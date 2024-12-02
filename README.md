@@ -1,6 +1,6 @@
 # loan_management
 
-A new Flutter project.
+Our app is designed to simplify the management of your monthly installments, whether for purchases you've made or for tracking your position in a savings association (جمعية). The app allows you to keep track of the installments due for your purchases, as well as manage your payment and receipt schedule in the association.
 
 ## Getting Started
 
