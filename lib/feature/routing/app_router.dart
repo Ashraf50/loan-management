@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:loan_management/core/widget/bottom_bar.dart';
-import 'package:loan_management/feature/menu/presentation/view/widget/about_view.dart';
-import 'package:loan_management/feature/menu/presentation/view/widget/language_view.dart';
+import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
+import 'package:loan_management/feature/settings/presentation/view/widget/language_view.dart';
 
 class AppRouter {
   late final GoRouter router = GoRouter(

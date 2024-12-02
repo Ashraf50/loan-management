@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/feature/home/presentation/view/home_view.dart';
-import 'package:loan_management/feature/menu/presentation/view/setting_view.dart';
+import 'package:loan_management/feature/settings/presentation/view/setting_view.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../../generated/l10n.dart';
