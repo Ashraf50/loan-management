@@ -4,7 +4,6 @@ import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../generated/l10n.dart';
 
 class DarkModeButton extends StatefulWidget {

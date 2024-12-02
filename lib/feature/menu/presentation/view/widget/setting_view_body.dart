@@ -12,14 +12,14 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../generated/l10n.dart';
 
-class MenuViewBody extends StatelessWidget {
-  const MenuViewBody({super.key});
+class SettingViewBody extends StatelessWidget {
+  const SettingViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return CustomScaffold(
-      appBar: CustomAppBar(title: S.of(context).menu),
+      appBar: CustomAppBar(title: S.of(context).setting),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
@@ -44,6 +44,7 @@ class MenuViewBody extends StatelessWidget {
               S.of(context).about_us,
               style: AppStyles.textStyle20,
             ),
+            const SizedBox(height: 8),
             CustomListTile(
               image: "assets/img/about.svg",
               onTap: () {
@@ -55,6 +56,7 @@ class MenuViewBody extends StatelessWidget {
               S.of(context).contact_us,
               style: AppStyles.textStyle20,
             ),
+            const SizedBox(height: 8),
             CustomListTile(
               image: "assets/img/facebook.svg",
               onTap: () {

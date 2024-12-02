@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/feature/home/presentation/view/home_view.dart';
-import 'package:loan_management/feature/menu/presentation/view/menu_view.dart';
+import 'package:loan_management/feature/menu/presentation/view/setting_view.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../../generated/l10n.dart';
@@ -20,7 +20,7 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> _pages = const [
     HomeView(),
-    MenuView(),
+    SettingView(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,9 +46,9 @@ class _BottomBarState extends State<BottomBar> {
             isDarkTheme: isDarkTheme,
           ),
           _buildBottomBarItem(
-            iconPath: 'assets/img/menu.svg',
-            activeIconPath: 'assets/img/menu.svg',
-            title: S.of(context).menu,
+            iconPath: 'assets/img/settings.svg',
+            activeIconPath: 'assets/img/active_settings.svg',
+            title: S.of(context).setting,
             isDarkTheme: isDarkTheme,
           ),
         ],

@@ -90,11 +90,11 @@ class S {
     );
   }
 
-  /// `Menu`
-  String get menu {
+  /// `Settings`
+  String get setting {
     return Intl.message(
-      'Menu',
-      name: 'menu',
+      'Settings',
+      name: 'setting',
       desc: '',
       args: [],
     );

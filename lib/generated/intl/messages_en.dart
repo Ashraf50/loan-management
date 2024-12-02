@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "facebook": MessageLookupByLibrary.simpleMessage("facebook"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "menu": MessageLookupByLibrary.simpleMessage("Menu"),
+        "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "whatsapp": MessageLookupByLibrary.simpleMessage("whatsapp")
       };
 }
