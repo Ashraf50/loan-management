@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
+import 'package:loan_management/feature/graph/presentation/view/graph_view.dart';
 import 'package:loan_management/feature/home/presentation/view/home_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/setting_view.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> _pages = const [
     HomeView(),
+    GraphView(),
     SettingView(),
   ];
 
@@ -43,6 +45,12 @@ class _BottomBarState extends State<BottomBar> {
             iconPath: 'assets/img/home.svg',
             activeIconPath: 'assets/img/active_home.svg',
             title: S.of(context).home,
+            isDarkTheme: isDarkTheme,
+          ),
+          _buildBottomBarItem(
+            iconPath: 'assets/img/graph.svg',
+            activeIconPath: 'assets/img/graph.svg',
+            title: S.of(context).graph,
             isDarkTheme: isDarkTheme,
           ),
           _buildBottomBarItem(

@@ -159,6 +159,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Graph`
+  String get graph {
+    return Intl.message(
+      'Graph',
+      name: 'graph',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

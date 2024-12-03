@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
         "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "facebook": MessageLookupByLibrary.simpleMessage("فيس بوك"),
+        "graph": MessageLookupByLibrary.simpleMessage("مخطط"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),

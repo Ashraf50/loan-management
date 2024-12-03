@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "facebook": MessageLookupByLibrary.simpleMessage("facebook"),
+        "graph": MessageLookupByLibrary.simpleMessage("Graph"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
