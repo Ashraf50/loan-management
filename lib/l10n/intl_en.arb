@@ -10,5 +10,12 @@
     "contact_us": "Contact us",
     "facebook": "facebook",
     "whatsapp":"whatsapp",
-    "graph": "Graph"
+    "graph": "Graph",
+    "installment_name" :"Installment name",
+    "total_amount":"Total amount",
+    "num_of_month": "Number of months",
+    "installment_value": "Installment value",
+    "start_date": "Start date",
+    "add_installment": "Add installment",
+    "empty_value": "Empty value"
 }

@@ -10,5 +10,13 @@
     "contact_us": "تواصل معنا",
     "facebook": "فيس بوك",
     "whatsapp":"واتس اب",
-    "graph":"مخطط"
+    "graph":"مخطط",
+    "installment_name": "اسم القسط",
+    "total_amount": "المبلغ الإجمالي",
+    "num_of_month": "عدد الشهور",
+    "installment_value": "قيمة القسط",
+    "start_date": "تاريخ البداية",
+    "add_installment": "اضافه قسط",
+    "empty_value": "قيمة فارغة"
+    
 }

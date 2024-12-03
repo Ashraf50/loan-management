@@ -169,6 +169,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Installment name`
+  String get installment_name {
+    return Intl.message(
+      'Installment name',
+      name: 'installment_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total amount`
+  String get total_amount {
+    return Intl.message(
+      'Total amount',
+      name: 'total_amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of months`
+  String get num_of_month {
+    return Intl.message(
+      'Number of months',
+      name: 'num_of_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installment value`
+  String get installment_value {
+    return Intl.message(
+      'Installment value',
+      name: 'installment_value',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date`
+  String get start_date {
+    return Intl.message(
+      'Start date',
+      name: 'start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add installment`
+  String get add_installment {
+    return Intl.message(
+      'Add installment',
+      name: 'add_installment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty value`
+  String get empty_value {
+    return Intl.message(
+      'Empty value',
+      name: 'empty_value',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
