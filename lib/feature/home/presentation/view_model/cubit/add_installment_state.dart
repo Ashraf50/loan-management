@@ -1,10 +1,14 @@
-class InstallmentState {
-  final List<Map<String, String>> installments;
-  InstallmentState({this.installments = const []});
+sealed class InstallmentState {}
 
-  InstallmentState copyWith({List<Map<String, String>>? installments}) {
-    return InstallmentState(
-      installments: installments ?? this.installments,
-    );
-  }
+final class InstallmentInitial extends InstallmentState {}
+
+final class InstallmentLoading extends InstallmentState {}
+
+final class InstallmentSuccess extends InstallmentState {}
+
+final class InstallmentFailure extends InstallmentState {
+  final String errMessage;
+  InstallmentFailure({
+    required this.errMessage,
+  });
 }

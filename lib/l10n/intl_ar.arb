@@ -17,6 +17,10 @@
     "installment_value": "قيمة القسط",
     "start_date": "تاريخ البداية",
     "add_installment": "اضافه قسط",
-    "empty_value": "قيمة فارغة"
+    "empty_value": "قيمة فارغة",
+    "total": "الإجمالي",
+    "Uncompleted_Install":"غير مكتمله",
+    "completed_Install":"مكتمله",
+    "welcome":"مرحبا بك في قسطلي"
     
 }

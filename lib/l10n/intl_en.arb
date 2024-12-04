@@ -17,5 +17,9 @@
     "installment_value": "Installment value",
     "start_date": "Start date",
     "add_installment": "Add installment",
-    "empty_value": "Empty value"
+    "empty_value": "Empty value",
+    "total": "Total",
+    "Uncompleted_Install":"Uncompleted",
+    "completed_Install":"completed",
+    "welcome":"Welcome to Qestli"
 }

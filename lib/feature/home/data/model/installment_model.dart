@@ -1,0 +1,23 @@
+import 'package:hive/hive.dart';
+part 'installment_model.g.dart';
+
+@HiveType(typeId: 0)
+class InstallmentModel extends HiveObject {
+  @HiveField(0)
+  final String title;
+  @HiveField(1)
+  final String totalAmount;
+  @HiveField(2)
+  final String numOfMonths;
+  @HiveField(3)
+  final String installmentValue;
+  @HiveField(4)
+  final String startDate;
+  InstallmentModel({
+    required this.title,
+    required this.totalAmount,
+    required this.numOfMonths,
+    required this.installmentValue,
+    required this.startDate,
+  });
+}

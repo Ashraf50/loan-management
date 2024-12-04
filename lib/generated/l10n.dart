@@ -239,6 +239,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Total`
+  String get total {
+    return Intl.message(
+      'Total',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uncompleted`
+  String get Uncompleted_Install {
+    return Intl.message(
+      'Uncompleted',
+      name: 'Uncompleted_Install',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `completed`
+  String get completed_Install {
+    return Intl.message(
+      'completed',
+      name: 'completed_Install',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Qestli`
+  String get welcome {
+    return Intl.message(
+      'Welcome to Qestli',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

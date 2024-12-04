@@ -22,12 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Uncompleted_Install":
+            MessageLookupByLibrary.simpleMessage("Uncompleted"),
         "about_us": MessageLookupByLibrary.simpleMessage("About us"),
         "about_us_body": MessageLookupByLibrary.simpleMessage(
             "Our app is designed to simplify the management of your monthly installments, whether for purchases you\'ve made or for tracking your position in a savings association (جمعية). The app allows you to keep track of the installments due for your purchases, as well as manage your payment and receipt schedule in the association. All of this is available in one app, helping you stay organized and ensuring you keep track of all your financial commitments easily and accurately."),
         "add_installment":
             MessageLookupByLibrary.simpleMessage("Add installment"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "completed_Install": MessageLookupByLibrary.simpleMessage("completed"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "empty_value": MessageLookupByLibrary.simpleMessage("Empty value"),
@@ -44,7 +47,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Number of months"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start date"),
+        "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_amount": MessageLookupByLibrary.simpleMessage("Total amount"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Qestli"),
         "whatsapp": MessageLookupByLibrary.simpleMessage("whatsapp")
       };
 }

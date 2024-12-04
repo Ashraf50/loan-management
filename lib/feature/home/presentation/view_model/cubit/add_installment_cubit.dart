@@ -1,25 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import '../../../../../core/constant/app_string.dart';
+import '../../../data/model/installment_model.dart';
 import 'add_installment_state.dart';
 
 class InstallmentCubit extends Cubit<InstallmentState> {
-  InstallmentCubit() : super(InstallmentState());
+  InstallmentCubit() : super(InstallmentInitial());
+  List<InstallmentModel>? allInstallments;
+  fetchAllInstallment() {
+    var installmentBox = Hive.box<InstallmentModel>(AppStrings.installmentBox);
+    allInstallments = installmentBox.values.toList();
+  }
 
-  void addInstallment({
-    required String installmentName,
-    required String totalAmount,
-    required String numOfMonth,
-    required String installmentValue,
-    required String startDate,
-  }) {
-    final newInstallment = {
-      'installment_name': installmentName,
-      'total_amount': totalAmount,
-      'num_of_month': numOfMonth,
-      'installment_value': installmentValue,
-      'start_date': startDate,
-    };
-    final updatedInstallments =
-        List<Map<String, String>>.from(state.installments)..add(newInstallment);
-    emit(InstallmentState(installments: updatedInstallments));
+  add(InstallmentModel installment) async {
+    emit(InstallmentLoading());
+    try {
+      var installmentBox =
+          Hive.box<InstallmentModel>(AppStrings.installmentBox);
+      await installmentBox.add(installment);
+      emit(InstallmentSuccess());
+    } catch (e) {
+      emit(InstallmentFailure(errMessage: e.toString()));
+    }
   }
 }

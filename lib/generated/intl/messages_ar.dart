@@ -22,11 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Uncompleted_Install":
+            MessageLookupByLibrary.simpleMessage("غير مكتمله"),
         "about_us": MessageLookupByLibrary.simpleMessage("من نحن"),
         "about_us_body": MessageLookupByLibrary.simpleMessage(
             "تطبيقنا مصمم لتبسيط إدارة الأقساط الشهرية في حياتك اليومية، سواء كانت لمدفوعات المشتريات التي قمت بها أو لإدارة دورك في الجمعية التعاونية (جمعية). يتيح لك التطبيق متابعة الأقساط المستحقة عليك بخصوص المشتريات، بالإضافة إلى تنظيم مواعيد دفعك واستلامك للمبالغ الشهرية في الجمعية. كل ذلك في تطبيق واحد يساعدك على البقاء منظمًا ويضمن لك تتبع كل التزاماتك المالية بشكل دقيق وسهل."),
         "add_installment": MessageLookupByLibrary.simpleMessage("اضافه قسط"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "completed_Install": MessageLookupByLibrary.simpleMessage("مكتمله"),
         "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
         "empty_value": MessageLookupByLibrary.simpleMessage("قيمة فارغة"),
@@ -40,7 +43,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "num_of_month": MessageLookupByLibrary.simpleMessage("عدد الشهور"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "start_date": MessageLookupByLibrary.simpleMessage("تاريخ البداية"),
+        "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
         "total_amount": MessageLookupByLibrary.simpleMessage("المبلغ الإجمالي"),
+        "welcome": MessageLookupByLibrary.simpleMessage("مرحبا بك في قسطلي"),
         "whatsapp": MessageLookupByLibrary.simpleMessage("واتس اب")
       };
 }
