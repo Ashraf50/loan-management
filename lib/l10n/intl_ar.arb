@@ -21,6 +21,8 @@
     "total": "الإجمالي",
     "Uncompleted_Install":"غير مكتمله",
     "completed_Install":"مكتمله",
-    "welcome":"مرحبا بك في قسطلي"
+    "welcome":"مرحبا بك في قسطلي",
+    "no_installment":"لا يوجد اقساط",
+    "Search_for_installment":"ابحث عن قسط"
     
 }

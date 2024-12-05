@@ -9,7 +9,7 @@ import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_theme.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/installment_model.dart';
-import '../../view_model/cubit/add_installment_cubit.dart';
+import '../../view_model/cubit/installment_cubit.dart';
 
 class DialogWidget extends StatefulWidget {
   const DialogWidget({super.key});

@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
+import 'package:loan_management/core/widget/show_snack_bar.dart';
 import 'package:loan_management/feature/home/presentation/view/widget/dialog_widget.dart';
 import 'package:loan_management/feature/home/presentation/view/widget/installment_list_view.dart';
+import 'package:loan_management/feature/home/presentation/view/widget/sliver_app_bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/constant/app_styles.dart';
 import '../../../../../core/constant/get_responsive.dart';
 import '../../../../../generated/l10n.dart';
-import '../../view_model/cubit/add_installment_cubit.dart';
-import '../../view_model/cubit/add_installment_state.dart';
+import '../../view_model/cubit/installment_cubit.dart';
+import '../../view_model/cubit/installment_state.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -19,7 +21,6 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     double screenHeight = MediaQuery.sizeOf(context).height;
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -33,20 +34,8 @@ class HomeViewBody extends StatelessWidget {
                 pinned: true,
                 floating: true,
                 expandedHeight: getResponsiveHeight(screenHeight),
-                flexibleSpace: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  child: FlexibleSpaceBar(
-                    background: Text(
-                      S.of(context).welcome,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
+                flexibleSpace:
+                    const FlexibleSpaceBar(background: SliverAppBarWidget()),
                 bottom: TabBar(
                   labelPadding: EdgeInsets.zero,
                   labelColor: Colors.white,
@@ -98,7 +87,7 @@ class HomeViewBody extends StatelessWidget {
               BlocProvider.of<InstallmentCubit>(context).fetchAllInstallment();
               Navigator.pop(context);
             } else if (state is InstallmentFailure) {
-              print(state.errMessage);
+              showSnackBar(context, state.errMessage);
             }
           },
           builder: (context, state) {

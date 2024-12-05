@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Search_for_installment":
+            MessageLookupByLibrary.simpleMessage("Search for an installment"),
         "Uncompleted_Install":
             MessageLookupByLibrary.simpleMessage("Uncompleted"),
         "about_us": MessageLookupByLibrary.simpleMessage("About us"),
@@ -43,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "installment_value":
             MessageLookupByLibrary.simpleMessage("Installment value"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "no_installment":
+            MessageLookupByLibrary.simpleMessage("No installments found."),
         "num_of_month":
             MessageLookupByLibrary.simpleMessage("Number of months"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),

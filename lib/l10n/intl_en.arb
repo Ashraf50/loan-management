@@ -21,5 +21,7 @@
     "total": "Total",
     "Uncompleted_Install":"Uncompleted",
     "completed_Install":"completed",
-    "welcome":"Welcome to Qestli"
+    "welcome":"Welcome to Qestli",
+    "no_installment":"No installments found.",
+    "Search_for_installment":"Search for an installment"
 }

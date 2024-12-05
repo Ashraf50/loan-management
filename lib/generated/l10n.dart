@@ -279,6 +279,26 @@ class S {
       args: [],
     );
   }
+
+  /// `No installments found.`
+  String get no_installment {
+    return Intl.message(
+      'No installments found.',
+      name: 'no_installment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for an installment`
+  String get Search_for_installment {
+    return Intl.message(
+      'Search for an installment',
+      name: 'Search_for_installment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

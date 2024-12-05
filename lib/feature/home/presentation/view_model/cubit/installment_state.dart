@@ -12,3 +12,5 @@ final class InstallmentFailure extends InstallmentState {
     required this.errMessage,
   });
 }
+
+class InstallmentLoaded extends InstallmentState {}
