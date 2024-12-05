@@ -147,10 +147,23 @@ class _DialogWidgetState extends State<DialogWidget> {
                     if (formKey.currentState!.validate()) {
                       InstallmentModel installmentModel = InstallmentModel(
                         title: installmentNameController.text,
-                        totalAmount: totalAmountController.text,
-                        numOfMonths: numOfMonthController.text,
-                        installmentValue: installmentValueController.text,
+                        totalAmount:
+                            double.tryParse(totalAmountController.text) ?? 0,
+                        numOfMonths:
+                            int.tryParse(numOfMonthController.text) ?? 0,
+                        installmentValue:
+                            double.tryParse(installmentValueController.text) ??
+                                0,
                         startDate: startDataController.text,
+                        completedMonths: List.filled(
+                          int.tryParse(numOfMonthController.text) ?? 0,
+                          false,
+                        ),
+                        monthNotes: List.filled(
+                          int.tryParse(numOfMonthController.text) ?? 0,
+                          null,
+                        ),
+                        totalPaid: 0,
                       );
                       BlocProvider.of<InstallmentCubit>(context)
                           .add(installmentModel);

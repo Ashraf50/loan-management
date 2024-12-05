@@ -23,6 +23,14 @@
     "completed_Install":"مكتمله",
     "welcome":"مرحبا بك في قسطلي",
     "no_installment":"لا يوجد اقساط",
-    "Search_for_installment":"ابحث عن قسط"
-    
+    "Search_for_installment":"ابحث عن قسط",
+    "complete_the_current_month":"يجب ان تكمل الشهر ",
+    "before_selecting_month":"قبل تحديد هذا الشهر",
+    "month":"الشهر ",
+    "note": "ملاحظة",
+    "enter_note": "أدخل الملاحظة هنا...",
+    "amount_paid": "المبلغ المدفوع",
+    "remaining_amount":"المبلغ المتبقي",
+    "remaining_month":"الأشهر المتبقية",
+    "months":"اشهر"
 }

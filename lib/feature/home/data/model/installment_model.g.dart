@@ -18,17 +18,20 @@ class InstallmentModelAdapter extends TypeAdapter<InstallmentModel> {
     };
     return InstallmentModel(
       title: fields[0] as String,
-      totalAmount: fields[1] as String,
-      numOfMonths: fields[2] as String,
-      installmentValue: fields[3] as String,
+      totalAmount: fields[1] as double,
+      numOfMonths: fields[2] as num,
+      installmentValue: fields[3] as double,
       startDate: fields[4] as String,
+      completedMonths: (fields[5] as List).cast<bool>(),
+      monthNotes: (fields[6] as List).cast<String?>(),
+      totalPaid: fields[7] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, InstallmentModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -38,7 +41,13 @@ class InstallmentModelAdapter extends TypeAdapter<InstallmentModel> {
       ..writeByte(3)
       ..write(obj.installmentValue)
       ..writeByte(4)
-      ..write(obj.startDate);
+      ..write(obj.startDate)
+      ..writeByte(5)
+      ..write(obj.completedMonths)
+      ..writeByte(6)
+      ..write(obj.monthNotes)
+      ..writeByte(7)
+      ..write(obj.totalPaid);
   }
 
   @override

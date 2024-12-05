@@ -6,18 +6,27 @@ class InstallmentModel extends HiveObject {
   @HiveField(0)
   final String title;
   @HiveField(1)
-  final String totalAmount;
+  final double totalAmount;
   @HiveField(2)
-  final String numOfMonths;
+  final num numOfMonths;
   @HiveField(3)
-  final String installmentValue;
+  final double installmentValue;
   @HiveField(4)
   final String startDate;
+  @HiveField(5)
+  List<bool> completedMonths;
+  @HiveField(6)
+  List<String?> monthNotes;
+  @HiveField(7)
+  double totalPaid;
   InstallmentModel({
     required this.title,
     required this.totalAmount,
     required this.numOfMonths,
     required this.installmentValue,
     required this.startDate,
+    required this.completedMonths,
+    required this.monthNotes,
+    required this.totalPaid,
   });
 }

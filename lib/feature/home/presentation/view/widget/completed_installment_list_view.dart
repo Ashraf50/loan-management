@@ -8,16 +8,16 @@ import '../../../../../generated/l10n.dart';
 import '../../view_model/cubit/installment_cubit.dart';
 import '../../view_model/cubit/installment_state.dart';
 
-class InstallmentListView extends StatelessWidget {
-  const InstallmentListView({super.key});
+class CompletedInstallmentListView extends StatelessWidget {
+  const CompletedInstallmentListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InstallmentCubit, InstallmentState>(
       builder: (context, state) {
-        if (state is InstallmentLoaded || state is InstallmentInitial) {
+        if (state is InstallmentLoaded) {
           final displayedInstallments =
-              context.read<InstallmentCubit>().filteredInstallments ?? [];
+              context.read<InstallmentCubit>().completedInstallment;
           return DecorationContainer(
             widget: displayedInstallments.isEmpty
                 ? Center(
@@ -27,13 +27,17 @@ class InstallmentListView extends StatelessWidget {
                     ),
                   )
                 : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: displayedInstallments.length,
                     itemBuilder: (context, index) {
                       return AnimatedInstallmentItem(
                         delay: index * 200,
                         installment: displayedInstallments[index],
                         onTap: () {
-                          context.push("/details_view");
+                          context.push(
+                            "/details_view",
+                            extra: displayedInstallments[index],
+                          );
                         },
                       );
                     },

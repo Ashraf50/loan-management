@@ -1,68 +1,257 @@
 import 'package:flutter/material.dart';
-import 'package:loan_management/core/widget/custom_scaffold.dart';
+import 'package:loan_management/core/constant/app_colors.dart';
+import 'package:loan_management/core/constant/app_styles.dart';
+import 'package:loan_management/generated/l10n.dart';
+import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import '../../../../../core/constant/app_theme.dart';
+import '../../../../../core/widget/show_snack_bar.dart';
+import '../../../data/model/installment_model.dart';
+import '../../view_model/cubit/installment_cubit.dart';
 
 class DetailsViewBody extends StatefulWidget {
-  const DetailsViewBody({super.key});
+  final InstallmentModel installment;
+  const DetailsViewBody({
+    super.key,
+    required this.installment,
+  });
 
   @override
   State<DetailsViewBody> createState() => _DetailsViewBodyState();
 }
 
 class _DetailsViewBodyState extends State<DetailsViewBody> {
-  List<Map<String, dynamic>> tasks = [
-    {"title": "المهمة الأولى", "completed": false},
-    {"title": "المهمة الثانية", "completed": false},
-    {"title": "المهمة الثالثة", "completed": false},
-  ];
+  late List<bool> completedMonths;
+  late List<String?> monthNotes;
+  late List<TextEditingController> textControllers;
+
+  @override
+  void initState() {
+    super.initState();
+    completedMonths = widget.installment.completedMonths;
+    monthNotes = widget.installment.monthNotes;
+    textControllers = List.generate(
+      widget.installment.numOfMonths.toInt(),
+      (index) => TextEditingController(text: monthNotes[index]),
+    );
+  }
+
+  @override
+  void dispose() {
+    for (var controller in textControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  void _updateMonthStatus(int index, bool isCompleted) {
+    setState(() {
+      completedMonths[index] = isCompleted;
+      if (isCompleted) {
+        widget.installment.totalPaid += widget.installment.installmentValue;
+      } else {
+        widget.installment.totalPaid -= widget.installment.installmentValue;
+      }
+      widget.installment.completedMonths = completedMonths;
+    });
+    widget.installment.save();
+    if (completedMonths.every((month) => month)) {
+      context
+          .read<InstallmentCubit>()
+          .checkAndMoveToCompleted(widget.installment);
+    }
+  }
+
+  void _updateMonthNotes(int index, String? note) {
+    setState(() {
+      monthNotes[index] = note;
+      widget.installment.monthNotes = monthNotes;
+    });
+    widget.installment.save();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: ListView.builder(
-        itemCount: tasks.length,
-        itemBuilder: (context, index) {
-          final task = tasks[index];
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                tasks[index]['completed'] = !tasks[index]['completed'];
-              });
-            },
-            child: TimelineTile(
-              alignment: TimelineAlign.manual,
-              lineXY: 0.1,
-              isLast: index == tasks.length - 1,
-              indicatorStyle: IndicatorStyle(
-                indicator: const CircleAvatar(
-                  child: Text("1"),
-                ),
-                width: 30,
-                color: task['completed'] ? Colors.green : Colors.grey,
-                padding: const EdgeInsets.all(8),
-              ),
-              beforeLineStyle: const LineStyle(
-                thickness: 2,
-                color: Colors.blue,
-              ),
-              endChild: Container(
-                padding: const EdgeInsets.all(16),
-                color: task['completed']
-                    ? Colors.green.shade100
-                    : Colors.grey.shade200,
-                child: Text(
-                  task['title'],
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: task['completed'] ? Colors.green : Colors.black,
-                    decoration:
-                        task['completed'] ? TextDecoration.lineThrough : null,
-                  ),
-                ),
-              ),
+    int remainingMonths = widget.installment.numOfMonths.toInt() -
+        widget.installment.completedMonths.where((month) => month).length;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        backgroundColor: AppColors.primaryColor,
+        title: Text(
+          widget.installment.title,
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+      body: ListView(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: AppColors.primaryColor,
             ),
-          );
-        },
+            child: Column(
+              children: [
+                MyWidget(
+                  title: S.of(context).total_amount,
+                  subtitle: widget.installment.totalAmount.toString(),
+                ),
+                MyWidget(
+                  title: S.of(context).amount_paid,
+                  subtitle: widget.installment.totalPaid.toString(),
+                ),
+                MyWidget(
+                  title: S.of(context).remaining_amount,
+                  subtitle: (widget.installment.totalAmount -
+                          widget.installment.totalPaid)
+                      .toString(),
+                ),
+                MyWidget(
+                  title: S.of(context).remaining_month,
+                  subtitle:
+                      " ${remainingMonths.toString()} ${S.of(context).months}",
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: widget.installment.numOfMonths.toInt(),
+              itemBuilder: (context, index) {
+                return TimelineTile(
+                  alignment: TimelineAlign.manual,
+                  lineXY: 0.0,
+                  isLast: index == widget.installment.numOfMonths.toInt() - 1,
+                  indicatorStyle: IndicatorStyle(
+                    indicator: CircleAvatar(
+                      backgroundColor:
+                          completedMonths[index] ? Colors.green : Colors.grey,
+                      child: Text(
+                        '${index + 1}',
+                        style: AppStyles.textStyle18black,
+                      ),
+                    ),
+                    width: 40,
+                    height: 50,
+                    padding: const EdgeInsets.all(8),
+                  ),
+                  beforeLineStyle: LineStyle(
+                    thickness: 2,
+                    color: completedMonths[index] ? Colors.green : Colors.grey,
+                  ),
+                  endChild: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                          color: themeProvider.isDarkTheme
+                              ? AppColors.widgetColorDark
+                              : AppColors.whiteGrey,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('${S.of(context).month} ${index + 1}',
+                                  style: AppStyles.textStyle18black),
+                              Checkbox(
+                                fillColor: WidgetStatePropertyAll(
+                                  completedMonths[index]
+                                      ? Colors.green
+                                      : themeProvider.isDarkTheme
+                                          ? AppColors.widgetColorDark
+                                          : AppColors.whiteGrey,
+                                ),
+                                value: completedMonths[index],
+                                onChanged: completedMonths[index]
+                                    ? null
+                                    : (value) {
+                                        if (index == 0 ||
+                                            completedMonths[index - 1]) {
+                                          _updateMonthStatus(
+                                              index, value ?? false);
+                                        } else {
+                                          showSnackBar(context,
+                                              '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}');
+                                        }
+                                      },
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: TextField(
+                              maxLines: 2,
+                              style: AppStyles.textStyle18black,
+                              controller: textControllers[index],
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                      color: AppColors.primaryColor),
+                                ),
+                                hintText: S.of(context).enter_note,
+                                hintStyle: AppStyles.textStyle18gray,
+                              ),
+                              onChanged: (value) =>
+                                  _updateMonthNotes(index, value),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyWidget extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  const MyWidget({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: Row(
+        children: [
+          Text(
+            "$title: ",
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Text(
+            subtitle,
+            style: AppStyles.textStyle18White,
+          ),
+        ],
       ),
     );
   }

@@ -4,8 +4,9 @@ import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/widget/show_snack_bar.dart';
 import 'package:loan_management/feature/home/presentation/view/widget/dialog_widget.dart';
-import 'package:loan_management/feature/home/presentation/view/widget/installment_list_view.dart';
+import 'package:loan_management/feature/home/presentation/view/widget/completed_installment_list_view.dart';
 import 'package:loan_management/feature/home/presentation/view/widget/sliver_app_bar.dart';
+import 'package:loan_management/feature/home/presentation/view/widget/uncompleted_installment_list_view.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/constant/app_styles.dart';
@@ -53,8 +54,8 @@ class HomeViewBody extends StatelessWidget {
           },
           body: const TabBarView(
             children: [
-              InstallmentListView(),
-              InstallmentListView(),
+              UnCompletedInstallmentListView(),
+              CompletedInstallmentListView(),
             ],
           ),
         ),

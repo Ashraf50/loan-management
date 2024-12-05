@@ -299,6 +299,96 @@ class S {
       args: [],
     );
   }
+
+  /// `You must complete the current month`
+  String get complete_the_current_month {
+    return Intl.message(
+      'You must complete the current month',
+      name: 'complete_the_current_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `before selecting this month.`
+  String get before_selecting_month {
+    return Intl.message(
+      'before selecting this month.',
+      name: 'before_selecting_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `month`
+  String get month {
+    return Intl.message(
+      'month',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `note`
+  String get note {
+    return Intl.message(
+      'note',
+      name: 'note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter note here...`
+  String get enter_note {
+    return Intl.message(
+      'Enter note here...',
+      name: 'enter_note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount Paid`
+  String get amount_paid {
+    return Intl.message(
+      'Amount Paid',
+      name: 'amount_paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remaining amount`
+  String get remaining_amount {
+    return Intl.message(
+      'Remaining amount',
+      name: 'remaining_amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remaining Months`
+  String get remaining_month {
+    return Intl.message(
+      'Remaining Months',
+      name: 'remaining_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Months`
+  String get months {
+    return Intl.message(
+      'Months',
+      name: 'months',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -23,5 +23,14 @@
     "completed_Install":"completed",
     "welcome":"Welcome to Qestli",
     "no_installment":"No installments found.",
-    "Search_for_installment":"Search for an installment"
+    "Search_for_installment":"Search for an installment",
+    "complete_the_current_month":"You must complete the current month",
+    "before_selecting_month":"before selecting this month.",
+    "month":"month",
+    "note": "note",
+    "enter_note":"Enter note here...",
+    "amount_paid": "Amount Paid",
+    "remaining_amount":"Remaining amount",
+    "remaining_month":"Remaining Months",
+    "months":"Months"
 }
