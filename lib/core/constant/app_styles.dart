@@ -21,8 +21,14 @@ class AppStyles {
     fontSize: 20,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle textStyle20notBoldWhite = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
   static const TextStyle textStyle24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
+    color: Colors.white,
   );
 }

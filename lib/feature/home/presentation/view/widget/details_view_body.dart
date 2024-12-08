@@ -103,7 +103,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
                 const SizedBox(height: 10),
                 Text(
                   "${S.of(context).remaining_amount}: ${(widget.installment.totalAmount - widget.installment.totalPaid).toString()}",
-                  style: AppStyles.textStyle20notBold,
+                  style: AppStyles.textStyle20notBoldWhite,
                 ),
                 const SizedBox(height: 15),
                 MyWidget(
