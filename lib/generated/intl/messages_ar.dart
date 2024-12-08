@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_us_body": MessageLookupByLibrary.simpleMessage(
             "تطبيقنا مصمم لتبسيط إدارة الأقساط الشهرية في حياتك اليومية، سواء كانت لمدفوعات المشتريات التي قمت بها أو لإدارة دورك في الجمعية التعاونية (جمعية). يتيح لك التطبيق متابعة الأقساط المستحقة عليك بخصوص المشتريات، بالإضافة إلى تنظيم مواعيد دفعك واستلامك للمبالغ الشهرية في الجمعية. كل ذلك في تطبيق واحد يساعدك على البقاء منظمًا ويضمن لك تتبع كل التزاماتك المالية بشكل دقيق وسهل."),
         "add_installment": MessageLookupByLibrary.simpleMessage("اضافه قسط"),
+        "amount_monthly": MessageLookupByLibrary.simpleMessage("المبلغ/شهري"),
         "amount_paid": MessageLookupByLibrary.simpleMessage("المبلغ المدفوع"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "before_selecting_month":
@@ -45,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل الملاحظة هنا..."),
         "facebook": MessageLookupByLibrary.simpleMessage("فيس بوك"),
         "graph": MessageLookupByLibrary.simpleMessage("مخطط"),
+        "graph_title": MessageLookupByLibrary.simpleMessage("تقدم دفع الأقساط"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "installment_name": MessageLookupByLibrary.simpleMessage("اسم القسط"),
         "installment_value": MessageLookupByLibrary.simpleMessage("قيمة القسط"),
@@ -54,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_installment": MessageLookupByLibrary.simpleMessage("لا يوجد اقساط"),
         "note": MessageLookupByLibrary.simpleMessage("ملاحظة"),
         "num_of_month": MessageLookupByLibrary.simpleMessage("عدد الشهور"),
+        "remaining": MessageLookupByLibrary.simpleMessage("متبقي"),
         "remaining_amount":
             MessageLookupByLibrary.simpleMessage("المبلغ المتبقي"),
         "remaining_month":
@@ -62,7 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date": MessageLookupByLibrary.simpleMessage("تاريخ البداية"),
         "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
         "total_amount": MessageLookupByLibrary.simpleMessage("المبلغ الإجمالي"),
-        "welcome": MessageLookupByLibrary.simpleMessage("مرحبا بك في قسطلي"),
+        "welcome":
+            MessageLookupByLibrary.simpleMessage("مرحبا بك في التزاماتي"),
         "whatsapp": MessageLookupByLibrary.simpleMessage("واتس اب")
       };
 }

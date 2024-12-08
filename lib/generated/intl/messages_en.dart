@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Our app is designed to simplify the management of your monthly installments, whether for purchases you\'ve made or for tracking your position in a savings association (جمعية). The app allows you to keep track of the installments due for your purchases, as well as manage your payment and receipt schedule in the association. All of this is available in one app, helping you stay organized and ensuring you keep track of all your financial commitments easily and accurately."),
         "add_installment":
             MessageLookupByLibrary.simpleMessage("Add installment"),
+        "amount_monthly":
+            MessageLookupByLibrary.simpleMessage("Amount/Monthly"),
         "amount_paid": MessageLookupByLibrary.simpleMessage("Amount Paid"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "before_selecting_month": MessageLookupByLibrary.simpleMessage(
@@ -46,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter note here..."),
         "facebook": MessageLookupByLibrary.simpleMessage("facebook"),
         "graph": MessageLookupByLibrary.simpleMessage("Graph"),
+        "graph_title": MessageLookupByLibrary.simpleMessage(
+            "Installment Payment Progress"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "installment_name":
             MessageLookupByLibrary.simpleMessage("Installment name"),
@@ -59,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "note": MessageLookupByLibrary.simpleMessage("note"),
         "num_of_month":
             MessageLookupByLibrary.simpleMessage("Number of months"),
+        "remaining": MessageLookupByLibrary.simpleMessage("remaining"),
         "remaining_amount":
             MessageLookupByLibrary.simpleMessage("Remaining amount"),
         "remaining_month":
@@ -67,7 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date": MessageLookupByLibrary.simpleMessage("Start date"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_amount": MessageLookupByLibrary.simpleMessage("Total amount"),
-        "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Qestli"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Eltzamati"),
         "whatsapp": MessageLookupByLibrary.simpleMessage("whatsapp")
       };
 }

@@ -21,7 +21,7 @@
     "total": "Total",
     "Uncompleted_Install":"Uncompleted",
     "completed_Install":"completed",
-    "welcome":"Welcome to Qestli",
+    "welcome":"Welcome to Eltzamati",
     "no_installment":"No installments found.",
     "Search_for_installment":"Search for an installment",
     "complete_the_current_month":"You must complete the current month",
@@ -32,5 +32,8 @@
     "amount_paid": "Amount Paid",
     "remaining_amount":"Remaining amount",
     "remaining_month":"Remaining Months",
-    "months":"Months"
+    "months":"Months",
+    "graph_title": "Installment Payment Progress",
+    "amount_monthly":"Amount/Monthly",
+    "remaining":"remaining"
 }

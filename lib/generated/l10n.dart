@@ -270,10 +270,10 @@ class S {
     );
   }
 
-  /// `Welcome to Qestli`
+  /// `Welcome to Eltzamati`
   String get welcome {
     return Intl.message(
-      'Welcome to Qestli',
+      'Welcome to Eltzamati',
       name: 'welcome',
       desc: '',
       args: [],
@@ -385,6 +385,36 @@ class S {
     return Intl.message(
       'Months',
       name: 'months',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installment Payment Progress`
+  String get graph_title {
+    return Intl.message(
+      'Installment Payment Progress',
+      name: 'graph_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount/Monthly`
+  String get amount_monthly {
+    return Intl.message(
+      'Amount/Monthly',
+      name: 'amount_monthly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `remaining`
+  String get remaining {
+    return Intl.message(
+      'remaining',
+      name: 'remaining',
       desc: '',
       args: [],
     );

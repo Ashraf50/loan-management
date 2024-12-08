@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/generated/l10n.dart';
@@ -89,31 +90,31 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
       body: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
               color: AppColors.primaryColor,
             ),
             child: Column(
               children: [
+                Text(
+                  "${S.of(context).remaining} ${remainingMonths.toString()} ${S.of(context).months}",
+                  style: AppStyles.textStyle24,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "${S.of(context).remaining_amount}: ${(widget.installment.totalAmount - widget.installment.totalPaid).toString()}",
+                  style: AppStyles.textStyle20notBold,
+                ),
+                const SizedBox(height: 15),
                 MyWidget(
-                  title: S.of(context).total_amount,
-                  subtitle: widget.installment.totalAmount.toString(),
+                  title: S.of(context).amount_monthly,
+                  subtitle: widget.installment.installmentValue.toString(),
                 ),
                 MyWidget(
                   title: S.of(context).amount_paid,
-                  subtitle: widget.installment.totalPaid.toString(),
-                ),
-                MyWidget(
-                  title: S.of(context).remaining_amount,
-                  subtitle: (widget.installment.totalAmount -
-                          widget.installment.totalPaid)
-                      .toString(),
-                ),
-                MyWidget(
-                  title: S.of(context).remaining_month,
                   subtitle:
-                      " ${remainingMonths.toString()} ${S.of(context).months}",
-                )
+                      " ${widget.installment.totalPaid.toString()}/${widget.installment.totalAmount.toString()}",
+                ),
               ],
             ),
           ),
@@ -238,14 +239,24 @@ class MyWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "$title: ",
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            children: [
+              SvgPicture.asset(
+                "assets/img/money.svg",
+                height: 30,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                "$title: ",
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
           Text(
             subtitle,

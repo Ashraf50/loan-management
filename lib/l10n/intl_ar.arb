@@ -21,7 +21,7 @@
     "total": "الإجمالي",
     "Uncompleted_Install":"غير مكتمله",
     "completed_Install":"مكتمله",
-    "welcome":"مرحبا بك في قسطلي",
+    "welcome":"مرحبا بك في التزاماتي",
     "no_installment":"لا يوجد اقساط",
     "Search_for_installment":"ابحث عن قسط",
     "complete_the_current_month":"يجب ان تكمل الشهر ",
@@ -32,5 +32,8 @@
     "amount_paid": "المبلغ المدفوع",
     "remaining_amount":"المبلغ المتبقي",
     "remaining_month":"الأشهر المتبقية",
-    "months":"اشهر"
+    "months":"اشهر",
+    "graph_title": "تقدم دفع الأقساط",
+    "amount_monthly":"المبلغ/شهري",
+    "remaining":"متبقي"
 }
