@@ -1,9 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:label="التزاماتي"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+    <service android:name="com.dexterous.flutterlocalnotifications.services.NotificationService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+    <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true"/>
+    <receiver android:name="com.google.firebase.messaging.FirebaseReceiver" android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

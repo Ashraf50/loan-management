@@ -21,7 +21,7 @@ class InstallmentModelAdapter extends TypeAdapter<InstallmentModel> {
       totalAmount: fields[1] as double,
       numOfMonths: fields[2] as num,
       installmentValue: fields[3] as double,
-      startDate: fields[4] as String,
+      startDate: fields[4] as DateTime,
       completedMonths: (fields[5] as List).cast<bool>(),
       monthNotes: (fields[6] as List).cast<String?>(),
       totalPaid: fields[7] as double,

@@ -12,7 +12,7 @@ class InstallmentModel extends HiveObject {
   @HiveField(3)
   final double installmentValue;
   @HiveField(4)
-  final String startDate;
+  final DateTime startDate;
   @HiveField(5)
   List<bool> completedMonths;
   @HiveField(6)

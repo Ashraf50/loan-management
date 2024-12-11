@@ -154,7 +154,9 @@ class _DialogWidgetState extends State<DialogWidget> {
                         installmentValue:
                             double.tryParse(installmentValueController.text) ??
                                 0,
-                        startDate: startDataController.text,
+                        startDate:
+                            DateTime.tryParse(startDataController.text) ??
+                                DateTime.now(),
                         completedMonths: List.filled(
                           int.tryParse(numOfMonthController.text) ?? 0,
                           false,
