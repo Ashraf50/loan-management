@@ -92,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "password_not_match":
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير متطابقة"),
+        "personal_info":
+            MessageLookupByLibrary.simpleMessage("المعلومات الشخصية"),
         "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "please_enter_your_email":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال بريدك الإلكتروني"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الأشهر المتبقية"),
         "reset_pass":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
+        "save_changes": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "set_pass": MessageLookupByLibrary.simpleMessage("تعيين كلمة المرور"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),
@@ -125,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل رقم هاتف صالح"),
         "value_empty":
             MessageLookupByLibrary.simpleMessage("لا يمكن ترك الحقل فارغًا"),
+        "verify_message": MessageLookupByLibrary.simpleMessage(
+            "يرجى التحقق من البريد الإلكتروني الجديد بالنقر على الرابط الذي تم إرساله"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "welcome":
             MessageLookupByLibrary.simpleMessage("مرحبا بك في التزاماتي"),

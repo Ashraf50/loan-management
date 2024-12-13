@@ -76,5 +76,8 @@
     "profile": "Profile",
     "next":"Next",
     "debtor": "Debtor",
-    "creditor":"Creditor"
+    "creditor":"Creditor",
+    "save_changes": "Save changes",
+    "personal_info":"Personal Information",
+    "verify_message":"Please verify the new email by clicking the link was sent to"
 }

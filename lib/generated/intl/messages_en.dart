@@ -96,6 +96,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_not_match":
             MessageLookupByLibrary.simpleMessage("The password does not match"),
+        "personal_info":
+            MessageLookupByLibrary.simpleMessage("Personal Information"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "please_enter_your_email":
             MessageLookupByLibrary.simpleMessage("Please enter your email"),
@@ -108,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "remaining_month":
             MessageLookupByLibrary.simpleMessage("Remaining Months"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "save_changes": MessageLookupByLibrary.simpleMessage("Save changes"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "set_pass": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -128,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter a valid phone number"),
         "value_empty": MessageLookupByLibrary.simpleMessage(
             "You cannot leave the field value empty"),
+        "verify_message": MessageLookupByLibrary.simpleMessage(
+            "Please verify the new email by clicking the link was sent to"),
         "warning": MessageLookupByLibrary.simpleMessage("warning"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Eltzamati"),
         "whatsapp": MessageLookupByLibrary.simpleMessage("whatsapp")

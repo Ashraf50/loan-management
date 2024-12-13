@@ -34,3 +34,18 @@ class ResetEvent extends AuthEvent {
     required this.email,
   });
 }
+
+class UpdateEvent extends AuthEvent {
+  final String username;
+  final String email;
+  final String phone;
+  final String password;
+  final String role;
+  UpdateEvent({
+    required this.email,
+    required this.username,
+    required this.phone,
+    required this.password,
+    required this.role,
+  });
+}

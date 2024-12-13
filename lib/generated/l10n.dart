@@ -829,6 +829,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Save changes`
+  String get save_changes {
+    return Intl.message(
+      'Save changes',
+      name: 'save_changes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Information`
+  String get personal_info {
+    return Intl.message(
+      'Personal Information',
+      name: 'personal_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please verify the new email by clicking the link was sent to`
+  String get verify_message {
+    return Intl.message(
+      'Please verify the new email by clicking the link was sent to',
+      name: 'verify_message',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -26,4 +26,27 @@ class AuthHelper {
       return false;
     }
   }
+
+  Future<Map<String, dynamic>?> fetchUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw Exception('User not authenticated');
+    }
+    try {
+      bool debtorStatus = await isDebtor();
+      String collection = debtorStatus ? "Debtors" : "Creditors";
+      final userDoc = await FirebaseFirestore.instance
+          .collection(collection)
+          .doc(user.uid)
+          .get();
+      if (userDoc.exists) {
+        return userDoc.data();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching user data: $e");
+      return null;
+    }
+  }
 }

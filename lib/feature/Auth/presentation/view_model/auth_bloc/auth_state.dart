@@ -39,3 +39,14 @@ class ResetFailure extends AuthState {
     required this.messageError,
   });
 }
+
+class UpdateLoading extends AuthState {}
+
+class UpdateSuccess extends AuthState {}
+
+class UpdateFailure extends AuthState {
+  final String messageError;
+  UpdateFailure({
+    required this.messageError,
+  });
+}

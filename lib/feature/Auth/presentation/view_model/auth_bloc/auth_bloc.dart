@@ -123,6 +123,56 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } on Exception {
           emit(ResetFailure(messageError: "something went wrong"));
         }
+      } else if (event is UpdateEvent) {
+        emit(UpdateLoading());
+        try {
+          final currentUser = FirebaseAuth.instance.currentUser;
+          if (currentUser == null) {
+            throw Exception('No authenticated user.');
+          }
+          await currentUser.verifyBeforeUpdateEmail(event.email);
+          await currentUser.reload();
+          if (!currentUser.emailVerified) {
+            emit(UpdateFailure(messageError: "Email not verified yet."));
+            return;
+          }
+          await currentUser.updatePassword(event.password).then((_) {
+            print("Password updated successfully");
+          }).catchError((error) {
+            print("Failed to update password: $error");
+            emit(UpdateFailure(messageError: "Failed to update password"));
+            return;
+          });
+          CollectionReference selectedCollection;
+          if (event.role == 'Debtor') {
+            selectedCollection =
+                FirebaseFirestore.instance.collection("Debtors");
+          } else if (event.role == 'Creditor') {
+            selectedCollection =
+                FirebaseFirestore.instance.collection("Creditors");
+          } else {
+            emit(UpdateFailure(messageError: "Invalid role selected"));
+            return;
+          }
+          await selectedCollection
+              .doc(currentUser.uid)
+              .update({
+                'Username': event.username,
+                'email': event.email,
+                'phone': event.phone,
+                'password': event.password,
+              })
+              .then((_) => print("User data updated successfully"))
+              .catchError((error) {
+                print("Failed to update user data: $error");
+                emit(UpdateFailure(messageError: "Failed to update user data"));
+                return;
+              });
+          emit(UpdateSuccess());
+        } catch (e) {
+          print("UpdateEvent error: $e");
+          emit(UpdateFailure(messageError: "Something went wrong"));
+        }
       }
     });
   }
