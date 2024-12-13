@@ -31,4 +31,20 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
+    static const TextStyle textStyle24black = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle textStyle18green = TextStyle(
+    fontSize: 18,
+    decoration: TextDecoration.underline,
+    decorationColor: AppColors.primaryColor,
+    color: AppColors.primaryColor,
+  );
+  static const TextStyle textStyle18 = TextStyle(
+    fontSize: 18,
+    color: Color(0xffA8D5BA),
+    decoration: TextDecoration.underline,
+    decorationColor: Color(0xffA8D5BA),
+  );
 }

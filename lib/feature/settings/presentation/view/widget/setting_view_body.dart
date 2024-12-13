@@ -25,6 +25,13 @@ class SettingViewBody extends StatelessWidget {
         child: ListView(
           children: [
             const SizedBox(height: 20),
+            CustomListTile(
+              image: "assets/img/profile.svg",
+              onTap: () {
+                context.push('/ProfileView');
+              },
+              title: S.of(context).profile,
+            ),
             const DarkModeButton(),
             const SizedBox(height: 8),
             CustomListTile(
