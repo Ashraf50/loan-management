@@ -1,49 +1,40 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthHelper {
+  final supabase = Supabase.instance.client;
+
   bool loginStatus() {
-    return FirebaseAuth.instance.currentUser != null;
+    return supabase.auth.currentUser != null;
   }
 
   Future<bool> isDebtor() async {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = supabase.auth.currentUser;
     if (user == null) {
       return false;
     }
     try {
-      final userDoc = await FirebaseFirestore.instance
-          .collection('Debtors')
-          .doc(user.uid)
-          .get();
-      if (userDoc.exists) {
-        return true;
-      } else {
+      final response = await supabase
+          .from('Debtors')
+          .select('email')
+          .eq('email', user.email as Object)
+          .maybeSingle();
+      if (response == null) {
         return false;
       }
+      return true;
     } catch (e) {
       print("Error fetching user role: $e");
       return false;
     }
   }
 
-  Future<Map<String, dynamic>?> fetchUserData() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      throw Exception('User not authenticated');
-    }
+  Future<List<Map<String, dynamic>>?> fetchUserData() async {
+    final user = supabase.auth.currentUser;
     try {
       bool debtorStatus = await isDebtor();
-      String collection = debtorStatus ? "Debtors" : "Creditors";
-      final userDoc = await FirebaseFirestore.instance
-          .collection(collection)
-          .doc(user.uid)
-          .get();
-      if (userDoc.exists) {
-        return userDoc.data();
-      } else {
-        return null;
-      }
+      String table = debtorStatus ? "Debtors" : "Creditors";
+      final response = await supabase.from(table).select().eq('Uid', user!.id);
+      return response;
     } catch (e) {
       print("Error fetching user data: $e");
       return null;

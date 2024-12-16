@@ -54,7 +54,7 @@
     "send": "Send",
     "set_pass": "Set Password",
     "logout":"Logout",
-    "new_pass_message1":"We have sent you an email to reset your password. Please check your email through our app.",
+    "new_pass_message":"The password has been successfully changed. Please register again.",
     "please_enter_your_email":"Please enter your email",
     "please_enter_your_pass":"Please enter your Password",
     "success": "success",
@@ -79,5 +79,15 @@
     "creditor":"Creditor",
     "save_changes": "Save changes",
     "personal_info":"Personal Information",
-    "verify_message":"Please verify the new email by clicking the link was sent to"
+    "verify_message":"Please verify the new email by clicking the link was sent to",
+    "verify_email":"Thank you for signing up for Eltzamati Please confirm your email address to complete the registration process by clicking the link we sent you.",
+    "enter_otp":"Enter OTP",
+    "send_otp":"Send Otp",
+    "otp_sended":"OTP sended",
+    "Username":"Username",
+    "role": "Role",
+    "created_at": "Created at",
+    "update_data":"Update data",
+    "enter_new_pass":"Enter new password",
+    "no_data": "No user data available"
 }

@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("غير مكتمله"),
         "Update_email":
             MessageLookupByLibrary.simpleMessage("تحديث البريد الإلكتروني"),
+        "Username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "about_us": MessageLookupByLibrary.simpleMessage("من نحن"),
         "about_us_body": MessageLookupByLibrary.simpleMessage(
             "تطبيقنا مصمم لتبسيط إدارة الأقساط الشهرية في حياتك اليومية، سواء كانت لمدفوعات المشتريات التي قمت بها أو لإدارة دورك في الجمعية التعاونية (جمعية). يتيح لك التطبيق متابعة الأقساط المستحقة عليك بخصوص المشتريات، بالإضافة إلى تنظيم مواعيد دفعك واستلامك للمبالغ الشهرية في الجمعية. كل ذلك في تطبيق واحد يساعدك على البقاء منظمًا ويضمن لك تتبع كل التزاماتك المالية بشكل دقيق وسهل."),
@@ -49,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
         "country": MessageLookupByLibrary.simpleMessage("الدولة"),
+        "created_at": MessageLookupByLibrary.simpleMessage("تاريخ الإنشاء"),
         "creditor": MessageLookupByLibrary.simpleMessage("دائن"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
         "debtor": MessageLookupByLibrary.simpleMessage("مدين"),
@@ -62,8 +64,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
         "enter_name": MessageLookupByLibrary.simpleMessage("أدخل اسمك"),
+        "enter_new_pass":
+            MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور الجديدة"),
         "enter_note":
             MessageLookupByLibrary.simpleMessage("أدخل الملاحظة هنا..."),
+        "enter_otp": MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
@@ -83,12 +88,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("الشهر "),
         "months": MessageLookupByLibrary.simpleMessage("اشهر"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
-        "new_pass_message1": MessageLookupByLibrary.simpleMessage(
-            "تم إرسال بريد إلكتروني إليك لإعادة تعيين كلمة المرور. يُرجى فحص بريدك الإلكتروني من خلال التطبيق الخاص بك."),
+        "new_pass_message": MessageLookupByLibrary.simpleMessage(
+            "تم تغيير كلمه المرور بنجاح برجاء التسجيل مره اخرى"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
+        "no_data":
+            MessageLookupByLibrary.simpleMessage("لا توجد بيانات مستخدم متاحة"),
         "no_installment": MessageLookupByLibrary.simpleMessage("لا يوجد اقساط"),
         "note": MessageLookupByLibrary.simpleMessage("ملاحظة"),
         "num_of_month": MessageLookupByLibrary.simpleMessage("عدد الشهور"),
+        "otp_sended":
+            MessageLookupByLibrary.simpleMessage("تم إرسال رمز التحقق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "password_not_match":
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير متطابقة"),
@@ -107,8 +116,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الأشهر المتبقية"),
         "reset_pass":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
+        "role": MessageLookupByLibrary.simpleMessage("الدور"),
         "save_changes": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "send_otp": MessageLookupByLibrary.simpleMessage("إرسال رمز التحقق"),
         "set_pass": MessageLookupByLibrary.simpleMessage("تعيين كلمة المرور"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "sign_up": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
@@ -116,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success": MessageLookupByLibrary.simpleMessage("نجاح"),
         "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
         "total_amount": MessageLookupByLibrary.simpleMessage("المبلغ الإجمالي"),
+        "update_data": MessageLookupByLibrary.simpleMessage("تحديث البيانات"),
         "update_phone":
             MessageLookupByLibrary.simpleMessage("تحديث رقم الهاتف"),
         "update_username":
@@ -128,6 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل رقم هاتف صالح"),
         "value_empty":
             MessageLookupByLibrary.simpleMessage("لا يمكن ترك الحقل فارغًا"),
+        "verify_email": MessageLookupByLibrary.simpleMessage(
+            "شكراً لتسجيلك في التزاماتي. يرجى تأكيد بريدك الإلكتروني لإتمام عملية التسجيل عن طريق الضغط على الرابط الذي أرسلناه لك."),
         "verify_message": MessageLookupByLibrary.simpleMessage(
             "يرجى التحقق من البريد الإلكتروني الجديد بالنقر على الرابط الذي تم إرساله"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),

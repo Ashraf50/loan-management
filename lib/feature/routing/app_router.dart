@@ -3,12 +3,15 @@ import 'package:loan_management/core/widget/bottom_bar.dart';
 import 'package:loan_management/feature/Auth/presentation/view/forget_pass_view.dart';
 import 'package:loan_management/feature/Auth/presentation/view/sign_in_view.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/finish_reset_pass_view.dart';
+import 'package:loan_management/feature/Auth/presentation/view/widget/update_password_view.dart';
 import 'package:loan_management/feature/home/data/model/installment_model.dart';
 import 'package:loan_management/feature/home/presentation/view/details_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/language_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/profile_view.dart';
+import 'package:loan_management/feature/settings/presentation/view/widget/update_phone_view.dart';
 import '../Auth/presentation/view/sign_up_view.dart';
+import '../settings/presentation/view/widget/update_username_view.dart';
 
 class AppRouter {
   final bool isLoggedIn;
@@ -40,6 +43,18 @@ class AppRouter {
       GoRoute(
         path: '/forgetPasswordView',
         builder: (context, state) => const ForgetPasswordView(),
+      ),
+      GoRoute(
+        path: '/updatePasswordView',
+        builder: (context, state) => const UpdatePasswordView(),
+      ),
+      GoRoute(
+        path: '/UpdateUsername',
+        builder: (context, state) => const UpdateUsernameView(),
+      ),
+      GoRoute(
+        path: '/UpdatePhone',
+        builder: (context, state) => const UpdatePhoneView(),
       ),
       GoRoute(
         path: '/finishResetPassword',

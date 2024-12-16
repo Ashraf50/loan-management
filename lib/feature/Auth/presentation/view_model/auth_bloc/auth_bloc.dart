@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loan_management/core/helper/AuthHelper.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -7,40 +7,39 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
+      final supabase = Supabase.instance.client;
       if (event is RegisterEvent) {
         emit(RegisterLoading());
         try {
-          final user =
-              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          // Create a user with Supabase
+          final response = await supabase.auth.signUp(
             email: event.email,
             password: event.password,
           );
-          CollectionReference selectedCollection;
-          CollectionReference otherCollection;
-
-          if (event.role == 'Debtor' || event.role == 'مدين') {
-            selectedCollection =
-                FirebaseFirestore.instance.collection("Debtors");
-            otherCollection =
-                FirebaseFirestore.instance.collection("Creditors");
-          } else if (event.role == 'Creditor' || event.role == 'دائن') {
-            selectedCollection =
-                FirebaseFirestore.instance.collection("Creditors");
-            otherCollection = FirebaseFirestore.instance.collection("Debtors");
-          } else {
-            throw Exception("Invalid role selected");
+          if (response.user == null) {
+            throw Exception('Failed to register user');
           }
-          // Check if the email already exists in the other collection
-          final querySnapshot = await otherCollection
-              .where('email', isEqualTo: event.email)
-              .get();
-          if (querySnapshot.docs.isNotEmpty) {
+          String table = event.role == 'Debtor' || event.role == 'مدين'
+              ? 'Debtors'
+              : event.role == 'Creditor' || event.role == 'دائن'
+                  ? 'Creditors'
+                  : throw Exception("Invalid role selected");
+          // Check if the email already exists in the other table
+          String otherTable = table == 'Debtors' ? 'Creditors' : 'Debtors';
+          final existingUser = await supabase
+              .from(otherTable)
+              .select('id')
+              .eq('email', event.email)
+              .maybeSingle();
+
+          if (existingUser != null) {
             emit(RegisterFailure(
                 messageError: "email-already-registered-in-other-role"));
             return;
           }
-          // Add user to the selected collection
-          await selectedCollection.doc(user.user!.uid).set({
+          // Add user to the appropriate table
+          await supabase.from(table).insert({
+            'Uid': response.user!.id,
             'Username': event.username,
             'email': event.email,
             'phone': event.phoneNumber,
@@ -48,132 +47,107 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'role': event.role,
           });
           emit(RegisterSuccess());
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'weak-password') {
-            emit(RegisterFailure(messageError: 'weak-password'));
-          } else if (e.code == 'email-already-in-use') {
-            emit(RegisterFailure(messageError: 'email-already-in-use'));
-          } else {
-            emit(RegisterFailure(messageError: e.code));
-          }
-        } on Exception catch (_) {
-          emit(RegisterFailure(messageError: "something went wrong"));
+        } catch (e) {
+          emit(RegisterFailure(messageError: e.toString()));
         }
       } else if (event is LoginEvent) {
         emit(LoginLoading());
         try {
-          final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          final response =
+              await Supabase.instance.client.auth.signInWithPassword(
             email: event.email,
             password: event.password,
           );
-          CollectionReference selectedCollection;
-          CollectionReference otherCollection;
-          if (event.role == 'Debtor' || event.role == 'مدين') {
-            selectedCollection =
-                FirebaseFirestore.instance.collection('Debtors');
-            otherCollection =
-                FirebaseFirestore.instance.collection('Creditors');
-          } else if (event.role == 'Creditor' || event.role == 'دائن') {
-            selectedCollection =
-                FirebaseFirestore.instance.collection('Creditors');
-            otherCollection = FirebaseFirestore.instance.collection('Debtors');
-          } else {
+          if (response.error != null) {
+            emit(LoginFailure(message: response.error!.message));
+            return;
+          }
+          final role = event.role;
+          final selectedTable = role == 'Debtor' || role == 'مدين'
+              ? 'Debtors'
+              : role == 'Creditor' || role == 'دائن'
+                  ? 'Creditors'
+                  : null;
+          if (selectedTable == null) {
             emit(LoginFailure(message: "Invalid role selected"));
             return;
           }
-          final selectedDoc =
-              await selectedCollection.doc(user.user!.uid).get();
-          if (selectedDoc.exists) {
-            emit(LoginSuccess(role: event.role));
-          } else {
-            // Check if the user is registered in the other collection
-            final otherDoc = await otherCollection.doc(user.user!.uid).get();
-            if (otherDoc.exists) {
-              emit(LoginFailure(
-                  message: "Email is not registered as ${event.role}"));
-            } else {
+          try {
+            // ignore: unused_local_variable
+            final queryResponse = await Supabase.instance.client
+                .from(selectedTable)
+                .select()
+                .eq('email', event.email)
+                .single();
+            emit(LoginSuccess(role: role));
+            return;
+          } catch (e) {
+            final otherTable =
+                selectedTable == 'Debtors' ? 'Creditors' : 'Debtors';
+            try {
+              // ignore: unused_local_variable
+              final otherQueryResponse = await Supabase.instance.client
+                  .from(otherTable)
+                  .select()
+                  .eq('email', event.email)
+                  .single();
+              emit(
+                  LoginFailure(message: "Email is registered in another role"));
+              return;
+            } catch (e) {
               emit(LoginFailure(message: "User not found in selected role"));
+              return;
             }
           }
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'user-not-found') {
-            emit(LoginFailure(message: "user-not-found"));
-          } else if (e.code == 'wrong-password') {
-            emit(LoginFailure(message: "wrong-password"));
-          } else {
-            emit(LoginFailure(message: e.code));
-          }
-        } on Exception {
-          emit(LoginFailure(message: "something went wrong"));
+        } on Exception catch (e) {
+          emit(LoginFailure(message: "Something went wrong ${e.toString()}"));
         }
       } else if (event is ResetEvent) {
         emit(ResetLoading());
         try {
-          await FirebaseAuth.instance
-              .sendPasswordResetEmail(email: event.email);
+          // Send password reset email with Supabase
+          await supabase.auth.resetPasswordForEmail(event.email);
           emit(ResetSuccess());
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'user-not-found') {
-            emit(ResetFailure(messageError: "user-not-found"));
-          } else if (e.code == 'wrong-password') {
-            emit(ResetFailure(messageError: 'wrong-password'));
-          } else {
-            emit(ResetFailure(messageError: e.code));
-          }
-        } on Exception {
-          emit(ResetFailure(messageError: "something went wrong"));
-        }
-      } else if (event is UpdateEvent) {
-        emit(UpdateLoading());
-        try {
-          final currentUser = FirebaseAuth.instance.currentUser;
-          if (currentUser == null) {
-            throw Exception('No authenticated user.');
-          }
-          await currentUser.verifyBeforeUpdateEmail(event.email);
-          await currentUser.reload();
-          if (!currentUser.emailVerified) {
-            emit(UpdateFailure(messageError: "Email not verified yet."));
-            return;
-          }
-          await currentUser.updatePassword(event.password).then((_) {
-            print("Password updated successfully");
-          }).catchError((error) {
-            print("Failed to update password: $error");
-            emit(UpdateFailure(messageError: "Failed to update password"));
-            return;
-          });
-          CollectionReference selectedCollection;
-          if (event.role == 'Debtor') {
-            selectedCollection =
-                FirebaseFirestore.instance.collection("Debtors");
-          } else if (event.role == 'Creditor') {
-            selectedCollection =
-                FirebaseFirestore.instance.collection("Creditors");
-          } else {
-            emit(UpdateFailure(messageError: "Invalid role selected"));
-            return;
-          }
-          await selectedCollection
-              .doc(currentUser.uid)
-              .update({
-                'Username': event.username,
-                'email': event.email,
-                'phone': event.phone,
-                'password': event.password,
-              })
-              .then((_) => print("User data updated successfully"))
-              .catchError((error) {
-                print("Failed to update user data: $error");
-                emit(UpdateFailure(messageError: "Failed to update user data"));
-                return;
-              });
-          emit(UpdateSuccess());
         } catch (e) {
-          print("UpdateEvent error: $e");
-          emit(UpdateFailure(messageError: "Something went wrong"));
+          emit(ResetFailure(messageError: e.toString()));
+        }
+      } else if (event is UpdatePassEvent) {
+        emit(UpdatePassLoading());
+        try {
+          // ignore: unused_local_variable
+          final recovery = await supabase.auth.verifyOTP(
+            token: event.token,
+            email: event.email,
+            type: OtpType.recovery,
+          );
+
+          await supabase.auth
+              .updateUser(UserAttributes(password: event.password));
+          try {
+            bool isDebtor = await AuthHelper().isDebtor();
+            String table = isDebtor ? "Debtors" : "Creditors";
+            await supabase.from(table).update({
+              'password': event.password,
+            }).eq('Uid', supabase.auth.currentUser!.id);
+          } catch (e) {
+            emit(UpdatePassFailure(
+                messageError: "Error updating password ${e.toString()}"));
+          }
+          emit(UpdatePassSuccess());
+        } catch (e) {
+          emit(UpdatePassFailure(messageError: e.toString()));
         }
       }
     });
   }
+}
+
+extension on PostgrestMap {
+  get error => null;
+
+  get data => null;
+}
+
+extension on AuthResponse {
+  get error => null;
 }

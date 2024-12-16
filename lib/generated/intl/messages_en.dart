@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Uncompleted_Install":
             MessageLookupByLibrary.simpleMessage("Uncompleted"),
         "Update_email": MessageLookupByLibrary.simpleMessage("Update Email"),
+        "Username": MessageLookupByLibrary.simpleMessage("Username"),
         "about_us": MessageLookupByLibrary.simpleMessage("About us"),
         "about_us_body": MessageLookupByLibrary.simpleMessage(
             "Our app is designed to simplify the management of your monthly installments, whether for purchases you\'ve made or for tracking your position in a savings association (جمعية). The app allows you to keep track of the installments due for your purchases, as well as manage your payment and receipt schedule in the association. All of this is available in one app, helping you stay organized and ensuring you keep track of all your financial commitments easily and accurately."),
@@ -50,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "created_at": MessageLookupByLibrary.simpleMessage("Created at"),
         "creditor": MessageLookupByLibrary.simpleMessage("Creditor"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "debtor": MessageLookupByLibrary.simpleMessage("Debtor"),
@@ -62,8 +64,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter your email"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Enter your name"),
+        "enter_new_pass":
+            MessageLookupByLibrary.simpleMessage("Enter new password"),
         "enter_note":
             MessageLookupByLibrary.simpleMessage("Enter note here..."),
+        "enter_otp": MessageLookupByLibrary.simpleMessage("Enter OTP"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
@@ -85,14 +90,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "months": MessageLookupByLibrary.simpleMessage("Months"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
-        "new_pass_message1": MessageLookupByLibrary.simpleMessage(
-            "We have sent you an email to reset your password. Please check your email through our app."),
+        "new_pass_message": MessageLookupByLibrary.simpleMessage(
+            "The password has been successfully changed. Please register again."),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "no_data":
+            MessageLookupByLibrary.simpleMessage("No user data available"),
         "no_installment":
             MessageLookupByLibrary.simpleMessage("No installments found."),
         "note": MessageLookupByLibrary.simpleMessage("note"),
         "num_of_month":
             MessageLookupByLibrary.simpleMessage("Number of months"),
+        "otp_sended": MessageLookupByLibrary.simpleMessage("OTP sended"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_not_match":
             MessageLookupByLibrary.simpleMessage("The password does not match"),
@@ -110,8 +118,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "remaining_month":
             MessageLookupByLibrary.simpleMessage("Remaining Months"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "role": MessageLookupByLibrary.simpleMessage("Role"),
         "save_changes": MessageLookupByLibrary.simpleMessage("Save changes"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "send_otp": MessageLookupByLibrary.simpleMessage("Send Otp"),
         "set_pass": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
@@ -119,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success": MessageLookupByLibrary.simpleMessage("success"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_amount": MessageLookupByLibrary.simpleMessage("Total amount"),
+        "update_data": MessageLookupByLibrary.simpleMessage("Update data"),
         "update_phone":
             MessageLookupByLibrary.simpleMessage("Update Phone Number"),
         "update_username":
@@ -131,6 +142,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter a valid phone number"),
         "value_empty": MessageLookupByLibrary.simpleMessage(
             "You cannot leave the field value empty"),
+        "verify_email": MessageLookupByLibrary.simpleMessage(
+            "Thank you for signing up for Eltzamati Please confirm your email address to complete the registration process by clicking the link we sent you."),
         "verify_message": MessageLookupByLibrary.simpleMessage(
             "Please verify the new email by clicking the link was sent to"),
         "warning": MessageLookupByLibrary.simpleMessage("warning"),

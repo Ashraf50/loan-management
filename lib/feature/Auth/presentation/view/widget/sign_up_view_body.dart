@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +6,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
+import 'package:loan_management/core/widget/show_snack_bar.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/check_account_widget.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/generated/l10n.dart';
@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_styles.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
-import '../../../../../core/widget/custom_snack_bar.dart';
 import '../../view_model/auth_bloc/auth_bloc.dart';
 import 'role_button.dart';
 
@@ -54,20 +53,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         } else if (state is RegisterSuccess) {
           context.go('/signInView');
           isLoading = false;
-          SnackbarHelper.showCustomSnackbar(
-            context: context,
-            title: S.of(context).success,
-            message: S.of(context).success,
-            contentType: ContentType.success,
-          );
+          showSnackBar(context, S.of(context).verify_email);
         } else if (state is RegisterFailure) {
           isLoading = false;
-          SnackbarHelper.showCustomSnackbar(
-            context: context,
-            title: S.of(context).error,
-            message: state.messageError,
-            contentType: ContentType.failure,
-          );
+          showSnackBar(context, state.messageError);
         }
       },
       builder: (context, state) {
@@ -258,20 +247,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                               ),
                             );
                           } else {
-                            SnackbarHelper.showCustomSnackbar(
-                              context: context,
-                              title: S.of(context).warning,
-                              message: S.of(context).check_email_or_pass,
-                              contentType: ContentType.help,
-                            );
+                            showSnackBar(
+                                context, S.of(context).check_email_or_pass);
                           }
                         } else {
-                          SnackbarHelper.showCustomSnackbar(
-                            context: context,
-                            title: S.of(context).warning,
-                            message: S.of(context).password_not_match,
-                            contentType: ContentType.help,
-                          );
+                          showSnackBar(
+                              context, S.of(context).password_not_match);
                         }
                       },
                       textColor: AppColors.white,

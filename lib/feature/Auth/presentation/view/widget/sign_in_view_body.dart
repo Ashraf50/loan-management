@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
+import 'package:loan_management/core/widget/show_snack_bar.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/check_account_widget.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/role_button.dart';
@@ -15,7 +15,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/custom_scaffold.dart';
-import '../../../../../core/widget/custom_snack_bar.dart';
 import '../../../../../generated/l10n.dart';
 import '../../view_model/auth_bloc/auth_bloc.dart';
 
@@ -54,21 +53,12 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           } else {
             context.go('/CreditorBottomBar');
           }
-          SnackbarHelper.showCustomSnackbar(
-            context: context,
-            title: S.of(context).success,
-            message: S.of(context).success,
-            contentType: ContentType.success,
-          );
+          showSnackBar(context, S.of(context).success);
+
           isLoading = false;
         } else if (state is LoginFailure) {
           isLoading = false;
-          SnackbarHelper.showCustomSnackbar(
-            context: context,
-            title: S.of(context).error,
-            message: state.message,
-            contentType: ContentType.failure,
-          );
+          showSnackBar(context, state.message);
         }
       },
       builder: (context, state) {
@@ -198,12 +188,8 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                               password: passwordController.text,
                               role: selectedRole));
                         } else {
-                          SnackbarHelper.showCustomSnackbar(
-                            context: context,
-                            title: S.of(context).warning,
-                            message: S.of(context).check_email_or_pass,
-                            contentType: ContentType.help,
-                          );
+                          showSnackBar(
+                              context, S.of(context).check_email_or_pass);
                         }
                       },
                       textColor: AppColors.white,

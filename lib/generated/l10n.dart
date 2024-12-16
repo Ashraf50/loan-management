@@ -600,11 +600,11 @@ class S {
     );
   }
 
-  /// `We have sent you an email to reset your password. Please check your email through our app.`
-  String get new_pass_message1 {
+  /// `The password has been successfully changed. Please register again.`
+  String get new_pass_message {
     return Intl.message(
-      'We have sent you an email to reset your password. Please check your email through our app.',
-      name: 'new_pass_message1',
+      'The password has been successfully changed. Please register again.',
+      name: 'new_pass_message',
       desc: '',
       args: [],
     );
@@ -855,6 +855,106 @@ class S {
     return Intl.message(
       'Please verify the new email by clicking the link was sent to',
       name: 'verify_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thank you for signing up for Eltzamati Please confirm your email address to complete the registration process by clicking the link we sent you.`
+  String get verify_email {
+    return Intl.message(
+      'Thank you for signing up for Eltzamati Please confirm your email address to complete the registration process by clicking the link we sent you.',
+      name: 'verify_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter OTP`
+  String get enter_otp {
+    return Intl.message(
+      'Enter OTP',
+      name: 'enter_otp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Otp`
+  String get send_otp {
+    return Intl.message(
+      'Send Otp',
+      name: 'send_otp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP sended`
+  String get otp_sended {
+    return Intl.message(
+      'OTP sended',
+      name: 'otp_sended',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get Username {
+    return Intl.message(
+      'Username',
+      name: 'Username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get role {
+    return Intl.message(
+      'Role',
+      name: 'role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Created at`
+  String get created_at {
+    return Intl.message(
+      'Created at',
+      name: 'created_at',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update data`
+  String get update_data {
+    return Intl.message(
+      'Update data',
+      name: 'update_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new password`
+  String get enter_new_pass {
+    return Intl.message(
+      'Enter new password',
+      name: 'enter_new_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No user data available`
+  String get no_data {
+    return Intl.message(
+      'No user data available',
+      name: 'no_data',
       desc: '',
       args: [],
     );

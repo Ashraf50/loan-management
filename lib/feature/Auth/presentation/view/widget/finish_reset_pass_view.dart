@@ -32,7 +32,7 @@ class FinishResetPassView extends StatelessWidget {
               height: 30,
             ),
             Text(
-              S.of(context).new_pass_message1,
+              S.of(context).new_pass_message,
               style: AppStyles.textStyle18black,
             ),
             const SizedBox(
@@ -42,7 +42,7 @@ class FinishResetPassView extends StatelessWidget {
               width: double.infinity,
               title: S.of(context).login,
               onTap: () {
-                context.go('/sign_in');
+                context.go('/signInView');
               },
               buttonColor: AppColors.primaryColor,
               textColor: AppColors.white,

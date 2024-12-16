@@ -35,17 +35,13 @@ class ResetEvent extends AuthEvent {
   });
 }
 
-class UpdateEvent extends AuthEvent {
-  final String username;
+class UpdatePassEvent extends AuthEvent {
+  final String token;
   final String email;
-  final String phone;
   final String password;
-  final String role;
-  UpdateEvent({
+  UpdatePassEvent({
+    required this.token,
     required this.email,
-    required this.username,
-    required this.phone,
     required this.password,
-    required this.role,
   });
 }

@@ -40,13 +40,13 @@ class ResetFailure extends AuthState {
   });
 }
 
-class UpdateLoading extends AuthState {}
+class UpdatePassLoading extends AuthState {}
 
-class UpdateSuccess extends AuthState {}
+class UpdatePassSuccess extends AuthState {}
 
-class UpdateFailure extends AuthState {
+class UpdatePassFailure extends AuthState {
   final String messageError;
-  UpdateFailure({
+  UpdatePassFailure({
     required this.messageError,
   });
 }
