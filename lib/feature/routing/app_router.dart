@@ -4,8 +4,8 @@ import 'package:loan_management/feature/Auth/presentation/view/forget_pass_view.
 import 'package:loan_management/feature/Auth/presentation/view/sign_in_view.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/finish_reset_pass_view.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/update_password_view.dart';
-import 'package:loan_management/feature/home/data/model/installment_model.dart';
-import 'package:loan_management/feature/home/presentation/view/details_view.dart';
+import 'package:loan_management/feature/debtor/home/data/model/installment_model.dart';
+import 'package:loan_management/feature/debtor/home/presentation/view/debtor_details_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/language_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/profile_view.dart';
@@ -76,7 +76,7 @@ class AppRouter {
         path: '/details_view',
         builder: (context, state) {
           final installmentDetails = state.extra as InstallmentModel;
-          return DetailsView(
+          return DebtorDetailsView(
             installment: installmentDetails,
           );
         },

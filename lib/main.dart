@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:loan_management/core/constant/app_string.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/helper/AuthHelper.dart';
-import 'package:loan_management/feature/home/data/model/installment_model.dart';
+import 'package:loan_management/feature/debtor/home/data/model/installment_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

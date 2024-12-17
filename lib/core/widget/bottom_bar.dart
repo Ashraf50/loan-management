@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
-import 'package:loan_management/feature/graph/presentation/view/graph_view.dart';
-import 'package:loan_management/feature/home/presentation/view/home_view.dart';
+import 'package:loan_management/feature/creditor/graph/presentation/view/creditor_graph_view.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view/creditor_home_view.dart';
+import 'package:loan_management/feature/debtor/graph/presentation/view/debtor_graph_view.dart';
+import 'package:loan_management/feature/debtor/home/presentation/view/debtor_home_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/setting_view.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -20,8 +22,8 @@ class _DebtorBottomBarState extends State<DebtorBottomBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
-    HomeView(),
-    GraphView(),
+    DebtorHomeView(),
+    DebtorGraphView(),
     SettingView(),
   ];
 
@@ -76,6 +78,8 @@ class _CreditorBottomBarState extends State<CreditorBottomBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
+    CreditorHomeView(),
+    CreditorGraphView(),
     SettingView(),
   ];
 
@@ -95,18 +99,18 @@ class _CreditorBottomBarState extends State<CreditorBottomBar> {
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         items: [
-          // _buildBottomBarItem(
-          //   iconPath: 'assets/img/home.svg',
-          //   activeIconPath: 'assets/img/active_home.svg',
-          //   title: S.of(context).home,
-          //   isDarkTheme: isDarkTheme,
-          // ),
-          // _buildBottomBarItem(
-          //   iconPath: 'assets/img/graph.svg',
-          //   activeIconPath: 'assets/img/graph.svg',
-          //   title: S.of(context).graph,
-          //   isDarkTheme: isDarkTheme,
-          // ),
+          _buildBottomBarItem(
+            iconPath: 'assets/img/home.svg',
+            activeIconPath: 'assets/img/active_home.svg',
+            title: S.of(context).home,
+            isDarkTheme: isDarkTheme,
+          ),
+          _buildBottomBarItem(
+            iconPath: 'assets/img/graph.svg',
+            activeIconPath: 'assets/img/graph.svg',
+            title: S.of(context).graph,
+            isDarkTheme: isDarkTheme,
+          ),
           _buildBottomBarItem(
             iconPath: 'assets/img/settings.svg',
             activeIconPath: 'assets/img/active_settings.svg',

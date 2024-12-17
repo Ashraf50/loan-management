@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/feature/Auth/presentation/view_model/auth_bloc/auth_bloc.dart';
-import 'package:loan_management/feature/home/presentation/view_model/cubit/installment_cubit.dart';
+import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/installment_cubit.dart';
 import 'package:loan_management/feature/settings/presentation/view_model/language_bloc/language_bloc.dart';
 import 'package:loan_management/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
