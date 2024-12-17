@@ -5,9 +5,9 @@ import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../home/data/model/installment_model.dart';
-import '../../../../home/presentation/view_model/cubit/installment_cubit.dart';
-import '../../../../home/presentation/view_model/cubit/installment_state.dart';
+import '../../../../home/data/model/debtor_installment_model.dart';
+import '../../../../home/presentation/view_model/cubit/debtor_installment_cubit.dart';
+import '../../../../home/presentation/view_model/cubit/debtor_installment_state.dart';
 
 class DebtorGraphViewBody extends StatefulWidget {
   const DebtorGraphViewBody({super.key});
@@ -18,7 +18,8 @@ class DebtorGraphViewBody extends StatefulWidget {
 
 class _DebtorGraphViewBodyState extends State<DebtorGraphViewBody> {
   late String selectedFilter;
-  List<BarChartGroupData> getBarData(List<InstallmentModel> installments) {
+  List<BarChartGroupData> getBarData(
+      List<DebtorInstallmentModel> installments) {
     List<BarChartGroupData> barData = [];
     for (int i = 0; i < installments.length; i++) {
       double totalPaid = installments[i].totalPaid;
@@ -48,7 +49,7 @@ class _DebtorGraphViewBodyState extends State<DebtorGraphViewBody> {
     return barData;
   }
 
-  List<String> getInstallmentNames(List<InstallmentModel> installments) {
+  List<String> getInstallmentNames(List<DebtorInstallmentModel> installments) {
     return installments.map((installment) => installment.title).toList();
   }
 
@@ -60,15 +61,15 @@ class _DebtorGraphViewBodyState extends State<DebtorGraphViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InstallmentCubit, InstallmentState>(
+    return BlocBuilder<DebtorInstallmentCubit, DebtorInstallmentState>(
       builder: (context, state) {
-        if (state is InstallmentLoading) {
+        if (state is DebtorInstallmentLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is InstallmentLoaded) {
+        } else if (state is DebtorInstallmentLoaded) {
           final installments = selectedFilter ==
                   S.of(context).Uncompleted_Install
-              ? BlocProvider.of<InstallmentCubit>(context).allInstallments!
-              : BlocProvider.of<InstallmentCubit>(context).completedInstallment;
+              ? BlocProvider.of<DebtorInstallmentCubit>(context).allInstallments!
+              : BlocProvider.of<DebtorInstallmentCubit>(context).completedInstallment;
           return CustomScaffold(
             appBar: CustomAppBar(title: S.of(context).graph_title),
             body: Column(

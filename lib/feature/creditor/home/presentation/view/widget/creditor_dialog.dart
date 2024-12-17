@@ -8,19 +8,21 @@ import 'package:provider/provider.dart';
 import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../data/model/installment_model.dart';
-import '../../view_model/cubit/installment_cubit.dart';
+import '../../../data/model/creditor_installment_model.dart';
+import '../../view_model/cubit/creditor_installment_cubit.dart';
 
-class DialogWidget extends StatefulWidget {
-  const DialogWidget({super.key});
+class CreditorDialogWidget extends StatefulWidget {
+  const CreditorDialogWidget({super.key});
 
   @override
-  State<DialogWidget> createState() => _DialogWidgetState();
+  State<CreditorDialogWidget> createState() => _CreditorDialogWidgetState();
 }
 
-class _DialogWidgetState extends State<DialogWidget> {
+class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
   final TextEditingController startDataController = TextEditingController();
   final TextEditingController installmentNameController =
+      TextEditingController();
+      final TextEditingController debtorNameController =
       TextEditingController();
   final TextEditingController totalAmountController = TextEditingController();
   final TextEditingController numOfMonthController = TextEditingController();
@@ -57,6 +59,19 @@ class _DialogWidgetState extends State<DialogWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                CustomTextfield(
+                  labelText: "Debtor name",
+                  keyboardType: TextInputType.text,
+                  controller: debtorNameController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value == '') {
+                      return S.of(context).empty_value;
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 CustomTextfield(
                   labelText: S.of(context).installment_name,
                   keyboardType: TextInputType.text,
@@ -145,7 +160,9 @@ class _DialogWidgetState extends State<DialogWidget> {
                   title: S.of(context).add_installment,
                   onTap: () {
                     if (formKey.currentState!.validate()) {
-                      InstallmentModel installmentModel = InstallmentModel(
+                      CreditorInstallmentModel creditorInstallment =
+                          CreditorInstallmentModel(
+                            installmentDebtor: debtorNameController.text,
                         title: installmentNameController.text,
                         totalAmount:
                             double.tryParse(totalAmountController.text) ?? 0,
@@ -167,8 +184,8 @@ class _DialogWidgetState extends State<DialogWidget> {
                         ),
                         totalPaid: 0,
                       );
-                      BlocProvider.of<InstallmentCubit>(context)
-                          .add(installmentModel);
+                      BlocProvider.of<CreditorInstallmentCubit>(context)
+                          .add(creditorInstallment);
                     }
                   },
                 )

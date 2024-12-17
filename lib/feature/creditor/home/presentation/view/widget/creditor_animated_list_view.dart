@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../feature/debtor/home/presentation/view/widget/installment_item.dart';
+import 'creditor_installment_item.dart';
 
-class AnimatedInstallmentItem extends StatefulWidget {
+class CreditorAnimatedInstallmentItem extends StatefulWidget {
   final int delay;
   final dynamic installment;
   final VoidCallback onTap;
 
-  const AnimatedInstallmentItem({
+  const CreditorAnimatedInstallmentItem({
     super.key,
     required this.delay,
     required this.installment,
@@ -14,11 +14,12 @@ class AnimatedInstallmentItem extends StatefulWidget {
   });
 
   @override
-  State<AnimatedInstallmentItem> createState() =>
-      _AnimatedInstallmentItemState();
+  State<CreditorAnimatedInstallmentItem> createState() =>
+      _CreditorAnimatedInstallmentItemState();
 }
 
-class _AnimatedInstallmentItemState extends State<AnimatedInstallmentItem>
+class _CreditorAnimatedInstallmentItemState
+    extends State<CreditorAnimatedInstallmentItem>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
@@ -58,7 +59,7 @@ class _AnimatedInstallmentItemState extends State<AnimatedInstallmentItem>
       position: _slideAnimation,
       child: FadeTransition(
         opacity: _controller,
-        child: InstallmentItem(
+        child: CreditorInstallmentItem(
           onTap: widget.onTap,
           installment: widget.installment,
         ),

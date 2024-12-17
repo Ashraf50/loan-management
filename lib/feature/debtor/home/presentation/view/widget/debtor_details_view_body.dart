@@ -7,11 +7,11 @@ import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../core/widget/show_snack_bar.dart';
-import '../../../data/model/installment_model.dart';
-import '../../view_model/cubit/installment_cubit.dart';
+import '../../../data/model/debtor_installment_model.dart';
+import '../../view_model/cubit/debtor_installment_cubit.dart';
 
 class DebtorDetailsViewBody extends StatefulWidget {
-  final InstallmentModel installment;
+  final DebtorInstallmentModel installment;
   const DebtorDetailsViewBody({
     super.key,
     required this.installment,
@@ -58,7 +58,7 @@ class _DebtorDetailsViewBodyState extends State<DebtorDetailsViewBody> {
     widget.installment.save();
     if (completedMonths.every((month) => month)) {
       context
-          .read<InstallmentCubit>()
+          .read<DebtorInstallmentCubit>()
           .checkAndMoveToCompleted(widget.installment);
     }
   }

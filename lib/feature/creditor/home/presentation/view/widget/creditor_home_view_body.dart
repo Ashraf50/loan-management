@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view/widget/creditor_dialog.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_styles.dart';
 import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../core/constant/get_responsive.dart';
+import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../../creditor_feature/home/presentation/view/widget/dialog_widget.dart';
-import '../../../../../debtor_feature/home/presentation/view/widget/sliver_app_bar.dart';
+import '../../../../../debtor/home/presentation/view/widget/sliver_app_bar.dart';
+import '../../view_model/cubit/creditor_installment_cubit.dart';
+import '../../view_model/cubit/creditor_installment_state.dart';
 import 'creditor_completed_installment_list_view.dart';
 import 'creditor_uncompleted_installment_list_view.dart';
 
@@ -75,9 +80,26 @@ class CreditorHomeViewBody extends StatelessWidget {
 
   void showDialogWidget(BuildContext context, ThemeProvider themeProvider) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return const DialogWidget();
-        });
+      context: context,
+      builder: (context) {
+        return BlocConsumer<CreditorInstallmentCubit, CreditorInstallmentState>(
+          listener: (context, state) {
+            if (state is CreditorInstallmentSuccess) {
+              BlocProvider.of<CreditorInstallmentCubit>(context)
+                  .fetchAllInstallment();
+              Navigator.pop(context);
+            } else if (state is CreditorInstallmentFailure) {
+              showSnackBar(context, state.errMessage);
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall: state is CreditorInstallmentLoading ? true : false,
+              child: const CreditorDialogWidget(),
+            );
+          },
+        );
+      },
+    );
   }
 }

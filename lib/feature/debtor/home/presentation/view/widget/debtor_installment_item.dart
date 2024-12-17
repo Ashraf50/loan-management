@@ -6,22 +6,22 @@ import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_styles.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../settings/presentation/view_model/language_bloc/language_bloc.dart';
-import '../../../data/model/installment_model.dart';
+import '../../../data/model/debtor_installment_model.dart';
 
-class InstallmentItem extends StatefulWidget {
-  final InstallmentModel installment;
+class DebtorInstallmentItem extends StatefulWidget {
+  final DebtorInstallmentModel installment;
   final void Function() onTap;
-  const InstallmentItem({
+  const DebtorInstallmentItem({
     super.key,
     required this.installment,
     required this.onTap,
   });
 
   @override
-  State<InstallmentItem> createState() => _InstallmentItemState();
+  State<DebtorInstallmentItem> createState() => _DebtorInstallmentItemState();
 }
 
-class _InstallmentItemState extends State<InstallmentItem> {
+class _DebtorInstallmentItemState extends State<DebtorInstallmentItem> {
   String? _selectedLanguage;
   @override
   void initState() {

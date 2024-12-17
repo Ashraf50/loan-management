@@ -1,22 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'installment_model.dart';
+part of 'debtor_installment_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class InstallmentModelAdapter extends TypeAdapter<InstallmentModel> {
+class DebtorInstallmentModelAdapter
+    extends TypeAdapter<DebtorInstallmentModel> {
   @override
   final int typeId = 0;
 
   @override
-  InstallmentModel read(BinaryReader reader) {
+  DebtorInstallmentModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return InstallmentModel(
+    return DebtorInstallmentModel(
       title: fields[0] as String,
       totalAmount: fields[1] as double,
       numOfMonths: fields[2] as num,
@@ -29,7 +30,7 @@ class InstallmentModelAdapter extends TypeAdapter<InstallmentModel> {
   }
 
   @override
-  void write(BinaryWriter writer, InstallmentModel obj) {
+  void write(BinaryWriter writer, DebtorInstallmentModel obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
@@ -56,7 +57,7 @@ class InstallmentModelAdapter extends TypeAdapter<InstallmentModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is InstallmentModelAdapter &&
+      other is DebtorInstallmentModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

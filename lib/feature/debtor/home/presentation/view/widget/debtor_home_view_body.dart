@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/widget/show_snack_bar.dart';
-import 'package:loan_management/feature/debtor/home/presentation/view/widget/dialog_widget.dart';
+import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_dialog_widget.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_completed_installment_list_view.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/sliver_app_bar.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_uncompleted_installment_list_view.dart';
@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 import '../../../../../../core/constant/app_styles.dart';
 import '../../../../../../core/constant/get_responsive.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../view_model/cubit/installment_cubit.dart';
-import '../../view_model/cubit/installment_state.dart';
+import '../../view_model/cubit/debtor_installment_cubit.dart';
+import '../../view_model/cubit/debtor_installment_state.dart';
 
 class DebtorHomeViewBody extends StatelessWidget {
   const DebtorHomeViewBody({super.key});
@@ -82,19 +82,20 @@ class DebtorHomeViewBody extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) {
-        return BlocConsumer<InstallmentCubit, InstallmentState>(
+        return BlocConsumer<DebtorInstallmentCubit, DebtorInstallmentState>(
           listener: (context, state) {
-            if (state is InstallmentSuccess) {
-              BlocProvider.of<InstallmentCubit>(context).fetchAllInstallment();
+            if (state is DebtorInstallmentSuccess) {
+              BlocProvider.of<DebtorInstallmentCubit>(context)
+                  .fetchAllInstallment();
               Navigator.pop(context);
-            } else if (state is InstallmentFailure) {
+            } else if (state is DebtorInstallmentFailure) {
               showSnackBar(context, state.errMessage);
             }
           },
           builder: (context, state) {
             return ModalProgressHUD(
-              inAsyncCall: state is InstallmentLoading ? true : false,
-              child: const DialogWidget(),
+              inAsyncCall: state is DebtorInstallmentLoading ? true : false,
+              child: const DebtorDialogWidget(),
             );
           },
         );

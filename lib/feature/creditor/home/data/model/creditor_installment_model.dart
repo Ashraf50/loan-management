@@ -1,25 +1,28 @@
 import 'package:hive/hive.dart';
-part 'installment_model.g.dart';
+part 'creditor_installment_model.g.dart';
 
-@HiveType(typeId: 0)
-class InstallmentModel extends HiveObject {
+@HiveType(typeId: 1)
+class CreditorInstallmentModel extends HiveObject {
   @HiveField(0)
-  final String title;
+  final String installmentDebtor;
   @HiveField(1)
-  final double totalAmount;
+  final String title;
   @HiveField(2)
-  final num numOfMonths;
+  final double totalAmount;
   @HiveField(3)
-  final double installmentValue;
+  final num numOfMonths;
   @HiveField(4)
-  final DateTime startDate;
+  final double installmentValue;
   @HiveField(5)
-  List<bool> completedMonths;
+  final DateTime startDate;
   @HiveField(6)
-  List<String?> monthNotes;
+  List<bool> completedMonths;
   @HiveField(7)
+  List<String?> monthNotes;
+  @HiveField(8)
   double totalPaid;
-  InstallmentModel({
+  CreditorInstallmentModel({
+    required this.installmentDebtor,
     required this.title,
     required this.totalAmount,
     required this.numOfMonths,
