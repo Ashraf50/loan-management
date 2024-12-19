@@ -85,7 +85,7 @@ class _CreditorInstallmentItemState extends State<CreditorInstallmentItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.installment.title,
+                      widget.installment.installmentDebtor,
                       style: AppStyles.textStyle20,
                     ),
                     const SizedBox(height: 10),

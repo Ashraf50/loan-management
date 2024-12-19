@@ -123,10 +123,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "set_pass": MessageLookupByLibrary.simpleMessage("تعيين كلمة المرور"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "sign_up": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+        "splash1": MessageLookupByLibrary.simpleMessage(
+            "استمتع بإدارة سلسة لالتزاماتك المالية. مع التزامتي، يمكنك بسهولة تتبع ديونك، أقساطك، ومدخراتك في مكان واحد."),
+        "splash2": MessageLookupByLibrary.simpleMessage(
+            "لن تفوّت دفع أي قسط بعد الآن! يساعدك تطبيقنا على متابعة تقدمك، تعيين التذكيرات، وتدوين ملاحظات مفصلة لكل قسط أو التزام."),
+        "splash3": MessageLookupByLibrary.simpleMessage(
+            "تعاون بسهولة! سواء كنت مدينًا أو دائنًا، يتيح لك التزامتي التواصل الشفاف وتوثيق الالتزامات لتسهيل حياتك."),
         "start_date": MessageLookupByLibrary.simpleMessage("تاريخ البداية"),
         "success": MessageLookupByLibrary.simpleMessage("نجاح"),
         "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
         "total_amount": MessageLookupByLibrary.simpleMessage("المبلغ الإجمالي"),
+        "total_inflow": MessageLookupByLibrary.simpleMessage("إجمالي الداخل"),
+        "total_outflow": MessageLookupByLibrary.simpleMessage("إجمالي الخارج"),
         "update_data": MessageLookupByLibrary.simpleMessage("تحديث البيانات"),
         "update_phone":
             MessageLookupByLibrary.simpleMessage("تحديث رقم الهاتف"),

@@ -125,10 +125,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "set_pass": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "splash1": MessageLookupByLibrary.simpleMessage(
+            "Experience seamless management of your finances and commitments. With Eltzamati, you can effortlessly track your dues, installments, and savings in one place."),
+        "splash2": MessageLookupByLibrary.simpleMessage(
+            "Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment."),
+        "splash3": MessageLookupByLibrary.simpleMessage(
+            "Collaborate easily! Whether you\'re a debtor or a creditor, Eltzamati enables transparent and efficient communication and record-keeping to make life easier"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start date"),
         "success": MessageLookupByLibrary.simpleMessage("success"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_amount": MessageLookupByLibrary.simpleMessage("Total amount"),
+        "total_inflow": MessageLookupByLibrary.simpleMessage("Total Inflow"),
+        "total_outflow": MessageLookupByLibrary.simpleMessage("Total outflow"),
         "update_data": MessageLookupByLibrary.simpleMessage("Update data"),
         "update_phone":
             MessageLookupByLibrary.simpleMessage("Update Phone Number"),

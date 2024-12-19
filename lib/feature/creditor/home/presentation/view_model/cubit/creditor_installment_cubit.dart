@@ -48,7 +48,7 @@ class CreditorInstallmentCubit extends Cubit<CreditorInstallmentState> {
     } else {
       filteredInstallments = allInstallments!
           .where((installment) =>
-              installment.title.toLowerCase().contains(query.toLowerCase()))
+              installment.installmentDebtor.toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
     emit(CreditorInstallmentLoaded());

@@ -89,5 +89,10 @@
     "created_at": "Created at",
     "update_data":"Update data",
     "enter_new_pass":"Enter new password",
-    "no_data": "No user data available"
+    "no_data": "No user data available",
+    "splash1":"Experience seamless management of your finances and commitments. With Eltzamati, you can effortlessly track your dues, installments, and savings in one place.",
+    "splash2":"Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.",
+    "splash3":"Collaborate easily! Whether you're a debtor or a creditor, Eltzamati enables transparent and efficient communication and record-keeping to make life easier",
+    "total_inflow":"Total Inflow",
+    "total_outflow":"Total outflow"
 }

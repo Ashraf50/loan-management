@@ -959,6 +959,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Experience seamless management of your finances and commitments. With Eltzamati, you can effortlessly track your dues, installments, and savings in one place.`
+  String get splash1 {
+    return Intl.message(
+      'Experience seamless management of your finances and commitments. With Eltzamati, you can effortlessly track your dues, installments, and savings in one place.',
+      name: 'splash1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.`
+  String get splash2 {
+    return Intl.message(
+      'Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.Never miss a payment again! Our app helps you monitor your progress, set reminders, and keep detailed notes for each installment or commitment.',
+      name: 'splash2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collaborate easily! Whether you're a debtor or a creditor, Eltzamati enables transparent and efficient communication and record-keeping to make life easier`
+  String get splash3 {
+    return Intl.message(
+      'Collaborate easily! Whether you\'re a debtor or a creditor, Eltzamati enables transparent and efficient communication and record-keeping to make life easier',
+      name: 'splash3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Inflow`
+  String get total_inflow {
+    return Intl.message(
+      'Total Inflow',
+      name: 'total_inflow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total outflow`
+  String get total_outflow {
+    return Intl.message(
+      'Total outflow',
+      name: 'total_outflow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
