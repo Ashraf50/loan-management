@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "about_us": MessageLookupByLibrary.simpleMessage("من نحن"),
         "about_us_body": MessageLookupByLibrary.simpleMessage(
-            "تطبيقنا مصمم لتبسيط إدارة الأقساط الشهرية في حياتك اليومية، سواء كانت لمدفوعات المشتريات التي قمت بها أو لإدارة دورك في الجمعية التعاونية (جمعية). يتيح لك التطبيق متابعة الأقساط المستحقة عليك بخصوص المشتريات، بالإضافة إلى تنظيم مواعيد دفعك واستلامك للمبالغ الشهرية في الجمعية. كل ذلك في تطبيق واحد يساعدك على البقاء منظمًا ويضمن لك تتبع كل التزاماتك المالية بشكل دقيق وسهل."),
+            "تطبيقنا مصمم لتبسيط إدارة الأقساط الشهرية في حياتك اليومية، سواء كانت لمدفوعات المشتريات التي قمت بها. يتيح لك التطبيق متابعة الأقساط المستحقة عليك بخصوص المشتريات، بالإضافة إلى تنظيم مواعيد دفعك الشهرية. كل ذلك في تطبيق واحد يساعدك على البقاء منظمًا ويضمن لك تتبع كل التزاماتك المالية بشكل دقيق وسهل."),
         "add_installment": MessageLookupByLibrary.simpleMessage("اضافه قسط"),
         "already_have_account":
             MessageLookupByLibrary.simpleMessage("هل لديك حساب بالفعل؟"),
@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "creditor": MessageLookupByLibrary.simpleMessage("دائن"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
         "debtor": MessageLookupByLibrary.simpleMessage("مدين"),
+        "debtor_name": MessageLookupByLibrary.simpleMessage("اسم المدين"),
         "delete_acc": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "dismiss": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "don_have_account":

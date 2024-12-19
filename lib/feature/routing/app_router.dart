@@ -4,6 +4,8 @@ import 'package:loan_management/feature/Auth/presentation/view/forget_pass_view.
 import 'package:loan_management/feature/Auth/presentation/view/sign_in_view.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/finish_reset_pass_view.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/update_password_view.dart';
+import 'package:loan_management/feature/creditor/home/data/model/creditor_installment_model.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view/creditor_details_view.dart';
 import 'package:loan_management/feature/debtor/home/data/model/debtor_installment_model.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/debtor_details_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
@@ -78,6 +80,15 @@ class AppRouter {
           final installmentDetails = state.extra as DebtorInstallmentModel;
           return DebtorDetailsView(
             installment: installmentDetails,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/creditor_details_view',
+        builder: (context, state) {
+          final installmentDetails = state.extra as CreditorInstallmentModel;
+          return CreditorDetailsView(
+            creditorInstallmentModel: installmentDetails,
           );
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/creditor_animated_list_view.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view_model/cubit/creditor_installment_state.dart';
 import 'package:loan_management/generated/l10n.dart';
@@ -33,10 +34,10 @@ class CreditorCompletedInstallmentListView extends StatelessWidget {
                         delay: index * 200,
                         installment: displayedInstallments[index],
                         onTap: () {
-                          // context.push(
-                          //   "/details_view",
-                          //   extra: displayedInstallments[index],
-                          // );
+                          context.push(
+                            '/creditor_details_view',
+                            extra: displayedInstallments[index],
+                          );
                         },
                       );
                     },

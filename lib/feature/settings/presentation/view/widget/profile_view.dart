@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
+import 'package:loan_management/core/constant/date_format.dart';
 import 'package:loan_management/core/helper/AuthHelper.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
@@ -101,10 +101,4 @@ class ProfileView extends StatelessWidget {
       ),
     );
   }
-}
-
-String dateTimeFormat(String date) {
-  DateTime dateTime = DateTime.parse(date);
-  String formattedDate = DateFormat('dd-MM-yyyy hh:mm a').format(dateTime);
-  return formattedDate;
 }

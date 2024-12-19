@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../core/constant/app_styles.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../debtor/home/presentation/view/widget/decoration_container.dart';
@@ -35,10 +36,10 @@ class CreditorUnCompletedInstallmentListView extends StatelessWidget {
                         delay: index * 200,
                         installment: displayedInstallments[index],
                         onTap: () {
-                          // context.push(
-                          //   "/details_view",
-                          //   extra: displayedInstallments[index],
-                          // );
+                          context.push(
+                            '/creditor_details_view',
+                            extra: displayedInstallments[index],
+                          );
                         },
                       );
                     },

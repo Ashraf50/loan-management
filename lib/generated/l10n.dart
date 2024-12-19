@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `Our app is designed to simplify the management of your monthly installments, whether for purchases you've made or for tracking your position in a savings association (جمعية). The app allows you to keep track of the installments due for your purchases, as well as manage your payment and receipt schedule in the association. All of this is available in one app, helping you stay organized and ensuring you keep track of all your financial commitments easily and accurately.`
+  /// `Our application is designed to simplify the management of monthly installments in your daily life, whether for payments related to purchases you've made. The application allows you to track your due installments for purchases, in addition to organizing your monthly payment schedules. All of this in one app that helps you stay organized and ensures you keep track of all your financial commitments accurately and easily.`
   String get about_us_body {
     return Intl.message(
-      'Our app is designed to simplify the management of your monthly installments, whether for purchases you\'ve made or for tracking your position in a savings association (جمعية). The app allows you to keep track of the installments due for your purchases, as well as manage your payment and receipt schedule in the association. All of this is available in one app, helping you stay organized and ensuring you keep track of all your financial commitments easily and accurately.',
+      'Our application is designed to simplify the management of monthly installments in your daily life, whether for payments related to purchases you\'ve made. The application allows you to track your due installments for purchases, in addition to organizing your monthly payment schedules. All of this in one app that helps you stay organized and ensures you keep track of all your financial commitments accurately and easily.',
       name: 'about_us_body',
       desc: '',
       args: [],
@@ -1005,6 +1005,16 @@ class S {
     return Intl.message(
       'Total outflow',
       name: 'total_outflow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Debtor name`
+  String get debtor_name {
+    return Intl.message(
+      'Debtor name',
+      name: 'debtor_name',
       desc: '',
       args: [],
     );

@@ -106,12 +106,14 @@ class _CreditorGraphViewBodyState extends State<CreditorGraphViewBody> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is CreditorInstallmentLoaded) {
           final installments =
-              selectedFilter == S.of(context).Uncompleted_Install ||
-                      selectedFilter == S.of(context).total
+              selectedFilter == S.of(context).Uncompleted_Install
                   ? BlocProvider.of<CreditorInstallmentCubit>(context)
                       .allInstallments!
                   : BlocProvider.of<CreditorInstallmentCubit>(context)
                       .completedInstallment;
+          final allInstallments =
+              BlocProvider.of<CreditorInstallmentCubit>(context)
+                  .allInstallments!;
           return CustomScaffold(
             appBar: CustomAppBar(title: S.of(context).graph_title),
             body: Column(
@@ -204,11 +206,14 @@ class _CreditorGraphViewBodyState extends State<CreditorGraphViewBody> {
                         show: false,
                       ),
                       barGroups: selectedFilter == S.of(context).total
-                          ? getTotalBarData(installments)
+                          ? getTotalBarData(allInstallments)
                           : getBarData(installments),
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           );

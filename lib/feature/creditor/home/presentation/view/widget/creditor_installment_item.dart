@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
+import 'package:loan_management/core/constant/date_format.dart';
 import 'package:loan_management/feature/creditor/home/data/model/creditor_installment_model.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_styles.dart';
-import '../../../../../../generated/l10n.dart';
 import '../../../../../settings/presentation/view_model/language_bloc/language_bloc.dart';
 
 class CreditorInstallmentItem extends StatefulWidget {
@@ -18,7 +18,8 @@ class CreditorInstallmentItem extends StatefulWidget {
   });
 
   @override
-  State<CreditorInstallmentItem> createState() => _CreditorInstallmentItemState();
+  State<CreditorInstallmentItem> createState() =>
+      _CreditorInstallmentItemState();
 }
 
 class _CreditorInstallmentItemState extends State<CreditorInstallmentItem> {
@@ -70,41 +71,67 @@ class _CreditorInstallmentItemState extends State<CreditorInstallmentItem> {
           onDismissed: (direction) {
             widget.installment.delete();
           },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: themeProvider.isDarkTheme
-                  ? AppColors.widgetColorDark
-                  : AppColors.whiteGrey,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.installment.installmentDebtor,
-                      style: AppStyles.textStyle20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: themeProvider.isDarkTheme
+                          ? AppColors.widgetColorDark
+                          : AppColors.whiteGrey,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "${S.of(context).total}: ${widget.installment.totalAmount}",
-                      style: AppStyles.textStyle20,
-                    )
-                  ],
-                ),
-                const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.grey,
-                  size: 30,
-                )
-              ],
-            ),
+                    child: Center(
+                      child: Text(
+                        widget.installment.installmentDebtor
+                            .substring(0, 1)
+                            .toUpperCase(),
+                        style: AppStyles.textStyle20,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.installment.installmentDebtor,
+                        style: AppStyles.textStyle20,
+                      ),
+                      Text(
+                        dateTimeFormat(widget.installment.startDate.toString()),
+                        style: AppStyles.textStyle20,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    widget.installment.totalAmount.toString(),
+                    style: AppStyles.textStyle20,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey,
+                    size: 20,
+                  )
+                ],
+              )
+            ],
           ),
         ),
       ),
+      // ),
     );
   }
 }

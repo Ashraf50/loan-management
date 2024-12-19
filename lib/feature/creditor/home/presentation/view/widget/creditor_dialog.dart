@@ -22,8 +22,7 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
   final TextEditingController startDataController = TextEditingController();
   final TextEditingController installmentNameController =
       TextEditingController();
-      final TextEditingController debtorNameController =
-      TextEditingController();
+  final TextEditingController debtorNameController = TextEditingController();
   final TextEditingController totalAmountController = TextEditingController();
   final TextEditingController numOfMonthController = TextEditingController();
   final TextEditingController installmentValueController =
@@ -60,7 +59,7 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextfield(
-                  labelText: "Debtor name",
+                  labelText: S.of(context).debtor_name,
                   keyboardType: TextInputType.text,
                   controller: debtorNameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -162,7 +161,7 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
                     if (formKey.currentState!.validate()) {
                       CreditorInstallmentModel creditorInstallment =
                           CreditorInstallmentModel(
-                            installmentDebtor: debtorNameController.text,
+                        installmentDebtor: debtorNameController.text,
                         title: installmentNameController.text,
                         totalAmount:
                             double.tryParse(totalAmountController.text) ?? 0,
