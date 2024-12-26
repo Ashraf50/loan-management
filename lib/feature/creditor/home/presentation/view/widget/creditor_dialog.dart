@@ -29,6 +29,7 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
   final TextEditingController installmentValueController =
       TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  DateTime? selectedDate;
   Future<void> _selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -37,9 +38,9 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
       lastDate: DateTime(2100),
     );
     if (pickedDate != null) {
-      String formattedDate = DateFormat('d MMMM yyyy').format(pickedDate);
       setState(() {
-        startDataController.text = formattedDate;
+        selectedDate = pickedDate;
+        startDataController.text = DateFormat('d MMMM yyyy').format(pickedDate);
       });
     }
   }
@@ -173,9 +174,7 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
                         installmentValue:
                             double.tryParse(installmentValueController.text) ??
                                 0,
-                        startDate:
-                            DateTime.tryParse(startDataController.text) ??
-                                DateTime.now(),
+                        startDate: selectedDate ?? DateTime.now(),
                         completedMonths: List.filled(
                           int.tryParse(numOfMonthController.text) ?? 0,
                           false,

@@ -1,11 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/creditor_dialog.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:provider/provider.dart';
 import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_styles.dart';
-import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../core/constant/get_responsive.dart';
 import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../../../../generated/l10n.dart';
@@ -15,12 +14,31 @@ import '../../view_model/cubit/creditor_installment_state.dart';
 import 'creditor_completed_installment_list_view.dart';
 import 'creditor_uncompleted_installment_list_view.dart';
 
-class CreditorHomeViewBody extends StatelessWidget {
+class CreditorHomeViewBody extends StatefulWidget {
   const CreditorHomeViewBody({super.key});
 
   @override
+  State<CreditorHomeViewBody> createState() => _CreditorHomeViewBodyState();
+}
+
+class _CreditorHomeViewBodyState extends State<CreditorHomeViewBody> {
+  void checkInternetAndSync() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult != ConnectivityResult.none) {
+      await context
+          .read<CreditorInstallmentCubit>()
+          .syncLocalDataWithSupabase();
+    } else {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternetAndSync();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     double screenHeight = MediaQuery.sizeOf(context).height;
     return DefaultTabController(
       length: 2,
@@ -62,7 +80,7 @@ class CreditorHomeViewBody extends StatelessWidget {
         floatingActionButton: InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () {
-            showDialogWidget(context, themeProvider);
+            showDialogWidget(context);
           },
           child: const CircleAvatar(
             radius: 30,
@@ -78,7 +96,7 @@ class CreditorHomeViewBody extends StatelessWidget {
     );
   }
 
-  void showDialogWidget(BuildContext context, ThemeProvider themeProvider) {
+  void showDialogWidget(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -90,6 +108,7 @@ class CreditorHomeViewBody extends StatelessWidget {
               Navigator.pop(context);
             } else if (state is CreditorInstallmentFailure) {
               showSnackBar(context, state.errMessage);
+              print(state.errMessage);
             }
           },
           builder: (context, state) {

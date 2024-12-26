@@ -250,10 +250,11 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
 
   void showDialogWidget(String id) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return ShareInstallmentDialog(id: id);
-        });
+      context: context,
+      builder: (context) {
+        return ShareInstallmentDialog(id: id);
+      },
+    );
   }
 }
 

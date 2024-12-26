@@ -23,6 +23,8 @@ class CreditorInstallmentModel extends HiveObject {
   List<String?> monthNotes;
   @HiveField(9)
   double totalPaid;
+  @HiveField(10)
+  bool isSynced;
   CreditorInstallmentModel({
     required this.installmentId,
     required this.installmentDebtor,
@@ -34,5 +36,6 @@ class CreditorInstallmentModel extends HiveObject {
     required this.completedMonths,
     required this.monthNotes,
     required this.totalPaid,
+    this.isSynced = false,
   });
 }
