@@ -9,6 +9,7 @@ import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../data/model/creditor_installment_model.dart';
+import 'package:uuid/uuid.dart';
 import '../../view_model/cubit/creditor_installment_cubit.dart';
 
 class CreditorDialogWidget extends StatefulWidget {
@@ -159,8 +160,10 @@ class _CreditorDialogWidgetState extends State<CreditorDialogWidget> {
                   title: S.of(context).add_installment,
                   onTap: () {
                     if (formKey.currentState!.validate()) {
+                      var uuid = const Uuid();
                       CreditorInstallmentModel creditorInstallment =
                           CreditorInstallmentModel(
+                        installmentId: uuid.v4(),
                         installmentDebtor: debtorNameController.text,
                         title: installmentNameController.text,
                         totalAmount:

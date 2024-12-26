@@ -4,24 +4,27 @@ part 'creditor_installment_model.g.dart';
 @HiveType(typeId: 1)
 class CreditorInstallmentModel extends HiveObject {
   @HiveField(0)
-  final String installmentDebtor;
+  final String installmentId;
   @HiveField(1)
-  final String title;
+  final String installmentDebtor;
   @HiveField(2)
-  final double totalAmount;
+  final String title;
   @HiveField(3)
-  final num numOfMonths;
+  final double totalAmount;
   @HiveField(4)
-  final double installmentValue;
+  final num numOfMonths;
   @HiveField(5)
-  final DateTime startDate;
+  final double installmentValue;
   @HiveField(6)
-  List<bool> completedMonths;
+  final DateTime startDate;
   @HiveField(7)
-  List<String?> monthNotes;
+  List<bool> completedMonths;
   @HiveField(8)
+  List<String?> monthNotes;
+  @HiveField(9)
   double totalPaid;
   CreditorInstallmentModel({
+    required this.installmentId,
     required this.installmentDebtor,
     required this.title,
     required this.totalAmount,

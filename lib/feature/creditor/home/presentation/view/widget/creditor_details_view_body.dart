@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view/widget/share_installment_dialog.dart';
 import 'package:loan_management/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -227,7 +228,32 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
           ),
         ],
       ),
+      floatingActionButton: InkWell(
+        borderRadius: BorderRadius.circular(30),
+        onTap: () {
+          showDialogWidget(
+            widget.installment.installmentId,
+          );
+        },
+        child: const CircleAvatar(
+          radius: 30,
+          backgroundColor: AppColors.primaryColor,
+          child: Icon(
+            Icons.share,
+            color: AppColors.white,
+            size: 30,
+          ),
+        ),
+      ),
     );
+  }
+
+  void showDialogWidget(String id) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ShareInstallmentDialog(id: id);
+        });
   }
 }
 

@@ -45,7 +45,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   supabase_flutter: ^2.8.1
-  app_links: ^6.3.3
+  uuid: ^4.5.1
+  qr_flutter: ^4.1.0
   modal_progress_hud_nsn: ^0.5.1
   flutter_native_splash: ^2.4.2
   lottie: ^3.2.0

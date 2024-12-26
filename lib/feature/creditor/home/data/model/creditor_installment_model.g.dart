@@ -18,39 +18,42 @@ class CreditorInstallmentModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CreditorInstallmentModel(
-      installmentDebtor: fields[0] as String,
-      title: fields[1] as String,
-      totalAmount: fields[2] as double,
-      numOfMonths: fields[3] as num,
-      installmentValue: fields[4] as double,
-      startDate: fields[5] as DateTime,
-      completedMonths: (fields[6] as List).cast<bool>(),
-      monthNotes: (fields[7] as List).cast<String?>(),
-      totalPaid: fields[8] as double,
+      installmentId: fields[0] as String,
+      installmentDebtor: fields[1] as String,
+      title: fields[2] as String,
+      totalAmount: fields[3] as double,
+      numOfMonths: fields[4] as num,
+      installmentValue: fields[5] as double,
+      startDate: fields[6] as DateTime,
+      completedMonths: (fields[7] as List).cast<bool>(),
+      monthNotes: (fields[8] as List).cast<String?>(),
+      totalPaid: fields[9] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, CreditorInstallmentModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
-      ..write(obj.installmentDebtor)
+      ..write(obj.installmentId)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.installmentDebtor)
       ..writeByte(2)
-      ..write(obj.totalAmount)
+      ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.numOfMonths)
+      ..write(obj.totalAmount)
       ..writeByte(4)
-      ..write(obj.installmentValue)
+      ..write(obj.numOfMonths)
       ..writeByte(5)
-      ..write(obj.startDate)
+      ..write(obj.installmentValue)
       ..writeByte(6)
-      ..write(obj.completedMonths)
+      ..write(obj.startDate)
       ..writeByte(7)
-      ..write(obj.monthNotes)
+      ..write(obj.completedMonths)
       ..writeByte(8)
+      ..write(obj.monthNotes)
+      ..writeByte(9)
       ..write(obj.totalPaid);
   }
 
