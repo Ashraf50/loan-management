@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "enter_email":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
+        "enter_id": MessageLookupByLibrary.simpleMessage("أدخل معرف القسط"),
         "enter_name": MessageLookupByLibrary.simpleMessage("أدخل اسمك"),
         "enter_new_pass":
             MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور الجديدة"),

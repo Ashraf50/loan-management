@@ -1,4 +1,7 @@
+import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/share_installment_dialog.dart';
@@ -29,6 +32,8 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
   late List<bool> completedMonths;
   late List<String?> monthNotes;
   late List<TextEditingController> textControllers;
+  late Box localBox;
+  late StreamSubscription connectivitySubscription;
 
   @override
   void initState() {
@@ -39,6 +44,13 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
       widget.installment.numOfMonths.toInt(),
       (index) => TextEditingController(text: monthNotes[index]),
     );
+    localBox = Hive.box('offline_updates');
+    connectivitySubscription =
+        Connectivity().onConnectivityChanged.listen((connectivityResult) {
+      if (connectivityResult != ConnectivityResult.none) {
+        _uploadOfflineData();
+      }
+    });
   }
 
   @override
@@ -46,7 +58,31 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
     for (var controller in textControllers) {
       controller.dispose();
     }
+    connectivitySubscription.cancel();
     super.dispose();
+  }
+
+  void _saveOfflineData(String key, Map<String, dynamic> value) {
+    final existingData =
+        (localBox.get(key) as Map?)?.cast<String, dynamic>() ?? {};
+    final updatingData = {...existingData, ...value};
+    localBox.put(key, updatingData);
+  }
+
+  /// Upload offline data to Supabase
+  Future<void> _uploadOfflineData() async {
+    final pendingData = localBox.toMap();
+    for (var entry in pendingData.entries) {
+      try {
+        await supabase
+            .from('installments')
+            .update(entry.value)
+            .eq('Uid', entry.key); // Upload to Supabase
+        localBox.delete(entry.key); // Remove from Hive if successful
+      } catch (e) {
+        print('Error uploading data for ${entry.key}: $e');
+      }
+    }
   }
 
   void _updateMonthStatus(int index, bool isCompleted) async {
@@ -60,10 +96,14 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
       widget.installment.completedMonths = completedMonths;
     });
     widget.installment.save();
-    await supabase.from("installments").update({
+    final updateData = {
       'completed_months': completedMonths,
       'total_paid': widget.installment.totalPaid,
-    }).eq('Uid', widget.installment.installmentId);
+    };
+    _saveOfflineData(widget.installment.installmentId, updateData);
+    if (await Connectivity().checkConnectivity() != ConnectivityResult.none) {
+      _uploadOfflineData();
+    }
     if (completedMonths.every((month) => month)) {
       context
           .read<CreditorInstallmentCubit>()
@@ -77,8 +117,11 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
       widget.installment.monthNotes = monthNotes;
     });
     widget.installment.save();
-    await supabase.from("installments").update({'month_notes': monthNotes}).eq(
-        'Uid', widget.installment.installmentId);
+    final updateData = {'month_notes': monthNotes};
+    _saveOfflineData(widget.installment.installmentId, updateData);
+    if (await Connectivity().checkConnectivity() != ConnectivityResult.none) {
+      _uploadOfflineData();
+    }
   }
 
   @override

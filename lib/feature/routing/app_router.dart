@@ -7,6 +7,7 @@ import 'package:loan_management/feature/Auth/presentation/view/widget/finish_res
 import 'package:loan_management/feature/Auth/presentation/view/widget/update_password_view.dart';
 import 'package:loan_management/feature/creditor/home/data/model/creditor_installment_model.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/creditor_details_view.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view/widget/add_installment.dart';
 import 'package:loan_management/feature/debtor/home/data/model/debtor_installment_model.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/add_local_installment.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
@@ -129,6 +130,25 @@ class AppRouter {
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
           child: const AddSharedInstallment(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/add_installment',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const AddInstallmentView(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(0.0, 1.0);
             const end = Offset.zero;

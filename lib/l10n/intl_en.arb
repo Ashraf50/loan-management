@@ -98,5 +98,6 @@
     "debtor_name":"Debtor name",
     "shared_install":"Shared installment",
     "add_personal_inst":"Add personal installment",
-    "add_shared_inst":"Add shared installment"
+    "add_shared_inst":"Add shared installment",
+    "enter_id":"Enter installment id"
 }

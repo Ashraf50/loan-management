@@ -22,6 +22,7 @@ void main() async {
   Hive.registerAdapter(DebtorInstallmentModelAdapter());
   Hive.registerAdapter(CreditorInstallmentModelAdapter());
   await Hive.openBox<DebtorInstallmentModel>(AppStrings.debtorInstallmentBox);
+  await Hive.openBox('offline_updates');
   await Hive.openBox<CreditorInstallmentModel>(AppStrings.creditorInstallment);
   sharedPreferences = await SharedPreferences.getInstance(); //save language
   SharedPreferences pref = await SharedPreferences.getInstance(); //save theme

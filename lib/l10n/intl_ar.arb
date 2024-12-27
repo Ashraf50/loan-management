@@ -98,5 +98,6 @@
     "debtor_name":"اسم المدين",
     "shared_install":"قسط مشترك",
     "add_personal_inst": "إضافة قسط شخصي",
-    "add_shared_inst": "إضافة قسط مشترك"
+    "add_shared_inst": "إضافة قسط مشترك",
+    "enter_id": "أدخل معرف القسط"
 }

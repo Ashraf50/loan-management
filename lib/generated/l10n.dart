@@ -1049,6 +1049,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter installment id`
+  String get enter_id {
+    return Intl.message(
+      'Enter installment id',
+      name: 'enter_id',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

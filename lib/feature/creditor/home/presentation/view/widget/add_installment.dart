@@ -4,26 +4,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view_model/cubit/creditor_installment_state.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_button.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
-import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/debtor_installment_state.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../data/model/debtor_installment_model.dart';
-import '../../view_model/cubit/debtor_installment_cubit.dart';
+import '../../../data/model/creditor_installment_model.dart';
+import 'package:uuid/uuid.dart';
+import '../../view_model/cubit/creditor_installment_cubit.dart';
 
-class AddLocalInstallment extends StatefulWidget {
-  const AddLocalInstallment({super.key});
+class AddInstallmentView extends StatefulWidget {
+  const AddInstallmentView({super.key});
 
   @override
-  State<AddLocalInstallment> createState() => _AddLocalInstallmentState();
+  State<AddInstallmentView> createState() => _AddInstallmentViewState();
 }
 
-class _AddLocalInstallmentState extends State<AddLocalInstallment> {
+class _AddInstallmentViewState extends State<AddInstallmentView> {
   final TextEditingController startDataController = TextEditingController();
   final TextEditingController installmentNameController =
       TextEditingController();
+  final TextEditingController debtorNameController = TextEditingController();
   final TextEditingController totalAmountController = TextEditingController();
   final TextEditingController numOfMonthController = TextEditingController();
   final TextEditingController installmentValueController =
@@ -47,21 +49,21 @@ class _AddLocalInstallmentState extends State<AddLocalInstallment> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DebtorInstallmentCubit, DebtorInstallmentState>(
+    return BlocConsumer<CreditorInstallmentCubit, CreditorInstallmentState>(
       listener: (context, state) {
-        if (state is DebtorInstallmentSuccess) {
-          BlocProvider.of<DebtorInstallmentCubit>(context)
+        if (state is CreditorInstallmentSuccess) {
+          BlocProvider.of<CreditorInstallmentCubit>(context)
               .fetchAllInstallment();
           Navigator.pop(context);
-        } else if (state is DebtorInstallmentFailure) {
+        } else if (state is CreditorInstallmentFailure) {
           showSnackBar(context, state.errMessage);
         }
       },
       builder: (context, state) {
         return ModalProgressHUD(
-          inAsyncCall: state is DebtorInstallmentLoading ? true : false,
+          inAsyncCall: state is CreditorInstallmentLoading ? true : false,
           child: CustomScaffold(
-            appBar: CustomAppBar(title: S.of(context).add_personal_inst),
+            appBar: CustomAppBar(title: S.of(context).add_installment),
             body: Form(
               key: formKey,
               child: Padding(
@@ -69,6 +71,19 @@ class _AddLocalInstallmentState extends State<AddLocalInstallment> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: ListView(
                   children: [
+                    CustomTextfield(
+                      labelText: S.of(context).debtor_name,
+                      keyboardType: TextInputType.text,
+                      controller: debtorNameController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == '') {
+                          return S.of(context).empty_value;
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
                     CustomTextfield(
                       labelText: S.of(context).installment_name,
                       keyboardType: TextInputType.text,
@@ -157,8 +172,11 @@ class _AddLocalInstallmentState extends State<AddLocalInstallment> {
                       title: S.of(context).add_installment,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          DebtorInstallmentModel debtorInstallment =
-                              DebtorInstallmentModel(
+                          var uuid = const Uuid();
+                          CreditorInstallmentModel creditorInstallment =
+                              CreditorInstallmentModel(
+                            installmentId: uuid.v4(),
+                            installmentDebtor: debtorNameController.text,
                             title: installmentNameController.text,
                             totalAmount:
                                 double.tryParse(totalAmountController.text) ??
@@ -179,8 +197,8 @@ class _AddLocalInstallmentState extends State<AddLocalInstallment> {
                             ),
                             totalPaid: 0,
                           );
-                          BlocProvider.of<DebtorInstallmentCubit>(context)
-                              .add(debtorInstallment);
+                          BlocProvider.of<CreditorInstallmentCubit>(context)
+                              .add(creditorInstallment);
                         }
                       },
                     )

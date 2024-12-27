@@ -36,33 +36,36 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
           inAsyncCall: state is DebtorInstallmentLoading ? true : false,
           child: CustomScaffold(
             appBar: CustomAppBar(title: S.of(context).add_shared_inst),
-            body: ListView(
-              children: [
-                CustomTextfield(
-                  labelText: "enter installment id",
-                  keyboardType: TextInputType.text,
-                  controller: idController,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value == '') {
-                      return S.of(context).empty_value;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                CustomButton(
-                  title: "Search",
-                  onTap: () {
-                    String installmentId = idController.text;
-                    if (installmentId.isNotEmpty) {
-                      BlocProvider.of<DebtorInstallmentCubit>(context)
-                          .addInstallmentById(installmentId);
-                    }
-                  },
-                  width: double.infinity,
-                )
-              ],
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: ListView(
+                children: [
+                  CustomTextfield(
+                    labelText: "Enter id",
+                    keyboardType: TextInputType.text,
+                    controller: idController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  CustomButton(
+                    title: S.of(context).Search_for_installment,
+                    width: double.infinity,
+                    onTap: () {
+                      String installmentId = idController.text;
+                      if (installmentId.isNotEmpty) {
+                        BlocProvider.of<DebtorInstallmentCubit>(context)
+                            .addInstallmentById(installmentId);
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

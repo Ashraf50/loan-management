@@ -1,16 +1,13 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loan_management/feature/creditor/home/presentation/view/widget/creditor_dialog.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_styles.dart';
 import '../../../../../../core/constant/get_responsive.dart';
-import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../debtor/home/presentation/view/widget/sliver_app_bar.dart';
 import '../../view_model/cubit/creditor_installment_cubit.dart';
-import '../../view_model/cubit/creditor_installment_state.dart';
 import 'creditor_completed_installment_list_view.dart';
 import 'creditor_uncompleted_installment_list_view.dart';
 
@@ -80,7 +77,7 @@ class _CreditorHomeViewBodyState extends State<CreditorHomeViewBody> {
         floatingActionButton: InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () {
-            showDialogWidget(context);
+            context.push("/add_installment");
           },
           child: const CircleAvatar(
             radius: 30,
@@ -93,32 +90,6 @@ class _CreditorHomeViewBodyState extends State<CreditorHomeViewBody> {
           ),
         ),
       ),
-    );
-  }
-
-  void showDialogWidget(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return BlocConsumer<CreditorInstallmentCubit, CreditorInstallmentState>(
-          listener: (context, state) {
-            if (state is CreditorInstallmentSuccess) {
-              BlocProvider.of<CreditorInstallmentCubit>(context)
-                  .fetchAllInstallment();
-              Navigator.pop(context);
-            } else if (state is CreditorInstallmentFailure) {
-              showSnackBar(context, state.errMessage);
-              print(state.errMessage);
-            }
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is CreditorInstallmentLoading ? true : false,
-              child: const CreditorDialogWidget(),
-            );
-          },
-        );
-      },
     );
   }
 }

@@ -68,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "empty_value": MessageLookupByLibrary.simpleMessage("Empty value"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter your email"),
+        "enter_id":
+            MessageLookupByLibrary.simpleMessage("Enter installment id"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Enter your name"),
         "enter_new_pass":
             MessageLookupByLibrary.simpleMessage("Enter new password"),
