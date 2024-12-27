@@ -26,13 +26,15 @@ class DebtorInstallmentModelAdapter
       completedMonths: (fields[5] as List).cast<bool>(),
       monthNotes: (fields[6] as List).cast<String?>(),
       totalPaid: fields[7] as double,
+      isShared: fields[8] as bool,
+      id: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, DebtorInstallmentModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -48,7 +50,11 @@ class DebtorInstallmentModelAdapter
       ..writeByte(6)
       ..write(obj.monthNotes)
       ..writeByte(7)
-      ..write(obj.totalPaid);
+      ..write(obj.totalPaid)
+      ..writeByte(8)
+      ..write(obj.isShared)
+      ..writeByte(9)
+      ..write(obj.id);
   }
 
   @override

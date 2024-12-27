@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/share_installment_dialog.dart';
 import 'package:loan_management/generated/l10n.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import '../../../../../../core/constant/app_theme.dart';
+import '../../../../../../core/widget/custom_widget.dart';
 import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../data/model/creditor_installment_model.dart';
 import '../../view_model/cubit/creditor_installment_cubit.dart';
@@ -24,6 +25,7 @@ class CreditorDetailsViewBody extends StatefulWidget {
 }
 
 class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
+  final supabase = Supabase.instance.client;
   late List<bool> completedMonths;
   late List<String?> monthNotes;
   late List<TextEditingController> textControllers;
@@ -47,7 +49,7 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
     super.dispose();
   }
 
-  void _updateMonthStatus(int index, bool isCompleted) {
+  void _updateMonthStatus(int index, bool isCompleted) async {
     setState(() {
       completedMonths[index] = isCompleted;
       if (isCompleted) {
@@ -58,6 +60,10 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
       widget.installment.completedMonths = completedMonths;
     });
     widget.installment.save();
+    await supabase.from("installments").update({
+      'completed_months': completedMonths,
+      'total_paid': widget.installment.totalPaid,
+    }).eq('Uid', widget.installment.installmentId);
     if (completedMonths.every((month) => month)) {
       context
           .read<CreditorInstallmentCubit>()
@@ -65,12 +71,14 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
     }
   }
 
-  void _updateMonthNotes(int index, String? note) {
+  void _updateMonthNotes(int index, String? note) async {
     setState(() {
       monthNotes[index] = note;
       widget.installment.monthNotes = monthNotes;
     });
     widget.installment.save();
+    await supabase.from("installments").update({'month_notes': monthNotes}).eq(
+        'Uid', widget.installment.installmentId);
   }
 
   @override
@@ -113,11 +121,11 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
                   style: AppStyles.textStyle20notBoldWhite,
                 ),
                 const SizedBox(height: 15),
-                MyWidget(
+                CustomWidget(
                   title: S.of(context).amount_monthly,
                   subtitle: widget.installment.installmentValue.toString(),
                 ),
-                MyWidget(
+                CustomWidget(
                   title: S.of(context).amount_paid,
                   subtitle:
                       " ${widget.installment.totalPaid.toString()}/${widget.installment.totalAmount.toString()}",
@@ -254,49 +262,6 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
       builder: (context) {
         return ShareInstallmentDialog(id: id);
       },
-    );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  const MyWidget({
-    super.key,
-    required this.title,
-    required this.subtitle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              SvgPicture.asset(
-                "assets/img/money.svg",
-                height: 30,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                "$title: ",
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          Text(
-            subtitle,
-            style: AppStyles.textStyle18White,
-          ),
-        ],
-      ),
     );
   }
 }

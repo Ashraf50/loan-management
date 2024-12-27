@@ -84,6 +84,18 @@ class _DebtorInstallmentItemState extends State<DebtorInstallmentItem> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    widget.installment.isShared
+                        ? Row(
+                            children: [
+                              const Icon(Icons.star),
+                              const SizedBox(width: 5),
+                              Text(
+                                S.of(context).shared_install,
+                                style: AppStyles.textStyle20,
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
                     Text(
                       widget.installment.title,
                       style: AppStyles.textStyle20,

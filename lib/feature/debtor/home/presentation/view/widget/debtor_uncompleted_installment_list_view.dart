@@ -15,7 +15,8 @@ class DebtorUnCompletedInstallmentListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DebtorInstallmentCubit, DebtorInstallmentState>(
       builder: (context, state) {
-        if (state is DebtorInstallmentLoaded || state is DebtorInstallmentInitial) {
+        if (state is DebtorInstallmentLoaded ||
+            state is DebtorInstallmentInitial) {
           final displayedInstallments =
               context.read<DebtorInstallmentCubit>().filteredInstallments ?? [];
           return DecorationContainer(
@@ -34,10 +35,17 @@ class DebtorUnCompletedInstallmentListView extends StatelessWidget {
                         delay: index * 200,
                         installment: displayedInstallments[index],
                         onTap: () {
-                          context.push(
-                            "/details_view",
-                            extra: displayedInstallments[index],
-                          );
+                          if (displayedInstallments[index].isShared) {
+                            context.push(
+                              "/shared_details_view",
+                              extra: displayedInstallments[index],
+                            );
+                          } else {
+                            context.push(
+                              "/local_details_view",
+                              extra: displayedInstallments[index],
+                            );
+                          }
                         },
                       );
                     },

@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_us_body": MessageLookupByLibrary.simpleMessage(
             "تطبيقنا مصمم لتبسيط إدارة الأقساط الشهرية في حياتك اليومية، سواء كانت لمدفوعات المشتريات التي قمت بها. يتيح لك التطبيق متابعة الأقساط المستحقة عليك بخصوص المشتريات، بالإضافة إلى تنظيم مواعيد دفعك الشهرية. كل ذلك في تطبيق واحد يساعدك على البقاء منظمًا ويضمن لك تتبع كل التزاماتك المالية بشكل دقيق وسهل."),
         "add_installment": MessageLookupByLibrary.simpleMessage("اضافه قسط"),
+        "add_personal_inst":
+            MessageLookupByLibrary.simpleMessage("إضافة قسط شخصي"),
+        "add_shared_inst":
+            MessageLookupByLibrary.simpleMessage("إضافة قسط مشترك"),
         "already_have_account":
             MessageLookupByLibrary.simpleMessage("هل لديك حساب بالفعل؟"),
         "amount_monthly": MessageLookupByLibrary.simpleMessage("المبلغ/شهري"),
@@ -123,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_otp": MessageLookupByLibrary.simpleMessage("إرسال رمز التحقق"),
         "set_pass": MessageLookupByLibrary.simpleMessage("تعيين كلمة المرور"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),
+        "shared_install": MessageLookupByLibrary.simpleMessage("قسط مشترك"),
         "sign_up": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "splash1": MessageLookupByLibrary.simpleMessage(
             "استمتع بإدارة سلسة لالتزاماتك المالية. مع التزامتي، يمكنك بسهولة تتبع ديونك، أقساطك، ومدخراتك في مكان واحد."),

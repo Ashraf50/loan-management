@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Our application is designed to simplify the management of monthly installments in your daily life, whether for payments related to purchases you\'ve made. The application allows you to track your due installments for purchases, in addition to organizing your monthly payment schedules. All of this in one app that helps you stay organized and ensures you keep track of all your financial commitments accurately and easily."),
         "add_installment":
             MessageLookupByLibrary.simpleMessage("Add installment"),
+        "add_personal_inst":
+            MessageLookupByLibrary.simpleMessage("Add personal installment"),
+        "add_shared_inst":
+            MessageLookupByLibrary.simpleMessage("Add shared installment"),
         "already_have_account":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "amount_monthly":
@@ -125,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_otp": MessageLookupByLibrary.simpleMessage("Send Otp"),
         "set_pass": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
+        "shared_install":
+            MessageLookupByLibrary.simpleMessage("Shared installment"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "splash1": MessageLookupByLibrary.simpleMessage(
             "Experience seamless management of your finances and commitments. With Eltzamati, you can effortlessly track your dues, installments, and savings in one place."),

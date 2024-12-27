@@ -34,10 +34,14 @@ class DebtorCompletedInstallmentListView extends StatelessWidget {
                         delay: index * 200,
                         installment: displayedInstallments[index],
                         onTap: () {
-                          context.push(
-                            "/details_view",
-                            extra: displayedInstallments[index],
-                          );
+                          if (displayedInstallments[index].isShared) {
+                            context.push("/shared_details_view");
+                          } else {
+                            context.push(
+                              "/local_details_view",
+                              extra: displayedInstallments[index],
+                            );
+                          }
                         },
                       );
                     },

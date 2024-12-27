@@ -1019,6 +1019,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Shared installment`
+  String get shared_install {
+    return Intl.message(
+      'Shared installment',
+      name: 'shared_install',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add personal installment`
+  String get add_personal_inst {
+    return Intl.message(
+      'Add personal installment',
+      name: 'add_personal_inst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add shared installment`
+  String get add_shared_inst {
+    return Intl.message(
+      'Add shared installment',
+      name: 'add_shared_inst',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

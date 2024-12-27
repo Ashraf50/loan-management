@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
-import 'package:loan_management/core/widget/show_snack_bar.dart';
-import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_dialog_widget.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_completed_installment_list_view.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/sliver_app_bar.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_uncompleted_installment_list_view.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../core/constant/app_styles.dart';
 import '../../../../../../core/constant/get_responsive.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../view_model/cubit/debtor_installment_cubit.dart';
-import '../../view_model/cubit/debtor_installment_state.dart';
 
 class DebtorHomeViewBody extends StatelessWidget {
   const DebtorHomeViewBody({super.key});
@@ -62,7 +57,7 @@ class DebtorHomeViewBody extends StatelessWidget {
         floatingActionButton: InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () {
-            showDialogWidget(context, themeProvider);
+            _showInstallmentOptions(context, themeProvider.isDarkTheme);
           },
           child: const CircleAvatar(
             radius: 30,
@@ -78,26 +73,44 @@ class DebtorHomeViewBody extends StatelessWidget {
     );
   }
 
-  void showDialogWidget(BuildContext context, ThemeProvider themeProvider) {
-    showDialog(
+  void _showInstallmentOptions(BuildContext context, theme) {
+    showModalBottomSheet(
       context: context,
+      backgroundColor: theme ? AppColors.widgetColorDark : AppColors.whiteGrey,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder: (context) {
-        return BlocConsumer<DebtorInstallmentCubit, DebtorInstallmentState>(
-          listener: (context, state) {
-            if (state is DebtorInstallmentSuccess) {
-              BlocProvider.of<DebtorInstallmentCubit>(context)
-                  .fetchAllInstallment();
-              Navigator.pop(context);
-            } else if (state is DebtorInstallmentFailure) {
-              showSnackBar(context, state.errMessage);
-            }
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is DebtorInstallmentLoading ? true : false,
-              child: const DebtorDialogWidget(),
-            );
-          },
+        return Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: Text(
+                  S.of(context).add_personal_inst,
+                  style: AppStyles.textStyle18black,
+                ),
+                onTap: () {
+                  context.push("/add_local_install");
+                  Navigator.pop(context);
+                },
+              ),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.group),
+                title: Text(
+                  S.of(context).add_shared_inst,
+                  style: AppStyles.textStyle18black,
+                ),
+                onTap: () {
+                  context.push("/add_shared_install");
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         );
       },
     );

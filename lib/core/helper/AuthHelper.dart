@@ -40,4 +40,15 @@ class AuthHelper {
       return null;
     }
   }
+
+  Future<List<Map<String, dynamic>>?> fetchInstallmentData(String id) async {
+    try {
+      final response =
+          await supabase.from("installments").select().eq('Uid', id);
+      return response;
+    } catch (e) {
+      print("Error fetching installment details:$e");
+      return null;
+    }
+  }
 }

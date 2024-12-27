@@ -19,6 +19,10 @@ class DebtorInstallmentModel extends HiveObject {
   List<String?> monthNotes;
   @HiveField(7)
   double totalPaid;
+  @HiveField(8)
+  bool isShared;
+  @HiveField(9)
+  String id;
   DebtorInstallmentModel({
     required this.title,
     required this.totalAmount,
@@ -28,5 +32,7 @@ class DebtorInstallmentModel extends HiveObject {
     required this.completedMonths,
     required this.monthNotes,
     required this.totalPaid,
+    this.isShared = false,
+    this.id="",
   });
 }

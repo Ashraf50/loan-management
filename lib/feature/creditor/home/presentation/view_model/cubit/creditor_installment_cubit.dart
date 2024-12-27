@@ -83,6 +83,7 @@ class CreditorInstallmentCubit extends Cubit<CreditorInstallmentState> {
         'start_date': installment.startDate.toIso8601String(),
         'completed_months': installment.completedMonths,
         'month_notes': installment.monthNotes,
+        'total_paid': installment.totalPaid,
       });
       var installmentBox =
           Hive.box<CreditorInstallmentModel>(AppStrings.creditorInstallment);

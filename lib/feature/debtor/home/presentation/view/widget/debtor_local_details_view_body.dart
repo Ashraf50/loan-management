@@ -10,18 +10,18 @@ import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../data/model/debtor_installment_model.dart';
 import '../../view_model/cubit/debtor_installment_cubit.dart';
 
-class DebtorDetailsViewBody extends StatefulWidget {
+class DebtorLocalDetailsViewBody extends StatefulWidget {
   final DebtorInstallmentModel installment;
-  const DebtorDetailsViewBody({
+  const DebtorLocalDetailsViewBody({
     super.key,
     required this.installment,
   });
 
   @override
-  State<DebtorDetailsViewBody> createState() => _DebtorDetailsViewBodyState();
+  State<DebtorLocalDetailsViewBody> createState() => _DebtorLocalDetailsViewBodyState();
 }
 
-class _DebtorDetailsViewBodyState extends State<DebtorDetailsViewBody> {
+class _DebtorLocalDetailsViewBodyState extends State<DebtorLocalDetailsViewBody> {
   late List<bool> completedMonths;
   late List<String?> monthNotes;
   late List<TextEditingController> textControllers;

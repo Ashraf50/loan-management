@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loan_management/core/widget/bottom_bar.dart';
 import 'package:loan_management/feature/Auth/presentation/view/forget_pass_view.dart';
@@ -7,12 +8,15 @@ import 'package:loan_management/feature/Auth/presentation/view/widget/update_pas
 import 'package:loan_management/feature/creditor/home/data/model/creditor_installment_model.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/creditor_details_view.dart';
 import 'package:loan_management/feature/debtor/home/data/model/debtor_installment_model.dart';
-import 'package:loan_management/feature/debtor/home/presentation/view/debtor_details_view.dart';
+import 'package:loan_management/feature/debtor/home/presentation/view/widget/add_local_installment.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/language_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/profile_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/update_phone_view.dart';
 import '../Auth/presentation/view/sign_up_view.dart';
+import '../debtor/home/presentation/view/widget/add_shared_installment.dart';
+import '../debtor/home/presentation/view/widget/debtor_local_details_view_body.dart';
+import '../debtor/home/presentation/view/widget/debtor_shared_details_view_body.dart';
 import '../settings/presentation/view/widget/update_username_view.dart';
 
 class AppRouter {
@@ -75,10 +79,19 @@ class AppRouter {
         builder: (context, state) => const AboutView(),
       ),
       GoRoute(
-        path: '/details_view',
+        path: '/local_details_view',
         builder: (context, state) {
           final installmentDetails = state.extra as DebtorInstallmentModel;
-          return DebtorDetailsView(
+          return DebtorLocalDetailsViewBody(
+            installment: installmentDetails,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/shared_details_view',
+        builder: (context, state) {
+          final installmentDetails = state.extra as DebtorInstallmentModel;
+          return DebtorSharedDetailsViewBody(
             installment: installmentDetails,
           );
         },
@@ -91,6 +104,44 @@ class AppRouter {
             creditorInstallmentModel: installmentDetails,
           );
         },
+      ),
+      GoRoute(
+        path: '/add_local_install',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const AddLocalInstallment(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/add_shared_install',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const AddSharedInstallment(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        ),
       ),
     ],
   );
