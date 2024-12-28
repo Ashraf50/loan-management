@@ -1,19 +1,16 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
+import 'package:loan_management/feature/creditor/home/presentation/view/widget/custom_time_line_widget.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/share_installment_dialog.dart';
 import 'package:loan_management/generated/l10n.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:timeline_tile/timeline_tile.dart';
-import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../core/widget/custom_widget.dart';
 import '../../../../../../core/widget/show_snack_bar.dart';
 import '../../../data/model/creditor_installment_model.dart';
-import '../../view_model/cubit/creditor_installment_cubit.dart';
+import '../../view_model/update_installment/creditor_update_cubit.dart';
 
 class CreditorDetailsViewBody extends StatefulWidget {
   final CreditorInstallmentModel installment;
@@ -28,11 +25,9 @@ class CreditorDetailsViewBody extends StatefulWidget {
 }
 
 class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
-  final supabase = Supabase.instance.client;
   late List<bool> completedMonths;
   late List<String?> monthNotes;
   late List<TextEditingController> textControllers;
-  late Box localBox;
   late StreamSubscription connectivitySubscription;
 
   @override
@@ -44,11 +39,10 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
       widget.installment.numOfMonths.toInt(),
       (index) => TextEditingController(text: monthNotes[index]),
     );
-    localBox = Hive.box('offline_updates');
     connectivitySubscription =
         Connectivity().onConnectivityChanged.listen((connectivityResult) {
       if (connectivityResult != ConnectivityResult.none) {
-        _uploadOfflineData();
+        context.read<CreditorUpdateCubit>().uploadOfflineData();
       }
     });
   }
@@ -62,240 +56,116 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
     super.dispose();
   }
 
-  void _saveOfflineData(String key, Map<String, dynamic> value) {
-    final existingData =
-        (localBox.get(key) as Map?)?.cast<String, dynamic>() ?? {};
-    final updatingData = {...existingData, ...value};
-    localBox.put(key, updatingData);
-  }
-
-  /// Upload offline data to Supabase
-  Future<void> _uploadOfflineData() async {
-    final pendingData = localBox.toMap();
-    for (var entry in pendingData.entries) {
-      try {
-        await supabase
-            .from('installments')
-            .update(entry.value)
-            .eq('Uid', entry.key); // Upload to Supabase
-        localBox.delete(entry.key); // Remove from Hive if successful
-      } catch (e) {
-        print('Error uploading data for ${entry.key}: $e');
-      }
-    }
-  }
-
-  void _updateMonthStatus(int index, bool isCompleted) async {
-    setState(() {
-      completedMonths[index] = isCompleted;
-      if (isCompleted) {
-        widget.installment.totalPaid += widget.installment.installmentValue;
-      } else {
-        widget.installment.totalPaid -= widget.installment.installmentValue;
-      }
-      widget.installment.completedMonths = completedMonths;
-    });
-    widget.installment.save();
-    final updateData = {
-      'completed_months': completedMonths,
-      'total_paid': widget.installment.totalPaid,
-    };
-    _saveOfflineData(widget.installment.installmentId, updateData);
-    if (await Connectivity().checkConnectivity() != ConnectivityResult.none) {
-      _uploadOfflineData();
-    }
-    if (completedMonths.every((month) => month)) {
-      context
-          .read<CreditorInstallmentCubit>()
-          .checkAndMoveToCompleted(widget.installment);
-    }
-  }
-
-  void _updateMonthNotes(int index, String? note) async {
-    setState(() {
-      monthNotes[index] = note;
-      widget.installment.monthNotes = monthNotes;
-    });
-    widget.installment.save();
-    final updateData = {'month_notes': monthNotes};
-    _saveOfflineData(widget.installment.installmentId, updateData);
-    if (await Connectivity().checkConnectivity() != ConnectivityResult.none) {
-      _uploadOfflineData();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     int remainingMonths = widget.installment.numOfMonths.toInt() -
         widget.installment.completedMonths.where((month) => month).length;
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        scrolledUnderElevation: 0,
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          widget.installment.installmentDebtor,
-          style: const TextStyle(color: Colors.white),
-        ),
-      ),
-      body: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              color: AppColors.primaryColor,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  widget.installment.title,
-                  style: AppStyles.textStyle24,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "${S.of(context).remaining} ${remainingMonths.toString()} ${S.of(context).months}",
-                  style: AppStyles.textStyle24,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "${S.of(context).remaining_amount}: ${(widget.installment.totalAmount - widget.installment.totalPaid).toString()}",
-                  style: AppStyles.textStyle20notBoldWhite,
-                ),
-                const SizedBox(height: 15),
-                CustomWidget(
-                  title: S.of(context).amount_monthly,
-                  subtitle: widget.installment.installmentValue.toString(),
-                ),
-                CustomWidget(
-                  title: S.of(context).amount_paid,
-                  subtitle:
-                      " ${widget.installment.totalPaid.toString()}/${widget.installment.totalAmount.toString()}",
-                ),
-              ],
+    return BlocConsumer<CreditorUpdateCubit, CreditorUpdateState>(
+      listener: (context, state) {
+        if (state is UpdateSuccess) {
+          Future.delayed(const Duration(seconds: 1), () {
+            showSnackBar(context, S.of(context).success);
+          });
+        } else if (state is UpdateFailure) {
+          Future.delayed(const Duration(seconds: 10), () {
+            showSnackBar(context, state.errorMessage);
+          });
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.white),
+            scrolledUnderElevation: 0,
+            centerTitle: true,
+            backgroundColor: AppColors.primaryColor,
+            title: Text(
+              widget.installment.installmentDebtor,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: widget.installment.numOfMonths.toInt(),
-              itemBuilder: (context, index) {
-                return TimelineTile(
-                  alignment: TimelineAlign.manual,
-                  lineXY: 0.0,
-                  isLast: index == widget.installment.numOfMonths.toInt() - 1,
-                  indicatorStyle: IndicatorStyle(
-                    indicator: CircleAvatar(
-                      backgroundColor:
-                          completedMonths[index] ? Colors.green : Colors.grey,
-                      child: Text(
-                        '${index + 1}',
-                        style: AppStyles.textStyle18black,
-                      ),
+          body: ListView(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: AppColors.primaryColor,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      widget.installment.title,
+                      style: AppStyles.textStyle24,
                     ),
-                    width: 40,
-                    height: 50,
-                    padding: const EdgeInsets.all(8),
-                  ),
-                  beforeLineStyle: LineStyle(
-                    thickness: 2,
-                    color: completedMonths[index] ? Colors.green : Colors.grey,
-                  ),
-                  endChild: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          color: themeProvider.isDarkTheme
-                              ? AppColors.widgetColorDark
-                              : AppColors.whiteGrey,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('${S.of(context).month} ${index + 1}',
-                                  style: AppStyles.textStyle18black),
-                              Checkbox(
-                                fillColor: WidgetStatePropertyAll(
-                                  completedMonths[index]
-                                      ? Colors.green
-                                      : themeProvider.isDarkTheme
-                                          ? AppColors.widgetColorDark
-                                          : AppColors.whiteGrey,
-                                ),
-                                value: completedMonths[index],
-                                onChanged: completedMonths[index]
-                                    ? null
-                                    : (value) {
-                                        if (index == 0 ||
-                                            completedMonths[index - 1]) {
-                                          _updateMonthStatus(
-                                              index, value ?? false);
-                                        } else {
-                                          showSnackBar(context,
-                                              '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}');
-                                        }
-                                      },
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: TextField(
-                              maxLines: 2,
-                              style: AppStyles.textStyle18black,
-                              controller: textControllers[index],
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                      color: AppColors.primaryColor),
-                                ),
-                                hintText: S.of(context).enter_note,
-                                hintStyle: AppStyles.textStyle18gray,
-                              ),
-                              onChanged: (value) =>
-                                  _updateMonthNotes(index, value),
-                            ),
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 10),
+                    Text(
+                      "${S.of(context).remaining} ${remainingMonths.toString()} ${S.of(context).months}",
+                      style: AppStyles.textStyle24,
                     ),
-                  ),
-                );
-              },
+                    const SizedBox(height: 10),
+                    Text(
+                      "${S.of(context).remaining_amount}: ${(widget.installment.totalAmount - widget.installment.totalPaid).toString()}",
+                      style: AppStyles.textStyle20notBoldWhite,
+                    ),
+                    const SizedBox(height: 15),
+                    CustomWidget(
+                      title: S.of(context).amount_monthly,
+                      subtitle: widget.installment.installmentValue.toString(),
+                    ),
+                    CustomWidget(
+                      title: S.of(context).amount_paid,
+                      subtitle:
+                          " ${widget.installment.totalPaid.toString()}/${widget.installment.totalAmount.toString()}",
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: widget.installment.numOfMonths.toInt(),
+                  itemBuilder: (context, index) {
+                    return CustomTimelineTileWidget(
+                      installment: widget.installment,
+                      index: index,
+                      completedMonths: completedMonths,
+                      textControllers: textControllers,
+                      onMonthStatusChange: (int index, bool value) {
+                        context.read<CreditorUpdateCubit>().updateMonthStatus(
+                            widget.installment, index, value);
+                      },
+                      onMonthNoteChanged: (value) {
+                        context
+                            .read<CreditorUpdateCubit>()
+                            .updateMonthNotes(widget.installment, index, value);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          floatingActionButton: InkWell(
+            borderRadius: BorderRadius.circular(30),
+            onTap: () {
+              showDialogWidget(
+                widget.installment.installmentId,
+              );
+            },
+            child: const CircleAvatar(
+              radius: 30,
+              backgroundColor: AppColors.primaryColor,
+              child: Icon(
+                Icons.share,
+                color: AppColors.white,
+                size: 30,
+              ),
             ),
           ),
-        ],
-      ),
-      floatingActionButton: InkWell(
-        borderRadius: BorderRadius.circular(30),
-        onTap: () {
-          showDialogWidget(
-            widget.installment.installmentId,
-          );
-        },
-        child: const CircleAvatar(
-          radius: 30,
-          backgroundColor: AppColors.primaryColor,
-          child: Icon(
-            Icons.share,
-            color: AppColors.white,
-            size: 30,
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 
