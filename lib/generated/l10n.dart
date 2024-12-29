@@ -1059,6 +1059,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Scan installment`
+  String get scan_installment {
+    return Intl.message(
+      'Scan installment',
+      name: 'scan_installment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

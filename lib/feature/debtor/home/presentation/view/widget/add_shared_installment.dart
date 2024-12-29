@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
@@ -19,6 +20,12 @@ class AddSharedInstallment extends StatefulWidget {
 
 class _AddSharedInstallmentState extends State<AddSharedInstallment> {
   final TextEditingController idController = TextEditingController();
+  void onScan(String scannedValue) {
+    idController.text = scannedValue;
+    BlocProvider.of<DebtorInstallmentCubit>(context)
+        .addInstallmentById(scannedValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DebtorInstallmentCubit, DebtorInstallmentState>(
@@ -26,7 +33,7 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
         if (state is DebtorInstallmentSuccess) {
           BlocProvider.of<DebtorInstallmentCubit>(context)
               .fetchAllInstallment();
-          Navigator.pop(context);
+          context.pop(context);
         } else if (state is DebtorInstallmentFailure) {
           showSnackBar(context, state.errMessage);
         }
@@ -41,7 +48,7 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
               child: ListView(
                 children: [
                   CustomTextfield(
-                    labelText: "Enter id",
+                    labelText: S.of(context).enter_id,
                     keyboardType: TextInputType.text,
                     controller: idController,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -64,6 +71,17 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
                       }
                     },
                   ),
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    title: S.of(context).scan_installment,
+                    onTap: () {
+                      context.push(
+                        "/scan_view",
+                        extra: onScan,
+                      );
+                    },
+                    width: double.infinity,
+                  )
                 ],
               ),
             ),

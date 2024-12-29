@@ -99,5 +99,6 @@
     "shared_install":"قسط مشترك",
     "add_personal_inst": "إضافة قسط شخصي",
     "add_shared_inst": "إضافة قسط مشترك",
-    "enter_id": "أدخل معرف القسط"
+    "enter_id": "أدخل معرف القسط",
+    "scan_installment": "مسح القسط"
 }

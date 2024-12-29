@@ -10,6 +10,7 @@ import 'package:loan_management/feature/creditor/home/presentation/view/creditor
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/add_installment.dart';
 import 'package:loan_management/feature/debtor/home/data/model/debtor_installment_model.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/add_local_installment.dart';
+import 'package:loan_management/feature/debtor/home/presentation/view/widget/scan_installment_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/language_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/profile_view.dart';
@@ -79,6 +80,14 @@ class AppRouter {
         path: '/about_view',
         builder: (context, state) => const AboutView(),
       ),
+      GoRoute(
+          path: '/scan_view',
+          builder: (context, state) {
+            final scan = state.extra as Function(String);
+            return ScanInstallmentView(
+              onScan: scan,
+            );
+          }),
       GoRoute(
         path: '/local_details_view',
         builder: (context, state) {

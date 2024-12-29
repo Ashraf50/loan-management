@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "role": MessageLookupByLibrary.simpleMessage("Role"),
         "save_changes": MessageLookupByLibrary.simpleMessage("Save changes"),
+        "scan_installment":
+            MessageLookupByLibrary.simpleMessage("Scan installment"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "send_otp": MessageLookupByLibrary.simpleMessage("Send Otp"),
         "set_pass": MessageLookupByLibrary.simpleMessage("Set Password"),
