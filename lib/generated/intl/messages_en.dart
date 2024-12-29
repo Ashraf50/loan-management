@@ -38,12 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add personal installment"),
         "add_shared_inst":
             MessageLookupByLibrary.simpleMessage("Add shared installment"),
+        "after_change": MessageLookupByLibrary.simpleMessage(
+            "You cannot change the month status after one hour"),
         "already_have_account":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "amount_monthly":
             MessageLookupByLibrary.simpleMessage("Amount/Monthly"),
         "amount_paid": MessageLookupByLibrary.simpleMessage("Amount Paid"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "before_change": MessageLookupByLibrary.simpleMessage(
+            "Once an hour has passed, you will not be able to change the month status"),
         "before_selecting_month": MessageLookupByLibrary.simpleMessage(
             "before selecting this month."),
         "check_email_or_pass":
@@ -124,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Remaining amount"),
         "remaining_month":
             MessageLookupByLibrary.simpleMessage("Remaining Months"),
+        "remove_mark": MessageLookupByLibrary.simpleMessage(
+            "You cannot un mark this month before un marking the next month."),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "role": MessageLookupByLibrary.simpleMessage("Role"),
         "save_changes": MessageLookupByLibrary.simpleMessage("Save changes"),

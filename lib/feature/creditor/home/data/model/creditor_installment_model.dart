@@ -25,6 +25,8 @@ class CreditorInstallmentModel extends HiveObject {
   double totalPaid;
   @HiveField(10)
   bool isSynced;
+  @HiveField(11)
+  DateTime? lastChangeStatus;
   CreditorInstallmentModel({
     required this.installmentId,
     required this.installmentDebtor,
@@ -37,5 +39,6 @@ class CreditorInstallmentModel extends HiveObject {
     required this.monthNotes,
     required this.totalPaid,
     this.isSynced = false,
+    this.lastChangeStatus
   });
 }

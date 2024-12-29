@@ -30,4 +30,12 @@ class DebtorUpdateCubit extends Cubit<DebtorUpdateState> {
       emit(UpdateFailure(e.toString()));
     }
   }
+
+  bool canRemoveMark(DebtorInstallmentModel installment) {
+    if (installment.lastChangeStatus != null) {
+      final timeDiff = DateTime.now().difference(installment.lastChangeStatus!);
+      return timeDiff.inHours < 1;
+    }
+    return true;
+  }
 }

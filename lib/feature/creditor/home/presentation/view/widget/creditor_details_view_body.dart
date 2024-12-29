@@ -58,8 +58,6 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    int remainingMonths = widget.installment.numOfMonths.toInt() -
-        widget.installment.completedMonths.where((month) => month).length;
     return BlocConsumer<CreditorUpdateCubit, CreditorUpdateState>(
       listener: (context, state) {
         if (state is UpdateSuccess) {
@@ -67,12 +65,13 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
             showSnackBar(context, S.of(context).success);
           });
         } else if (state is UpdateFailure) {
-          Future.delayed(const Duration(seconds: 10), () {
+          Future.delayed(const Duration(seconds: 20), () {
             showSnackBar(context, state.errorMessage);
           });
         }
       },
       builder: (context, state) {
+        var cubit = context.read<CreditorUpdateCubit>();
         return Scaffold(
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
@@ -99,7 +98,7 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      "${S.of(context).remaining} ${remainingMonths.toString()} ${S.of(context).months}",
+                      "${S.of(context).remaining} ${widget.installment.numOfMonths.toInt() - widget.installment.completedMonths.where((month) => month).length} ${S.of(context).months}",
                       style: AppStyles.textStyle24,
                     ),
                     const SizedBox(height: 10),
@@ -133,14 +132,15 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
                       completedMonths: completedMonths,
                       textControllers: textControllers,
                       onMonthStatusChange: (int index, bool value) {
-                        context.read<CreditorUpdateCubit>().updateMonthStatus(
+                        cubit.updateMonthStatus(
                             widget.installment, index, value);
                       },
                       onMonthNoteChanged: (value) {
-                        context
-                            .read<CreditorUpdateCubit>()
-                            .updateMonthNotes(widget.installment, index, value);
+                        cubit.updateMonthNotes(
+                            widget.installment, index, value);
                       },
+                      canRemoveMark: () =>
+                          cubit.canRemoveMark(widget.installment),
                     );
                   },
                 ),

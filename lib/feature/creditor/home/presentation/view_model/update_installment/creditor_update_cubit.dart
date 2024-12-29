@@ -72,4 +72,12 @@ class CreditorUpdateCubit extends Cubit<CreditorUpdateState> {
       }
     }
   }
+
+  bool canRemoveMark(CreditorInstallmentModel installment) {
+    if (installment.lastChangeStatus != null) {
+      final timeDiff = DateTime.now().difference(installment.lastChangeStatus!);
+      return timeDiff.inHours < 1;
+    }
+    return true;
+  }
 }

@@ -29,13 +29,14 @@ class CreditorInstallmentModelAdapter
       monthNotes: (fields[8] as List).cast<String?>(),
       totalPaid: fields[9] as double,
       isSynced: fields[10] as bool,
+      lastChangeStatus: fields[11] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CreditorInstallmentModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.installmentId)
       ..writeByte(1)
@@ -57,7 +58,9 @@ class CreditorInstallmentModelAdapter
       ..writeByte(9)
       ..write(obj.totalPaid)
       ..writeByte(10)
-      ..write(obj.isSynced);
+      ..write(obj.isSynced)
+      ..writeByte(11)
+      ..write(obj.lastChangeStatus);
   }
 
   @override

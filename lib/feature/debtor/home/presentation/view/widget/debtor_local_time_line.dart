@@ -16,6 +16,8 @@ class DebtorLocalTimeLine extends StatelessWidget {
   final List<TextEditingController> textControllers;
   final Function(int, bool) onMonthStatusChange;
   final void Function(String)? onMonthNoteChanged;
+  final bool Function() canRemoveMark;
+
   const DebtorLocalTimeLine({
     super.key,
     required this.installment,
@@ -24,6 +26,7 @@ class DebtorLocalTimeLine extends StatelessWidget {
     required this.textControllers,
     required this.onMonthStatusChange,
     this.onMonthNoteChanged,
+    required this.canRemoveMark,
   });
 
   @override
@@ -77,13 +80,33 @@ class DebtorLocalTimeLine extends StatelessWidget {
                     ),
                     value: completedMonths[index],
                     onChanged: completedMonths[index]
-                        ? null
-                        : (value) {
-                            if (index == 0 || completedMonths[index - 1]) {
+                        ? (value) {
+                            if (index < completedMonths.length - 1 &&
+                                completedMonths[index + 1]) {
+                              showSnackBar(context, S.of(context).remove_mark);
+                              return;
+                            }
+                            if (canRemoveMark()) {
                               onMonthStatusChange(index, value ?? false);
+                              installment.lastChangeStatus = DateTime.now();
+                              installment.save();
                               context
                                   .read<DebtorInstallmentCubit>()
                                   .checkAndMoveToCompleted(installment);
+                            } else {
+                              showSnackBar(context, S.of(context).after_change);
+                            }
+                          }
+                        : (value) {
+                            if (index == 0 || completedMonths[index - 1]) {
+                              onMonthStatusChange(index, value ?? false);
+                              installment.lastChangeStatus = DateTime.now();
+                              installment.save();
+                              context
+                                  .read<DebtorInstallmentCubit>()
+                                  .checkAndMoveToCompleted(installment);
+                              showSnackBar(
+                                  context, S.of(context).before_change);
                             } else {
                               showSnackBar(context,
                                   '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}');

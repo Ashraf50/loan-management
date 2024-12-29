@@ -28,13 +28,14 @@ class DebtorInstallmentModelAdapter
       totalPaid: fields[7] as double,
       isShared: fields[8] as bool,
       id: fields[9] as String,
+      lastChangeStatus: fields[10] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, DebtorInstallmentModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -54,7 +55,9 @@ class DebtorInstallmentModelAdapter
       ..writeByte(8)
       ..write(obj.isShared)
       ..writeByte(9)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(10)
+      ..write(obj.lastChangeStatus);
   }
 
   @override

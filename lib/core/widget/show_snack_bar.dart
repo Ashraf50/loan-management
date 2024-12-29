@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
+
 showSnackBar(BuildContext context, String text) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -11,7 +13,7 @@ showSnackBar(BuildContext context, String text) {
         ),
       ),
       action: SnackBarAction(
-        label: "Dismiss",
+        label: S.of(context).dismiss,
         onPressed: () {},
       ),
     ),

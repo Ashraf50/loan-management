@@ -1069,6 +1069,36 @@ class S {
       args: [],
     );
   }
+
+  /// `You cannot change the month status after one hour`
+  String get after_change {
+    return Intl.message(
+      'You cannot change the month status after one hour',
+      name: 'after_change',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once an hour has passed, you will not be able to change the month status`
+  String get before_change {
+    return Intl.message(
+      'Once an hour has passed, you will not be able to change the month status',
+      name: 'before_change',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You cannot un mark this month before un marking the next month.`
+  String get remove_mark {
+    return Intl.message(
+      'You cannot un mark this month before un marking the next month.',
+      name: 'remove_mark',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

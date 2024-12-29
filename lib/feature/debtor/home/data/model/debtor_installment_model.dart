@@ -23,6 +23,8 @@ class DebtorInstallmentModel extends HiveObject {
   bool isShared;
   @HiveField(9)
   String id;
+  @HiveField(10)
+  DateTime? lastChangeStatus;
   DebtorInstallmentModel({
     required this.title,
     required this.totalAmount,
@@ -33,6 +35,7 @@ class DebtorInstallmentModel extends HiveObject {
     required this.monthNotes,
     required this.totalPaid,
     this.isShared = false,
-    this.id="",
+    this.id = "",
+    this.lastChangeStatus
   });
 }

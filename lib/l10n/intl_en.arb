@@ -100,5 +100,8 @@
     "add_personal_inst":"Add personal installment",
     "add_shared_inst":"Add shared installment",
     "enter_id":"Enter installment id",
-    "scan_installment":"Scan installment"
+    "scan_installment":"Scan installment",
+    "after_change": "You cannot change the month status after one hour",
+    "before_change": "Once an hour has passed, you will not be able to change the month status",
+    "remove_mark":"You cannot un mark this month before un marking the next month."
 }

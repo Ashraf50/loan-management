@@ -47,8 +47,6 @@ class _DebtorLocalDetailsViewBodyState
 
   @override
   Widget build(BuildContext context) {
-    int remainingMonths = widget.installment.numOfMonths.toInt() -
-        widget.installment.completedMonths.where((month) => month).length;
     return BlocProvider(
       create: (context) => DebtorUpdateCubit(),
       child: BlocBuilder<DebtorUpdateCubit, DebtorUpdateState>(
@@ -75,7 +73,7 @@ class _DebtorLocalDetailsViewBodyState
                   child: Column(
                     children: [
                       Text(
-                        "${S.of(context).remaining} ${remainingMonths.toString()} ${S.of(context).months}",
+                        "${S.of(context).remaining} ${widget.installment.numOfMonths.toInt() - widget.installment.completedMonths.where((month) => month).length} ${S.of(context).months}",
                         style: AppStyles.textStyle24,
                       ),
                       const SizedBox(height: 10),
@@ -117,6 +115,8 @@ class _DebtorLocalDetailsViewBodyState
                           cubit.updateMonthNotes(
                               widget.installment, index, value);
                         },
+                        canRemoveMark: () =>
+                            cubit.canRemoveMark(widget.installment),
                       );
                     },
                   ),

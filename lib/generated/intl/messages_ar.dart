@@ -38,11 +38,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إضافة قسط شخصي"),
         "add_shared_inst":
             MessageLookupByLibrary.simpleMessage("إضافة قسط مشترك"),
+        "after_change": MessageLookupByLibrary.simpleMessage(
+            "لا يمكنك تغيير حالة الشهر بعد مرور ساعة"),
         "already_have_account":
             MessageLookupByLibrary.simpleMessage("هل لديك حساب بالفعل؟"),
         "amount_monthly": MessageLookupByLibrary.simpleMessage("المبلغ/شهري"),
         "amount_paid": MessageLookupByLibrary.simpleMessage("المبلغ المدفوع"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "before_change": MessageLookupByLibrary.simpleMessage(
+            "إذا مرّت ساعة، لن تتمكن من تغيير حالة الشهر"),
         "before_selecting_month":
             MessageLookupByLibrary.simpleMessage("قبل تحديد هذا الشهر"),
         "check_email_or_pass": MessageLookupByLibrary.simpleMessage(
@@ -120,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المبلغ المتبقي"),
         "remaining_month":
             MessageLookupByLibrary.simpleMessage("الأشهر المتبقية"),
+        "remove_mark": MessageLookupByLibrary.simpleMessage(
+            "لا يمكنك إلغاء تحديد هذا الشهر قبل إلغاء تحديد الشهر التالي."),
         "reset_pass":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
         "role": MessageLookupByLibrary.simpleMessage("الدور"),
