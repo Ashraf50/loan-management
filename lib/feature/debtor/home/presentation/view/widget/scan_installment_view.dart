@@ -15,7 +15,6 @@ class ScanInstallmentView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(title: S.of(context).scan_installment),
       body: MobileScanner(
-        // scanWindow: Rect.fromCenter(center: Offset.zero, width: width, height: height),
         onDetect: (barcode) {
           if (barcode.raw != null) {
             try {

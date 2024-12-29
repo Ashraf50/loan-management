@@ -35,7 +35,10 @@ class DebtorCompletedInstallmentListView extends StatelessWidget {
                         installment: displayedInstallments[index],
                         onTap: () {
                           if (displayedInstallments[index].isShared) {
-                            context.push("/shared_details_view");
+                            context.push(
+                              "/shared_details_view",
+                              extra: displayedInstallments[index],
+                            );
                           } else {
                             context.push(
                               "/local_details_view",
