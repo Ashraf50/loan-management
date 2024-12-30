@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view_model/cubit/creditor_installment_state.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_button.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../../../../core/widget/custom_toast.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../data/model/creditor_installment_model.dart';
@@ -54,156 +54,155 @@ class _AddInstallmentViewState extends State<AddInstallmentView> {
         if (state is CreditorInstallmentSuccess) {
           BlocProvider.of<CreditorInstallmentCubit>(context)
               .fetchAllInstallment();
+          SmartDialog.dismiss();
           Navigator.pop(context);
         } else if (state is CreditorInstallmentFailure) {
+          SmartDialog.dismiss();
           CustomToast.show(message: state.errMessage);
+        } else if (state is CreditorInstallmentLoading) {
+          SmartDialog.showLoading();
         }
       },
       builder: (context, state) {
-        return ModalProgressHUD(
-          inAsyncCall: state is CreditorInstallmentLoading ? true : false,
-          child: CustomScaffold(
-            appBar: CustomAppBar(title: S.of(context).add_installment),
-            body: Form(
-              key: formKey,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: ListView(
-                  children: [
-                    CustomTextfield(
-                      labelText: S.of(context).debtor_name,
-                      keyboardType: TextInputType.text,
-                      controller: debtorNameController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value == '') {
-                          return S.of(context).empty_value;
-                        } else {
-                          return null;
-                        }
+        return CustomScaffold(
+          appBar: CustomAppBar(title: S.of(context).add_installment),
+          body: Form(
+            key: formKey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: ListView(
+                children: [
+                  CustomTextfield(
+                    labelText: S.of(context).debtor_name,
+                    keyboardType: TextInputType.text,
+                    controller: debtorNameController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  CustomTextfield(
+                    labelText: S.of(context).installment_name,
+                    keyboardType: TextInputType.text,
+                    controller: installmentNameController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  CustomTextfield(
+                    labelText: S.of(context).total_amount,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    controller: totalAmountController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  CustomTextfield(
+                    labelText: S.of(context).num_of_month,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    controller: numOfMonthController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  CustomTextfield(
+                    labelText: S.of(context).installment_value,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    controller: installmentValueController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  CustomTextfield(
+                    labelText: S.of(context).start_date,
+                    controller: startDataController,
+                    readOnly: true,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == '') {
+                        return S.of(context).empty_value;
+                      } else {
+                        return null;
+                      }
+                    },
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        _selectDate(context);
                       },
-                    ),
-                    CustomTextfield(
-                      labelText: S.of(context).installment_name,
-                      keyboardType: TextInputType.text,
-                      controller: installmentNameController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value == '') {
-                          return S.of(context).empty_value;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    CustomTextfield(
-                      labelText: S.of(context).total_amount,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      controller: totalAmountController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value == '') {
-                          return S.of(context).empty_value;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    CustomTextfield(
-                      labelText: S.of(context).num_of_month,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      controller: numOfMonthController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value == '') {
-                          return S.of(context).empty_value;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    CustomTextfield(
-                      labelText: S.of(context).installment_value,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      controller: installmentValueController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value == '') {
-                          return S.of(context).empty_value;
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    CustomTextfield(
-                      labelText: S.of(context).start_date,
-                      controller: startDataController,
-                      readOnly: true,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value == '') {
-                          return S.of(context).empty_value;
-                        } else {
-                          return null;
-                        }
-                      },
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                        child: const Icon(
-                          Icons.calendar_month_outlined,
-                          color: Colors.grey,
-                        ),
+                      child: const Icon(
+                        Icons.calendar_month_outlined,
+                        color: Colors.grey,
                       ),
                     ),
-                    const SizedBox(height: 15),
-                    CustomButton(
-                      title: S.of(context).add_installment,
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          var uuid = const Uuid();
-                          CreditorInstallmentModel creditorInstallment =
-                              CreditorInstallmentModel(
-                            installmentId: uuid.v4(),
-                            installmentDebtor: debtorNameController.text,
-                            title: installmentNameController.text,
-                            totalAmount:
-                                double.tryParse(totalAmountController.text) ??
-                                    0,
-                            numOfMonths:
-                                int.tryParse(numOfMonthController.text) ?? 0,
-                            installmentValue: double.tryParse(
-                                    installmentValueController.text) ??
-                                0,
-                            startDate: selectedDate ?? DateTime.now(),
-                            completedMonths: List.filled(
+                  ),
+                  const SizedBox(height: 15),
+                  CustomButton(
+                    title: S.of(context).add_installment,
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        var uuid = const Uuid();
+                        CreditorInstallmentModel creditorInstallment =
+                            CreditorInstallmentModel(
+                          installmentId: uuid.v4(),
+                          installmentDebtor: debtorNameController.text,
+                          title: installmentNameController.text,
+                          totalAmount:
+                              double.tryParse(totalAmountController.text) ?? 0,
+                          numOfMonths:
                               int.tryParse(numOfMonthController.text) ?? 0,
-                              false,
-                            ),
-                            monthNotes: List.filled(
-                              int.tryParse(numOfMonthController.text) ?? 0,
-                              null,
-                            ),
-                            totalPaid: 0,
-                          );
-                          BlocProvider.of<CreditorInstallmentCubit>(context)
-                              .add(creditorInstallment);
-                        }
-                      },
-                    )
-                  ],
-                ),
+                          installmentValue: double.tryParse(
+                                  installmentValueController.text) ??
+                              0,
+                          startDate: selectedDate ?? DateTime.now(),
+                          completedMonths: List.filled(
+                            int.tryParse(numOfMonthController.text) ?? 0,
+                            false,
+                          ),
+                          monthNotes: List.filled(
+                            int.tryParse(numOfMonthController.text) ?? 0,
+                            null,
+                          ),
+                          totalPaid: 0,
+                        );
+                        BlocProvider.of<CreditorInstallmentCubit>(context)
+                            .add(creditorInstallment);
+                      }
+                    },
+                  )
+                ],
               ),
             ),
           ),
