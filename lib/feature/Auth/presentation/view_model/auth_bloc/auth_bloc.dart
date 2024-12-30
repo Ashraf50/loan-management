@@ -1,4 +1,5 @@
 import 'package:loan_management/core/helper/AuthHelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'auth_event.dart';
@@ -79,6 +80,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 .select()
                 .eq('email', event.email)
                 .single();
+            final pref = await SharedPreferences.getInstance();
+            await pref.setString('userRole', event.role);
             emit(LoginSuccess(role: role));
             return;
           } catch (e) {

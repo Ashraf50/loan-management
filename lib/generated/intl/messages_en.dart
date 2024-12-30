@@ -110,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No user data available"),
         "no_installment":
             MessageLookupByLibrary.simpleMessage("No installments found."),
+        "no_internet":
+            MessageLookupByLibrary.simpleMessage("No internet connection..."),
         "note": MessageLookupByLibrary.simpleMessage("note"),
         "num_of_month":
             MessageLookupByLibrary.simpleMessage("Number of months"),

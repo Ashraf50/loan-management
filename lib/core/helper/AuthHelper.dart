@@ -1,29 +1,30 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthHelper {
   final supabase = Supabase.instance.client;
+  SharedPreferences? pref;
+  AuthHelper() {
+    _initializePreferences();
+  }
+
+  Future<void> _initializePreferences() async {
+    pref = await SharedPreferences.getInstance();
+  }
 
   bool loginStatus() {
     return supabase.auth.currentUser != null;
   }
 
   Future<bool> isDebtor() async {
-    final user = supabase.auth.currentUser;
-    if (user == null) {
-      return false;
+    if (pref == null) {
+      await _initializePreferences();
     }
-    try {
-      final response = await supabase
-          .from('Debtors')
-          .select('email')
-          .eq('email', user.email as Object)
-          .maybeSingle();
-      if (response == null) {
-        return false;
-      }
+    String? role = pref?.getString('userRole');
+    print(role);
+    if (role == "Debtor" || role == "مدين") {
       return true;
-    } catch (e) {
-      print("Error fetching user role: $e");
+    } else {
       return false;
     }
   }

@@ -6,6 +6,7 @@ import 'package:loan_management/core/helper/AuthHelper.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/profile_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../generated/l10n.dart';
@@ -94,6 +95,8 @@ class ProfileView extends StatelessWidget {
           title: S.of(context).logout,
           onTap: () async {
             await Supabase.instance.client.auth.signOut();
+            final pref = await SharedPreferences.getInstance();
+            pref.remove("userRole");
             context.go('/signInView');
           },
           width: double.infinity,

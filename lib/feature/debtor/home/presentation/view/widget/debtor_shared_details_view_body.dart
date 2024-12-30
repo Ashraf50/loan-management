@@ -83,7 +83,7 @@ class _DebtorSharedDetailsViewBodyState
           } else if (!snapshot.hasData || snapshot.data == null) {
             return Center(
                 child: Text(
-              S.of(context).no_data,
+              S.of(context).no_internet,
               style: AppStyles.textStyle20notBold,
             ));
           } else {

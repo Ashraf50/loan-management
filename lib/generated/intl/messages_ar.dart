@@ -106,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_data":
             MessageLookupByLibrary.simpleMessage("لا توجد بيانات مستخدم متاحة"),
         "no_installment": MessageLookupByLibrary.simpleMessage("لا يوجد اقساط"),
+        "no_internet":
+            MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت..."),
         "note": MessageLookupByLibrary.simpleMessage("ملاحظة"),
         "num_of_month": MessageLookupByLibrary.simpleMessage("عدد الشهور"),
         "otp_sended":
