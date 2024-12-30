@@ -26,6 +26,7 @@ class _DebtorSharedDetailsViewBodyState
   late List<String?> monthNotes;
   late List<TextEditingController> textControllers;
   late Future<List<Map<String, dynamic>>?> futureInstallmentData;
+  bool isChecked = false;
   @override
   void initState() {
     super.initState();
@@ -36,6 +37,23 @@ class _DebtorSharedDetailsViewBodyState
     );
     futureInstallmentData =
         AuthHelper().fetchInstallmentData(widget.installment.id);
+  }
+
+  @override
+  void didUpdateWidget(covariant DebtorSharedDetailsViewBody oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.installment != oldWidget.installment && !isChecked) {
+      _checkAndMoveToCompleted();
+      isChecked = true;
+    }
+  }
+
+  void _checkAndMoveToCompleted() {
+    if (widget.installment.completedMonths.every((month) => month)) {
+      context
+          .read<DebtorInstallmentCubit>()
+          .checkAndMoveToCompleted(widget.installment);
+    }
   }
 
   @override
@@ -83,7 +101,7 @@ class _DebtorSharedDetailsViewBodyState
           } else if (!snapshot.hasData || snapshot.data == null) {
             return Center(
                 child: Text(
-              S.of(context).no_internet,
+              S.of(context).no_data,
               style: AppStyles.textStyle20notBold,
             ));
           } else {
@@ -92,11 +110,12 @@ class _DebtorSharedDetailsViewBodyState
               installmentData[0]["total_paid"],
               installmentData[0]["completed_months"],
             );
-            if (widget.installment.completedMonths.every((month) => month)) {
-              context
-                  .read<DebtorInstallmentCubit>()
-                  .checkAndMoveToCompleted(widget.installment);
-            }
+            // if (widget.installment.completedMonths.every((month) => month)) {
+            //   context
+            //       .read<DebtorInstallmentCubit>()
+            //       .checkAndMoveToCompleted(widget.installment);
+            // }
+
             int remainingMonths = installmentData[0]["number_of_months"]
                     .toInt() -
                 List<bool>.from(installmentData[0]["completed_months"] as List)

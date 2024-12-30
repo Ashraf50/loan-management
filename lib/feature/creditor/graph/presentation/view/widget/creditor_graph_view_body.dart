@@ -108,7 +108,7 @@ class _CreditorGraphViewBodyState extends State<CreditorGraphViewBody> {
           final installments =
               selectedFilter == S.of(context).Uncompleted_Install
                   ? BlocProvider.of<CreditorInstallmentCubit>(context)
-                      .allInstallments!
+                      .filteredInstallments!
                   : BlocProvider.of<CreditorInstallmentCubit>(context)
                       .completedInstallment;
           final allInstallments =

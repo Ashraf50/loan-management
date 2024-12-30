@@ -15,7 +15,6 @@ class CustomSearchTextField extends StatelessWidget {
         BlocProvider.of<DebtorInstallmentCubit>(context);
     final creditorInstallmentCubit =
         BlocProvider.of<CreditorInstallmentCubit>(context);
-
     return TextField(
       style: const TextStyle(
         color: Colors.black,

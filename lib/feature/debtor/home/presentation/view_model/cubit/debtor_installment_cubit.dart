@@ -31,7 +31,6 @@ class DebtorInstallmentCubit extends Cubit<DebtorInstallmentState> {
     try {
       var installmentBox =
           Hive.box<DebtorInstallmentModel>(AppStrings.debtorInstallmentBox);
-
       if (!installmentBox.containsKey(installment.title)) {
         await installmentBox.put(installment.title, installment);
       } else {
