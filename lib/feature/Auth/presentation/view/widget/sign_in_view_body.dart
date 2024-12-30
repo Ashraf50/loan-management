@@ -7,7 +7,7 @@ import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
-import 'package:loan_management/core/widget/show_snack_bar.dart';
+import 'package:loan_management/core/widget/custom_toast.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/check_account_widget.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/role_button.dart';
@@ -53,12 +53,19 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           } else {
             context.go('/CreditorBottomBar');
           }
-          showSnackBar(context, S.of(context).success);
+          CustomToast.show(
+            message: S.of(context).success,
+            alignment: Alignment.topCenter,
+            backgroundColor: AppColors.toastColor,
+          );
 
           isLoading = false;
         } else if (state is LoginFailure) {
           isLoading = false;
-          showSnackBar(context, state.message);
+          CustomToast.show(
+            message: state.message,
+            backgroundColor: Colors.red,
+          );
         }
       },
       builder: (context, state) {
@@ -188,8 +195,9 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                               password: passwordController.text,
                               role: selectedRole));
                         } else {
-                          showSnackBar(
-                              context, S.of(context).check_email_or_pass);
+                          CustomToast.show(
+                            message: S.of(context).check_email_or_pass,
+                          );
                         }
                       },
                       textColor: AppColors.white,

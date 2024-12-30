@@ -8,7 +8,7 @@ import 'package:loan_management/feature/creditor/home/presentation/view_model/cu
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_button.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../../../../../../core/widget/show_snack_bar.dart';
+import '../../../../../../core/widget/custom_toast.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../data/model/creditor_installment_model.dart';
 import 'package:uuid/uuid.dart';
@@ -56,7 +56,7 @@ class _AddInstallmentViewState extends State<AddInstallmentView> {
               .fetchAllInstallment();
           Navigator.pop(context);
         } else if (state is CreditorInstallmentFailure) {
-          showSnackBar(context, state.errMessage);
+          CustomToast.show(message: state.errMessage);
         }
       },
       builder: (context, state) {

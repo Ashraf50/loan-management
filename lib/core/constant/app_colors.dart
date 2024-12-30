@@ -9,4 +9,5 @@ class AppColors {
   static const whiteGrey = Color(0xffF2F2F2);
   static const widgetColorDark = Color(0xff303030); //0xff212425  0xff303030
   static const scaffoldColorDark = Color(0xff1e1e1e);
+  static const toastColor = Colors.green;
 }

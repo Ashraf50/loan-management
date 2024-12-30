@@ -11,7 +11,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_theme.dart';
-import '../../../../../core/widget/show_snack_bar.dart';
+import '../../../../../core/widget/custom_toast.dart';
 import '../../../../../generated/l10n.dart';
 
 class UpdatePhoneView extends StatelessWidget {
@@ -31,11 +31,18 @@ class UpdatePhoneView extends StatelessWidget {
             isLoading = true;
           } else if (state is UpdatePhoneSuccess) {
             isLoading = false;
-            showSnackBar(context, S.of(context).success);
+            CustomToast.show(
+              message: S.of(context).success,
+              backgroundColor: AppColors.toastColor,
+              alignment: Alignment.topCenter,
+            );
             context.pop();
           } else if (state is UpdatePhoneFailure) {
             isLoading = false;
-            showSnackBar(context, state.errMessage);
+            CustomToast.show(
+              message: state.errMessage,
+              backgroundColor: Colors.red,
+            );
           }
         },
         builder: (context, state) {
@@ -83,7 +90,8 @@ class UpdatePhoneView extends StatelessWidget {
                               ),
                             );
                           } else {
-                            showSnackBar(context, S.of(context).value_empty);
+                            CustomToast.show(
+                                message: S.of(context).value_empty);
                           }
                         },
                       ),

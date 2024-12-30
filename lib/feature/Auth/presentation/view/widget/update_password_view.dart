@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
-import 'package:loan_management/core/widget/show_snack_bar.dart';
+import 'package:loan_management/core/widget/custom_toast.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/feature/Auth/presentation/view_model/auth_bloc/auth_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -37,7 +37,7 @@ class UpdatePasswordView extends StatelessWidget {
           isLoading = false;
         } else if (state is UpdatePassFailure) {
           isLoading = false;
-          showSnackBar(context, state.messageError);
+          CustomToast.show(message: state.messageError);
         }
       },
       builder: (context, state) {
@@ -115,8 +115,8 @@ class UpdatePasswordView extends StatelessWidget {
                             ),
                           );
                         } else {
-                          showSnackBar(
-                              context, S.of(context).check_email_or_pass);
+                          CustomToast.show(
+                              message: S.of(context).check_email_or_pass);
                         }
                       },
                       buttonColor: AppColors.primaryColor,

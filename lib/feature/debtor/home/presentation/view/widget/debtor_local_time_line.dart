@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import '../../../../../../core/constant/app_colors.dart';
 import '../../../../../../core/constant/app_styles.dart';
-import '../../../../../../core/widget/show_snack_bar.dart';
+import '../../../../../../core/widget/custom_toast.dart';
 
 class DebtorLocalTimeLine extends StatelessWidget {
   final DebtorInstallmentModel installment;
@@ -83,7 +83,15 @@ class DebtorLocalTimeLine extends StatelessWidget {
                         ? (value) {
                             if (index < completedMonths.length - 1 &&
                                 completedMonths[index + 1]) {
-                              showSnackBar(context, S.of(context).remove_mark);
+                              CustomToast.show(
+                                message: S.of(context).remove_mark,
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                               return;
                             }
                             if (canRemoveMark()) {
@@ -94,7 +102,15 @@ class DebtorLocalTimeLine extends StatelessWidget {
                                   .read<DebtorInstallmentCubit>()
                                   .checkAndMoveToCompleted(installment);
                             } else {
-                              showSnackBar(context, S.of(context).after_change);
+                              CustomToast.show(
+                                message: S.of(context).after_change,
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                             }
                           }
                         : (value) {
@@ -105,11 +121,26 @@ class DebtorLocalTimeLine extends StatelessWidget {
                               context
                                   .read<DebtorInstallmentCubit>()
                                   .checkAndMoveToCompleted(installment);
-                              showSnackBar(
-                                  context, S.of(context).before_change);
+                              CustomToast.show(
+                                message: S.of(context).before_change,
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                             } else {
-                              showSnackBar(context,
-                                  '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}');
+                              CustomToast.show(
+                                message:
+                                    '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}',
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                             }
                           },
                   )

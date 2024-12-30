@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/feature/Auth/presentation/view_model/auth_bloc/auth_bloc.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/debtor_installment_cubit.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           return MaterialApp.router(
+            builder: FlutterSmartDialog.init(),
             routerConfig: appRouter.router,
             debugShowCheckedModeBanner: false,
             theme: themeProvider.getThemeData,

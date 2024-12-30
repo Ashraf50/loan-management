@@ -8,7 +8,7 @@ import 'package:loan_management/feature/debtor/home/presentation/view/widget/cus
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/debtor_installment_state.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../../../../../../core/widget/show_snack_bar.dart';
+import '../../../../../../core/widget/custom_toast.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../data/model/debtor_installment_model.dart';
 import '../../view_model/cubit/debtor_installment_cubit.dart';
@@ -54,7 +54,10 @@ class _AddLocalInstallmentState extends State<AddLocalInstallment> {
               .fetchAllInstallment();
           Navigator.pop(context);
         } else if (state is DebtorInstallmentFailure) {
-          showSnackBar(context, state.errMessage);
+          CustomToast.show(
+            message: state.errMessage,
+            backgroundColor: Colors.red,
+          );
         }
       },
       builder: (context, state) {

@@ -31,9 +31,11 @@ class FinishResetPassView extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Text(
-              S.of(context).new_pass_message,
-              style: AppStyles.textStyle18black,
+            Center(
+              child: Text(
+                S.of(context).new_pass_message,
+                style: AppStyles.textStyle18black,
+              ),
             ),
             const SizedBox(
               height: 60,

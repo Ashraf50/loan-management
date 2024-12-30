@@ -2,13 +2,16 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/custom_time_line_widget.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/share_installment_dialog.dart';
 import 'package:loan_management/generated/l10n.dart';
+import 'package:provider/provider.dart';
+import '../../../../../../core/constant/app_theme.dart';
 import '../../../../../../core/widget/custom_widget.dart';
-import '../../../../../../core/widget/show_snack_bar.dart';
+import '../../../../../../core/widget/custom_toast.dart';
 import '../../../data/model/creditor_installment_model.dart';
 import '../../view_model/update_installment/creditor_update_cubit.dart';
 
@@ -58,15 +61,17 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvide = Provider.of<ThemeProvider>(context);
     return BlocConsumer<CreditorUpdateCubit, CreditorUpdateState>(
       listener: (context, state) {
         if (state is UpdateSuccess) {
-          Future.delayed(const Duration(seconds: 1), () {
-            showSnackBar(context, S.of(context).success);
-          });
+          Future.delayed(const Duration(seconds: 1), () {});
         } else if (state is UpdateFailure) {
-          Future.delayed(const Duration(seconds: 20), () {
-            showSnackBar(context, state.errorMessage);
+          Future.delayed(const Duration(seconds: 30), () {
+            CustomToast.show(
+              message: state.errorMessage,
+              backgroundColor: Colors.red,
+            );
           });
         }
       },
@@ -150,9 +155,7 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
           floatingActionButton: InkWell(
             borderRadius: BorderRadius.circular(30),
             onTap: () {
-              showDialogWidget(
-                widget.installment.installmentId,
-              );
+              showDialogWidget(widget.installment.installmentId, themeProvide);
             },
             child: const CircleAvatar(
               radius: 30,
@@ -169,12 +172,21 @@ class _CreditorDetailsViewBodyState extends State<CreditorDetailsViewBody> {
     );
   }
 
-  void showDialogWidget(String id) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return ShareInstallmentDialog(id: id);
-      },
-    );
+  void showDialogWidget(String id, ThemeProvider theme) {
+    SmartDialog.show(builder: (context) {
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 50),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: theme.isDarkTheme
+              ? AppColors.widgetColorDark
+              : AppColors.whiteGrey,
+        ),
+        child: ShareInstallmentDialog(
+          id: id,
+          theme: theme,
+        ),
+      );
+    });
   }
 }

@@ -6,7 +6,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
-import 'package:loan_management/core/widget/show_snack_bar.dart';
+import 'package:loan_management/core/widget/custom_toast.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/check_account_widget.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/generated/l10n.dart';
@@ -53,10 +53,15 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         } else if (state is RegisterSuccess) {
           context.go('/signInView');
           isLoading = false;
-          showSnackBar(context, S.of(context).verify_email);
+          CustomToast.show(
+            message: S.of(context).verify_email,
+          );
         } else if (state is RegisterFailure) {
           isLoading = false;
-          showSnackBar(context, state.messageError);
+          CustomToast.show(
+            message: state.messageError,
+            backgroundColor: Colors.red,
+          );
         }
       },
       builder: (context, state) {
@@ -247,12 +252,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                               ),
                             );
                           } else {
-                            showSnackBar(
-                                context, S.of(context).check_email_or_pass);
+                            CustomToast.show(
+                                message: S.of(context).check_email_or_pass);
                           }
                         } else {
-                          showSnackBar(
-                              context, S.of(context).password_not_match);
+                          CustomToast.show(
+                              message: S.of(context).password_not_match);
                         }
                       },
                       textColor: AppColors.white,

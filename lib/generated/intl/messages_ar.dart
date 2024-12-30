@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
+        "copy":
+            MessageLookupByLibrary.simpleMessage("تم نسخ النص إلى الحافظة!"),
         "country": MessageLookupByLibrary.simpleMessage("الدولة"),
         "created_at": MessageLookupByLibrary.simpleMessage("تاريخ الإنشاء"),
         "creditor": MessageLookupByLibrary.simpleMessage("دائن"),

@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "copy":
+            MessageLookupByLibrary.simpleMessage("Text copied to clipboard!"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "created_at": MessageLookupByLibrary.simpleMessage("Created at"),
         "creditor": MessageLookupByLibrary.simpleMessage("Creditor"),

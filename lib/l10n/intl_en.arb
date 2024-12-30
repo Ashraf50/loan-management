@@ -103,5 +103,6 @@
     "scan_installment":"Scan installment",
     "after_change": "You cannot change the month status after one hour",
     "before_change": "Once an hour has passed, you will not be able to change the month status",
-    "remove_mark":"You cannot un mark this month before un marking the next month."
+    "remove_mark":"You cannot un mark this month before un marking the next month.",
+    "copy": "Text copied to clipboard!"
 }

@@ -5,7 +5,7 @@ import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/generated/l10n.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
-import '../../../../../../core/widget/show_snack_bar.dart';
+import '../../../../../../core/widget/custom_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../data/model/creditor_installment_model.dart';
 
@@ -82,7 +82,16 @@ class CustomTimelineTileWidget extends StatelessWidget {
                         ? (value) {
                             if (index < completedMonths.length - 1 &&
                                 completedMonths[index + 1]) {
-                              showSnackBar(context, S.of(context).remove_mark);
+                              CustomToast.show(
+                                message: S.of(context).remove_mark,
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
+
                               return;
                             }
                             if (canRemoveMark()) {
@@ -93,7 +102,15 @@ class CustomTimelineTileWidget extends StatelessWidget {
                                   .read<CreditorInstallmentCubit>()
                                   .checkAndMoveToCompleted(installment);
                             } else {
-                              showSnackBar(context, S.of(context).after_change);
+                              CustomToast.show(
+                                message: S.of(context).after_change,
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                             }
                           }
                         : (value) {
@@ -104,11 +121,26 @@ class CustomTimelineTileWidget extends StatelessWidget {
                               context
                                   .read<CreditorInstallmentCubit>()
                                   .checkAndMoveToCompleted(installment);
-                              showSnackBar(
-                                  context, S.of(context).before_change);
+                              CustomToast.show(
+                                message: S.of(context).before_change,
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                             } else {
-                              showSnackBar(context,
-                                  '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}');
+                              CustomToast.show(
+                                message:
+                                    '${S.of(context).complete_the_current_month} $index ${S.of(context).before_selecting_month}',
+                                backgroundColor: themeProvider.isDarkTheme
+                                    ? AppColors.whiteGrey
+                                    : AppColors.widgetColorDark,
+                                textColor: themeProvider.isDarkTheme
+                                    ? AppColors.black
+                                    : AppColors.white,
+                              );
                             }
                           },
                   ),

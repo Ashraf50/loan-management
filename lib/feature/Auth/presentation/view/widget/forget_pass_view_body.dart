@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:loan_management/core/widget/custom_button.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
-import 'package:loan_management/core/widget/show_snack_bar.dart';
+import 'package:loan_management/core/widget/custom_toast.dart';
 import 'package:loan_management/feature/Auth/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/feature/Auth/presentation/view_model/auth_bloc/auth_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -34,11 +34,17 @@ class ForgetPasswordViewBody extends StatelessWidget {
           isLoading = true;
         } else if (state is ResetSuccess) {
           context.push("/updatePasswordView");
-          showSnackBar(context, S.of(context).otp_sended);
+          CustomToast.show(
+            message: S.of(context).otp_sended,
+            backgroundColor: AppColors.toastColor,
+          );
           isLoading = false;
         } else if (state is ResetFailure) {
           isLoading = false;
-          showSnackBar(context, state.messageError);
+          CustomToast.show(
+            message: state.messageError,
+            backgroundColor: Colors.red,
+          );
         }
       },
       builder: (context, state) {
@@ -106,7 +112,9 @@ class ForgetPasswordViewBody extends StatelessWidget {
                             ),
                           );
                         } else {
-                          showSnackBar(context, S.of(context).valid_email);
+                          CustomToast.show(
+                            message: S.of(context).valid_email,
+                          );
                         }
                       },
                       buttonColor: AppColors.primaryColor,
