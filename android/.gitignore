@@ -13,4 +13,4 @@ key.properties
 **/*.jks
 **/android/key.properties
 **/android/app/nameKeystore.jks
-**/lib/core/helper/ads_helper.dart
+lib/core/helper/ads_helper.dart
