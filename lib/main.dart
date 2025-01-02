@@ -10,14 +10,19 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/constant/shared_pref.dart';
 import 'feature/creditor/home/data/model/creditor_installment_model.dart';
 import 'feature/routing/app_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await Supabase.initialize(
     url: AppStrings.supabaseUrl,
     anonKey: AppStrings.supabaseAnon,
   );
+  MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+  testDeviceIds: ['3D40C4DDAD03B6845A96D577C9DDDA98'],
+));
   await Hive.initFlutter();
   Hive.registerAdapter(DebtorInstallmentModelAdapter());
   Hive.registerAdapter(CreditorInstallmentModelAdapter());

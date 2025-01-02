@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:intl/intl.dart';
+import 'package:loan_management/core/helper/add_manager.dart';
 import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_button.dart';
@@ -184,6 +185,7 @@ class _AddLocalInstallmentState extends State<AddLocalInstallment> {
                         );
                         BlocProvider.of<DebtorInstallmentCubit>(context)
                             .add(debtorInstallment);
+                        AddManager().showInterstitialAd();
                       }
                     },
                   )

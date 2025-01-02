@@ -8,6 +8,7 @@ import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/debtor_installment_cubit.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/debtor_installment_state.dart';
+import '../../../../../../core/helper/add_manager.dart';
 import '../../../../../../core/widget/custom_toast.dart';
 import '../../../../../../generated/l10n.dart';
 
@@ -24,6 +25,7 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
     idController.text = scannedValue;
     BlocProvider.of<DebtorInstallmentCubit>(context)
         .addInstallmentById(scannedValue);
+    AddManager().showInterstitialAd();
   }
 
   @override
@@ -73,6 +75,7 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
                     if (installmentId.isNotEmpty) {
                       BlocProvider.of<DebtorInstallmentCubit>(context)
                           .addInstallmentById(installmentId);
+                      AddManager().showInterstitialAd();
                     }
                   },
                 ),

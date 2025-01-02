@@ -8,6 +8,7 @@ import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view_model/cubit/creditor_installment_state.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_button.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
+import '../../../../../../core/helper/add_manager.dart';
 import '../../../../../../core/widget/custom_toast.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../data/model/creditor_installment_model.dart';
@@ -199,6 +200,7 @@ class _AddInstallmentViewState extends State<AddInstallmentView> {
                         );
                         BlocProvider.of<CreditorInstallmentCubit>(context)
                             .add(creditorInstallment);
+                        AddManager().showInterstitialAd();
                       }
                     },
                   )

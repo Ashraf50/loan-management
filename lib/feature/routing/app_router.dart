@@ -13,7 +13,8 @@ import 'package:loan_management/feature/debtor/home/presentation/view/widget/add
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/scan_installment_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/about_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/language_view.dart';
-import 'package:loan_management/feature/settings/presentation/view/widget/profile_view.dart';
+import 'package:loan_management/feature/settings/presentation/view/widget/peofile_view.dart';
+import 'package:loan_management/feature/settings/presentation/view/widget/personal_info_view.dart';
 import 'package:loan_management/feature/settings/presentation/view/widget/update_phone_view.dart';
 import '../Auth/presentation/view/sign_up_view.dart';
 import '../debtor/home/presentation/view/widget/add_shared_installment.dart';
@@ -73,7 +74,11 @@ class AppRouter {
         builder: (context, state) => const LanguageView(),
       ),
       GoRoute(
-        path: '/ProfileView',
+        path: '/personalInfo',
+        builder: (context, state) => const PersonalInfoView(),
+      ),
+      GoRoute(
+        path: '/profileView',
         builder: (context, state) => const ProfileView(),
       ),
       GoRoute(
