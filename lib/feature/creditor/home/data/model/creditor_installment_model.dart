@@ -27,18 +27,17 @@ class CreditorInstallmentModel extends HiveObject {
   bool isSynced;
   @HiveField(11)
   DateTime? lastChangeStatus;
-  CreditorInstallmentModel({
-    required this.installmentId,
-    required this.installmentDebtor,
-    required this.title,
-    required this.totalAmount,
-    required this.numOfMonths,
-    required this.installmentValue,
-    required this.startDate,
-    required this.completedMonths,
-    required this.monthNotes,
-    required this.totalPaid,
-    this.isSynced = false,
-    this.lastChangeStatus
-  });
+  CreditorInstallmentModel(
+      {required this.installmentId,
+      required this.installmentDebtor,
+      required this.title,
+      required this.totalAmount,
+      required this.numOfMonths,
+      required this.installmentValue,
+      required this.startDate,
+      required this.completedMonths,
+      required this.monthNotes,
+      required this.totalPaid,
+      this.isSynced = false,
+      this.lastChangeStatus});
 }

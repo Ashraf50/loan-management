@@ -78,7 +78,10 @@ class PersonalInfoView extends StatelessWidget {
                   ),
                   ProfileWidget(
                     title: "${S.of(context).created_at}:",
-                    subTitle: dateTimeFormat(userData[0]["created_at"]),
+                    subTitle: dateTimeFormat(
+                      userData[0]["created_at"],
+                      'dd-MM-yyyy hh:mm a',
+                    ),
                   ),
                 ],
               ),

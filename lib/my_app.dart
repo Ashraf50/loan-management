@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:loan_management/core/constant/app_theme.dart';
 import 'package:loan_management/feature/Auth/presentation/view_model/auth_bloc/auth_bloc.dart';
+import 'package:loan_management/feature/chat/data/repo/chat_repo_impl.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view_model/cubit/debtor_installment_cubit.dart';
 import 'package:loan_management/feature/settings/presentation/view_model/language_bloc/language_bloc.dart';
 import 'package:loan_management/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'feature/chat/presentation/view_model/cubit/chats_cubit.dart';
 import 'feature/creditor/home/presentation/view_model/cubit/creditor_installment_cubit.dart';
 import 'feature/routing/app_router.dart';
 
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ChatCubit(ChatRepoImpl()),
         ),
         BlocProvider(
           create: (context) => LanguageBloc(),

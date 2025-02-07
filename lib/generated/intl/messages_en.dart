@@ -50,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Once an hour has passed, you will not be able to change the month status"),
         "before_selecting_month": MessageLookupByLibrary.simpleMessage(
             "before selecting this month."),
+        "chat": MessageLookupByLibrary.simpleMessage("Chats"),
         "check_email_or_pass":
             MessageLookupByLibrary.simpleMessage("Check the email or password"),
         "complete_the_current_month": MessageLookupByLibrary.simpleMessage(
@@ -140,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scan_installment":
             MessageLookupByLibrary.simpleMessage("Scan installment"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "send_mess": MessageLookupByLibrary.simpleMessage("Send Message"),
         "send_otp": MessageLookupByLibrary.simpleMessage("Send Otp"),
         "set_pass": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),

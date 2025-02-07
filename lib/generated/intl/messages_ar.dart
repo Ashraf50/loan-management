@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "إذا مرّت ساعة، لن تتمكن من تغيير حالة الشهر"),
         "before_selecting_month":
             MessageLookupByLibrary.simpleMessage("قبل تحديد هذا الشهر"),
+        "chat": MessageLookupByLibrary.simpleMessage("المحادثات"),
         "check_email_or_pass": MessageLookupByLibrary.simpleMessage(
             "تحقق من البريد الإلكتروني أو كلمة المرور"),
         "complete_the_current_month":
@@ -136,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_changes": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
         "scan_installment": MessageLookupByLibrary.simpleMessage("مسح القسط"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "send_mess": MessageLookupByLibrary.simpleMessage("ارسل رساله"),
         "send_otp": MessageLookupByLibrary.simpleMessage("إرسال رمز التحقق"),
         "set_pass": MessageLookupByLibrary.simpleMessage("تعيين كلمة المرور"),
         "setting": MessageLookupByLibrary.simpleMessage("الاعدادات"),

@@ -104,7 +104,10 @@ class _CreditorInstallmentItemState extends State<CreditorInstallmentItem> {
                         style: AppStyles.textStyle20,
                       ),
                       Text(
-                        dateTimeFormat(widget.installment.startDate.toString()),
+                        dateTimeFormat(
+                          widget.installment.startDate.toString(),
+                          'dd-MM-yyyy hh:mm a',
+                        ),
                         style: AppStyles.textStyle20,
                       )
                     ],

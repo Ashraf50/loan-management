@@ -16,7 +16,7 @@ import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
+  await dotenv.load(fileName: ".env");
   MobileAds.instance.initialize();
   await Supabase.initialize(
     url: dotenv.env['SUPABASE_URL']!,

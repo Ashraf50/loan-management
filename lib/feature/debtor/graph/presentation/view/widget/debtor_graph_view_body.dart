@@ -66,10 +66,12 @@ class _DebtorGraphViewBodyState extends State<DebtorGraphViewBody> {
         if (state is DebtorInstallmentLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is DebtorInstallmentLoaded) {
-          final installments = selectedFilter ==
-                  S.of(context).Uncompleted_Install
-              ? BlocProvider.of<DebtorInstallmentCubit>(context).filteredInstallments!
-              : BlocProvider.of<DebtorInstallmentCubit>(context).completedInstallment;
+          final installments =
+              selectedFilter == S.of(context).Uncompleted_Install
+                  ? BlocProvider.of<DebtorInstallmentCubit>(context)
+                      .filteredInstallments!
+                  : BlocProvider.of<DebtorInstallmentCubit>(context)
+                      .completedInstallment;
           return CustomScaffold(
             appBar: CustomAppBar(title: S.of(context).graph_title),
             body: Column(

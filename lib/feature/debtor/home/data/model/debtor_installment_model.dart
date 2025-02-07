@@ -25,17 +25,16 @@ class DebtorInstallmentModel extends HiveObject {
   String id;
   @HiveField(10)
   DateTime? lastChangeStatus;
-  DebtorInstallmentModel({
-    required this.title,
-    required this.totalAmount,
-    required this.numOfMonths,
-    required this.installmentValue,
-    required this.startDate,
-    required this.completedMonths,
-    required this.monthNotes,
-    required this.totalPaid,
-    this.isShared = false,
-    this.id = "",
-    this.lastChangeStatus
-  });
+  DebtorInstallmentModel(
+      {required this.title,
+      required this.totalAmount,
+      required this.numOfMonths,
+      required this.installmentValue,
+      required this.startDate,
+      required this.completedMonths,
+      required this.monthNotes,
+      required this.totalPaid,
+      this.isShared = false,
+      this.id = "",
+      this.lastChangeStatus});
 }

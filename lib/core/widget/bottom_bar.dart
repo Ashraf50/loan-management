@@ -9,6 +9,7 @@ import 'package:loan_management/feature/debtor/home/presentation/view/debtor_hom
 import 'package:loan_management/feature/settings/presentation/view/setting_view.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import '../../feature/chat/presentation/view/chat_view.dart';
 import '../../generated/l10n.dart';
 
 class DebtorBottomBar extends StatefulWidget {
@@ -24,6 +25,7 @@ class _DebtorBottomBarState extends State<DebtorBottomBar> {
   final List<Widget> _pages = const [
     DebtorHomeView(),
     DebtorGraphView(),
+    ChatView(),
     SettingView(),
   ];
 
@@ -53,6 +55,12 @@ class _DebtorBottomBarState extends State<DebtorBottomBar> {
             iconPath: 'assets/img/graph.svg',
             activeIconPath: 'assets/img/graph.svg',
             title: S.of(context).graph,
+            isDarkTheme: isDarkTheme,
+          ),
+          _buildBottomBarItem(
+            iconPath: 'assets/img/chat.svg',
+            activeIconPath: 'assets/img/active_chat.svg',
+            title: S.of(context).chat,
             isDarkTheme: isDarkTheme,
           ),
           _buildBottomBarItem(
@@ -80,6 +88,7 @@ class _CreditorBottomBarState extends State<CreditorBottomBar> {
   final List<Widget> _pages = const [
     CreditorHomeView(),
     CreditorGraphView(),
+    ChatView(),
     SettingView(),
   ];
 
@@ -109,6 +118,12 @@ class _CreditorBottomBarState extends State<CreditorBottomBar> {
             iconPath: 'assets/img/graph.svg',
             activeIconPath: 'assets/img/graph.svg',
             title: S.of(context).graph,
+            isDarkTheme: isDarkTheme,
+          ),
+          _buildBottomBarItem(
+            iconPath: 'assets/img/chat.svg',
+            activeIconPath: 'assets/img/active_chat.svg',
+            title: S.of(context).chat,
             isDarkTheme: isDarkTheme,
           ),
           _buildBottomBarItem(

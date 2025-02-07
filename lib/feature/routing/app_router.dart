@@ -8,6 +8,7 @@ import 'package:loan_management/feature/Auth/presentation/view/widget/update_pas
 import 'package:loan_management/feature/creditor/home/data/model/creditor_installment_model.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/creditor_details_view.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view/widget/add_installment.dart';
+import 'package:loan_management/feature/chat/presentation/view/widget/chat_details.dart';
 import 'package:loan_management/feature/debtor/home/data/model/debtor_installment_model.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/add_local_installment.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/scan_installment_view.dart';
@@ -117,6 +118,15 @@ class AppRouter {
           final installmentDetails = state.extra as CreditorInstallmentModel;
           return CreditorDetailsView(
             creditorInstallmentModel: installmentDetails,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/chat_details',
+        builder: (context, state) {
+          final usersId = state.extra as List;
+          return ChatDetailsView(
+            usersId: usersId,
           );
         },
       ),

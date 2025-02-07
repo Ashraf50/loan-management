@@ -105,5 +105,7 @@
     "before_change": "Once an hour has passed, you will not be able to change the month status",
     "remove_mark":"You cannot un mark this month before un marking the next month.",
     "copy": "Text copied to clipboard!",
-    "no_internet": "No internet connection..."
+    "no_internet": "No internet connection...",
+    "chat":"Chats",
+    "send_mess": "Send Message"
 }

@@ -1119,6 +1119,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Chats`
+  String get chat {
+    return Intl.message(
+      'Chats',
+      name: 'chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Message`
+  String get send_mess {
+    return Intl.message(
+      'Send Message',
+      name: 'send_mess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
-String dateTimeFormat(String date) {
+String dateTimeFormat(String date, String format) {
   DateTime dateTime = DateTime.parse(date);
-  String formattedDate = DateFormat('dd-MM-yyyy hh:mm a').format(dateTime);
+  String formattedDate = DateFormat(format).format(dateTime);
   return formattedDate;
 }
