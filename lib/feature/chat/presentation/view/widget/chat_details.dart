@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
+import 'package:loan_management/core/helper/chat_helper.dart';
 import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/chat/presentation/view/widget/messages_list.dart';
@@ -24,6 +25,7 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
   bool _isNotEmpty = false;
   late ChatCubit chatCubit;
   final currentUserId = Supabase.instance.client.auth.currentUser!.id;
+  String chatTitle = "Loading..."; 
 
   @override
   void initState() {
@@ -33,10 +35,19 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
       user1Id: widget.usersId[0],
       user2Id: widget.usersId[1],
     );
+    _fetchChatTitle();
     _controller.addListener(() {
       setState(() {
         _isNotEmpty = _controller.text.trim().isNotEmpty;
       });
+    });
+  }
+
+  Future<void> _fetchChatTitle() async {
+    final otherUserId = widget.usersId.firstWhere((id) => id != currentUserId);
+    final title = await ChatHelper.fetchChatTitle(currentUserId, otherUserId);
+    setState(() {
+      chatTitle = title;
     });
   }
 
@@ -50,7 +61,7 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: CustomAppBar(title: "Ashraf Essam"),
+      appBar: CustomAppBar(title: chatTitle),
       body: Column(
         children: [
           const SizedBox(height: 20),
@@ -85,7 +96,6 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
                                 receiverId = widget.usersId
                                     .firstWhere((id) => id != currentUserId);
                               }
-                              print(receiverId);
                               chatCubit.sendMessage(
                                 receiverId: receiverId,
                                 message: _controller.text,

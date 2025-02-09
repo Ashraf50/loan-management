@@ -30,7 +30,6 @@ class ChatService {
       print('Connection error: $error ❗');
     });
     socket.on('receiveMessage', (data) {
-      print(data);
       onMessageReceived(data);
     });
   }

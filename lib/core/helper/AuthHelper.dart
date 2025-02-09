@@ -21,7 +21,6 @@ class AuthHelper {
       await _initializePreferences();
     }
     String? role = pref?.getString('userRole');
-    print(role);
     if (role == "Debtor" || role == "مدين") {
       return true;
     } else {
