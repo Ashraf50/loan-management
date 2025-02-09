@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loan_management/core/constant/app_colors.dart';
 import 'package:loan_management/core/constant/app_styles.dart';
 import 'package:loan_management/core/helper/AuthHelper.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/debtor_shared_time_line.dart';
 import 'package:loan_management/generated/l10n.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../../core/widget/custom_widget.dart';
 import '../../../data/model/debtor_installment_model.dart';
 import '../../view_model/cubit/debtor_installment_cubit.dart';
@@ -110,12 +113,6 @@ class _DebtorSharedDetailsViewBodyState
               installmentData[0]["total_paid"],
               installmentData[0]["completed_months"],
             );
-            // if (widget.installment.completedMonths.every((month) => month)) {
-            //   context
-            //       .read<DebtorInstallmentCubit>()
-            //       .checkAndMoveToCompleted(widget.installment);
-            // }
-
             int remainingMonths = installmentData[0]["number_of_months"]
                     .toInt() -
                 List<bool>.from(installmentData[0]["completed_months"] as List)
@@ -180,6 +177,19 @@ class _DebtorSharedDetailsViewBodyState
             );
           }
         },
+      ),
+      floatingActionButton: InkWell(
+        borderRadius: BorderRadius.circular(30),
+        onTap: () {
+          context.push('/chat_details', extra: [
+            widget.installment.creditorId,
+            Supabase.instance.client.auth.currentUser!.id,
+          ]);
+        },
+        child: SvgPicture.asset(
+          'assets/img/messenger.svg',
+          height: 50,
+        ),
       ),
     );
   }

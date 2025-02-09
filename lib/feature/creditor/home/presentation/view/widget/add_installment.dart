@@ -8,6 +8,7 @@ import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/creditor/home/presentation/view_model/cubit/creditor_installment_state.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_button.dart';
 import 'package:loan_management/feature/debtor/home/presentation/view/widget/custom_text_field.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../../core/helper/add_manager.dart';
 import '../../../../../../core/widget/custom_toast.dart';
 import '../../../../../../generated/l10n.dart';
@@ -177,6 +178,9 @@ class _AddInstallmentViewState extends State<AddInstallmentView> {
                         var uuid = const Uuid();
                         CreditorInstallmentModel creditorInstallment =
                             CreditorInstallmentModel(
+                          creditorId:
+                              Supabase.instance.client.auth.currentUser!.id,
+                            
                           installmentId: uuid.v4(),
                           installmentDebtor: debtorNameController.text,
                           title: installmentNameController.text,

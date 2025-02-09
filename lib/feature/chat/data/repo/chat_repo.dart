@@ -7,8 +7,8 @@ abstract class ChatRepo {
     required String user1Id,
     required String user2Id,
   });
-   Future<Map<String, dynamic>> sendMessage({
-    required String receiverId,
-    required String message,
+  Future <String> getChatID({
+    required String user1Id,
+    required String user2Id,
   });
 }

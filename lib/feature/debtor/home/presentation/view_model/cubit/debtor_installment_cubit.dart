@@ -92,14 +92,18 @@ class DebtorInstallmentCubit extends Cubit<DebtorInstallmentState> {
         numOfMonths: installment['number_of_months'],
         installmentValue: installment['installment_value'],
         startDate: DateTime.parse(installment['start_date']),
-        completedMonths: List<bool>.from(installment['completed_months']),
+        completedMonths: List<bool>.from(
+          installment['completed_months'],
+        ),
         monthNotes: List<String>.from(
           (installment['month_notes'] ?? []).map((note) => note ?? ""),
         ),
         totalPaid: installment['total_paid'],
         isShared: true,
         id: installment['Uid'],
+        creditorId: installment['creditor_id'],
       );
+      print(debtorInstallment);
       await debtorInstallmentsBox.put(
           debtorInstallment.title, debtorInstallment);
     } catch (e) {

@@ -84,6 +84,7 @@ class CreditorInstallmentCubit extends Cubit<CreditorInstallmentState> {
         'completed_months': installment.completedMonths,
         'month_notes': installment.monthNotes,
         'total_paid': installment.totalPaid,
+        'creditor_id': installment.creditorId,
       });
       var installmentBox =
           Hive.box<CreditorInstallmentModel>(AppStrings.creditorInstallment);

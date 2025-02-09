@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loan_management/feature/chat/data/repo/chat_repo_impl.dart';
+import 'package:loan_management/feature/chat/data/repo/chat_service.dart';
 import 'package:loan_management/feature/chat/presentation/view_model/cubit/chats_cubit.dart';
 import 'package:loan_management/feature/chat/presentation/view_model/cubit/chats_state.dart';
 import 'chat_item.dart';
@@ -12,7 +13,8 @@ class ChatsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ChatCubit(ChatRepoImpl())..fetchChats(),
+      create: (context) =>
+          ChatCubit(ChatRepoImpl(), ChatService())..fetchChats(),
       child: BlocBuilder<ChatCubit, ChatState>(
         builder: (context, state) {
           if (state is ChatLoading) {

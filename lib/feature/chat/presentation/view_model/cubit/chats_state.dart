@@ -32,17 +32,3 @@ class MessageError extends ChatState {
     required this.errMessage,
   });
 }
-
-class SendLoading extends ChatState {}
-
-class SendLoaded extends ChatState {
-  final String message;
-  SendLoaded({required this.message});
-}
-
-class SendError extends ChatState {
-  final String errMessage;
-  SendError({
-    required this.errMessage,
-  });
-}

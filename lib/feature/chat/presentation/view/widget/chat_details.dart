@@ -5,11 +5,15 @@ import 'package:loan_management/core/widget/custom_app_bar.dart';
 import 'package:loan_management/core/widget/custom_scaffold.dart';
 import 'package:loan_management/feature/chat/presentation/view/widget/messages_list.dart';
 import 'package:loan_management/feature/chat/presentation/view_model/cubit/chats_cubit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../generated/l10n.dart';
 
 class ChatDetailsView extends StatefulWidget {
   final List usersId;
-  const ChatDetailsView({super.key, required this.usersId});
+  const ChatDetailsView({
+    super.key,
+    required this.usersId,
+  });
 
   @override
   State<ChatDetailsView> createState() => _ChatDetailsViewState();
@@ -18,10 +22,17 @@ class ChatDetailsView extends StatefulWidget {
 class _ChatDetailsViewState extends State<ChatDetailsView> {
   final TextEditingController _controller = TextEditingController();
   bool _isNotEmpty = false;
+  late ChatCubit chatCubit;
+  final currentUserId = Supabase.instance.client.auth.currentUser!.id;
 
   @override
   void initState() {
     super.initState();
+    chatCubit = context.read<ChatCubit>();
+    chatCubit.connectToChat(
+      user1Id: widget.usersId[0],
+      user2Id: widget.usersId[1],
+    );
     _controller.addListener(() {
       setState(() {
         _isNotEmpty = _controller.text.trim().isNotEmpty;
@@ -31,6 +42,7 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
 
   @override
   void dispose() {
+    chatCubit.disconnectSocket();
     _controller.dispose();
     super.dispose();
   }
@@ -61,10 +73,21 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
                       ? IconButton(
                           onPressed: () {
                             if (_isNotEmpty) {
-                              final chatCubit = context.read<ChatCubit>();
+                              final messages = chatCubit.messages;
+                              String receiverId;
+                              if (messages.isNotEmpty) {
+                                receiverId = messages.last.senderId ==
+                                        currentUserId
+                                    ? widget.usersId
+                                        .firstWhere((id) => id != currentUserId)
+                                    : messages.last.senderId;
+                              } else {
+                                receiverId = widget.usersId
+                                    .firstWhere((id) => id != currentUserId);
+                              }
+                              print(receiverId);
                               chatCubit.sendMessage(
-                                receiverId:
-                                    "e20d264a-96ff-4971-a250-6e61fb7536d1",
+                                receiverId: receiverId,
                                 message: _controller.text,
                               );
                               _controller.clear();

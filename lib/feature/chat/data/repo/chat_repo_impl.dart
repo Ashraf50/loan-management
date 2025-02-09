@@ -9,11 +9,9 @@ import 'chat_repo.dart';
 class ChatRepoImpl implements ChatRepo {
   ApiHelper apiHelper = ApiHelper();
   var userId = Supabase.instance.client.auth.currentUser?.id;
-
   @override
   Future<List<ChatModel>> getALlChats() async {
     try {
-      // var userId = Supabase.instance.client.auth.currentUser?.id;
       if (userId == null) throw Exception("User not authenticated");
       final response = await apiHelper.get(
         '${AppStrings.chatBaseUrl}/api/chats/$userId?apiKey=${dotenv.env['CHAT_API']}',
@@ -43,7 +41,7 @@ class ChatRepoImpl implements ChatRepo {
   }) async {
     try {
       final String url =
-          '${AppStrings.chatBaseUrl}/api/messages?apiKey=${dotenv.env['CHAT_API']}&user1Id=$user1Id&user2Id=$user2Id';
+          '${AppStrings.chatBaseUrl}/api/messages?apiKey=${dotenv.env['CHAT_API']}&user1Id=$user1Id&user2Id=$user2Id&limit=100';
       final response = await apiHelper.get(url);
       if (response.statusCode == 200) {
         final data = response.data;
@@ -64,15 +62,21 @@ class ChatRepoImpl implements ChatRepo {
   }
 
   @override
-  Future<Map<String, dynamic>> sendMessage(
-      {required String receiverId, required String message}) async {
-    final response = await apiHelper.post(
-        '${AppStrings.chatBaseUrl}/api/messages?apiKey=${dotenv.env['CHAT_API']}',
-        {
-          'senderId': userId,
-          'recipientId': receiverId,
-          'message': message,
-        });
-    return response.data;
+  Future<String> getChatID({
+    required String user1Id,
+    required String user2Id,
+  }) async {
+    try {
+      final response = await apiHelper.get(
+        '${AppStrings.chatBaseUrl}/api/chats/?user1Id=$user1Id&user2Id=$user2Id',
+      );
+      if (response.statusCode == 200 && response.data['status'] == "true") {
+        return response.data['chatId'];
+      } else {
+        throw Exception("Failed to get or create chat.");
+      }
+    } catch (e) {
+      throw Exception("Error getting chatId: $e");
+    }
   }
 }
