@@ -59,6 +59,26 @@ class ChatCubit extends Cubit<ChatState> {
     chatService.sendMessage(receiverId, message);
   }
 
+  Future removeMessage({required String messageId}) async {
+    try {
+      await chatRepo.deleteMessage(messageId: messageId);
+      messages.removeWhere((msg) => msg.id == messageId);
+      emit(MessageLoaded(messages: List.from(messages)));
+    } catch (e) {
+      emit(MessageError(
+          errMessage: "Failed to delete message: ${e.toString()}"));
+    }
+  }
+
+  Future removeChat({required String chatId}) async {
+    try {
+      await chatRepo.deleteChat(chatId: chatId);
+      fetchChats();
+    } catch (e) {
+      emit(ChatError(errMessage: "Failed to delete chat: ${e.toString()}"));
+    }
+  }
+
   void disconnectSocket() {
     chatService.disconnectSocket();
   }

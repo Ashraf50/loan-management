@@ -11,4 +11,12 @@ abstract class ChatRepo {
     required String user1Id,
     required String user2Id,
   });
+  Future  deleteChat({
+    required String chatId,
+   
+  });
+   Future  deleteMessage({
+    required String messageId,
+   
+  });
 }

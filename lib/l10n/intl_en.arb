@@ -107,5 +107,8 @@
     "copy": "Text copied to clipboard!",
     "no_internet": "No internet connection...",
     "chat":"Chats",
-    "send_mess": "Send Message"
+    "send_mess": "Send Message",
+    "copy_mess":"Copy Message",
+    "mess_copied":"Message copied",
+    "delete_mess":"Delete Message"
 }

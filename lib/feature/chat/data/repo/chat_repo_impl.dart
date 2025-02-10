@@ -79,4 +79,24 @@ class ChatRepoImpl implements ChatRepo {
       throw Exception("Error getting chatId: $e");
     }
   }
+
+  @override
+  Future deleteChat({required String chatId}) async {
+    try {
+      await apiHelper.delete(
+          '${AppStrings.chatBaseUrl}/api/chats/$chatId?apiKey=${dotenv.env['CHAT_API']}');
+    } catch (e) {
+      throw Exception("Failed to delete message: ${e.toString()}");
+    }
+  }
+
+  @override
+  Future deleteMessage({required String messageId}) async {
+    try {
+      await apiHelper.delete(
+          '${AppStrings.chatBaseUrl}/api/messages/$messageId?apiKey=${dotenv.env['CHAT_API']}');
+    } catch (e) {
+      throw Exception("Failed to delete message: ${e.toString()}");
+    }
+  }
 }

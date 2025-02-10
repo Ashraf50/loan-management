@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
         "copy":
             MessageLookupByLibrary.simpleMessage("تم نسخ النص إلى الحافظة!"),
+        "copy_mess": MessageLookupByLibrary.simpleMessage("نسخ الرسالة"),
         "country": MessageLookupByLibrary.simpleMessage("الدولة"),
         "created_at": MessageLookupByLibrary.simpleMessage("تاريخ الإنشاء"),
         "creditor": MessageLookupByLibrary.simpleMessage("دائن"),
@@ -67,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "debtor": MessageLookupByLibrary.simpleMessage("مدين"),
         "debtor_name": MessageLookupByLibrary.simpleMessage("اسم المدين"),
         "delete_acc": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "delete_mess": MessageLookupByLibrary.simpleMessage("حذف الرسالة"),
         "dismiss": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "don_have_account":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
@@ -98,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "mess_copied": MessageLookupByLibrary.simpleMessage("تم نسخ الرسالة"),
         "month": MessageLookupByLibrary.simpleMessage("الشهر "),
         "months": MessageLookupByLibrary.simpleMessage("اشهر"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),

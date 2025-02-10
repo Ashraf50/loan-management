@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "copy":
             MessageLookupByLibrary.simpleMessage("Text copied to clipboard!"),
+        "copy_mess": MessageLookupByLibrary.simpleMessage("Copy Message"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "created_at": MessageLookupByLibrary.simpleMessage("Created at"),
         "creditor": MessageLookupByLibrary.simpleMessage("Creditor"),
@@ -68,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "debtor": MessageLookupByLibrary.simpleMessage("Debtor"),
         "debtor_name": MessageLookupByLibrary.simpleMessage("Debtor name"),
         "delete_acc": MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "delete_mess": MessageLookupByLibrary.simpleMessage("Delete Message"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "don_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
@@ -101,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "mess_copied": MessageLookupByLibrary.simpleMessage("Message copied"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "months": MessageLookupByLibrary.simpleMessage("Months"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
