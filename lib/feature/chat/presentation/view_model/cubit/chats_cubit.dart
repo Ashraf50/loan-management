@@ -8,6 +8,9 @@ class ChatCubit extends Cubit<ChatState> {
   final ChatRepoImpl chatRepo;
   final ChatService chatService;
   List<MessageModel> messages = [];
+  int currentPage = 1;
+  bool isFetching = false;
+  bool hasMore = true;
   ChatCubit(this.chatRepo, this.chatService) : super(ChatInitial());
 
   void connectToChat({required String user1Id, required String user2Id}) async {
@@ -24,7 +27,7 @@ class ChatCubit extends Cubit<ChatState> {
           emit(MessageLoaded(messages: List.from(messages)));
         }
       });
-      fetchMessages(user1Id: user1Id, user2Id: user2Id);
+      fetchMessages(user1Id: user1Id, user2Id: user2Id, isPagination: false);
     } on Exception catch (e) {
       emit(MessageError(errMessage: "Failed to connect to chat: $e"));
     }
@@ -40,19 +43,38 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
-  Future<void> fetchMessages(
-      {required String user1Id, required String user2Id}) async {
-    emit(MessageLoading());
+  Future<void> fetchMessages({
+    required String user1Id,
+    required String user2Id,
+    bool isPagination = false,
+  }) async {
+    if (isFetching || !hasMore) return;
+    isFetching = true;
+    if (!isPagination) {
+      emit(MessageLoading());
+    }
     try {
       final fetchedMessages = await chatRepo.getMessages(
         user1Id: user1Id,
         user2Id: user2Id,
+        page: currentPage,
       );
-      messages = fetchedMessages;
-      emit(MessageLoaded(messages: messages));
+      if (fetchedMessages.isEmpty) {
+        hasMore = false;
+      } else {
+        messages = [...messages, ...fetchedMessages];
+        currentPage++;
+      }
+      emit(MessageLoaded(messages: List.from(messages)));
     } catch (e) {
-      emit(MessageError(errMessage: "Failed to load chats: $e.message}"));
+      emit(
+          MessageError(errMessage: "Failed to load messages: ${e.toString()}"));
     }
+    isFetching = false;
+  }
+
+  void loadMoreMessages(String user1Id, String user2Id) {
+    fetchMessages(user1Id: user1Id, user2Id: user2Id, isPagination: true);
   }
 
   void sendMessage({required String receiverId, required String message}) {

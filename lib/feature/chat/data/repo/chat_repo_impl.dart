@@ -38,10 +38,11 @@ class ChatRepoImpl implements ChatRepo {
   Future<List<MessageModel>> getMessages({
     required String user1Id,
     required String user2Id,
+    required int page,
   }) async {
     try {
       final String url =
-          '${AppStrings.chatBaseUrl}/api/messages?apiKey=${dotenv.env['CHAT_API']}&user1Id=$user1Id&user2Id=$user2Id&limit=100';
+          '${AppStrings.chatBaseUrl}/api/messages?apiKey=${dotenv.env['CHAT_API']}&user1Id=$user1Id&user2Id=$user2Id&page=$page';
       final response = await apiHelper.get(url);
       if (response.statusCode == 200) {
         final data = response.data;

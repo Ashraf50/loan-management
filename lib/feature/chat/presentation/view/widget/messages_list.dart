@@ -9,9 +9,44 @@ import 'package:loan_management/feature/chat/presentation/view_model/cubit/chats
 import 'package:loan_management/generated/l10n.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MessagesListView extends StatelessWidget {
+class MessagesListView extends StatefulWidget {
   final List usersId;
   const MessagesListView({super.key, required this.usersId});
+
+  @override
+  State<MessagesListView> createState() => _MessagesListViewState();
+}
+
+class _MessagesListViewState extends State<MessagesListView> {
+  late ScrollController _scrollController;
+  late ChatCubit chatCubit;
+  @override
+  void initState() {
+    super.initState();
+    chatCubit = context.read<ChatCubit>();
+    _scrollController = ScrollController();
+
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_isBottom) {
+      chatCubit.loadMoreMessages(widget.usersId[0], widget.usersId[1]);
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
+    return currentScroll >= (maxScroll * 0.95);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +58,7 @@ class MessagesListView extends StatelessWidget {
           );
         } else if (state is MessageLoaded) {
           return ListView.builder(
+              controller: _scrollController,
               reverse: true,
               itemCount: state.messages.length,
               itemBuilder: (context, index) {

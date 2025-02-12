@@ -1,7 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AdsHelper {
-  static const bool isTest = true;
+  static const bool isTest = false;
 
   static String testBanner = "ca-app-pub-3940256099942544/9214589741";
   static String testInterstitialAd = "ca-app-pub-3940256099942544/1033173712";
