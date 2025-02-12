@@ -16,7 +16,7 @@ class CustomToast {
       alignment: alignment,
       builder: (context) {
         return Container(
-          margin: const EdgeInsets.only(bottom: 50, top: 50),
+          margin: const EdgeInsets.only(bottom: 50, top: 50, left: 20,right: 20),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
             color: backgroundColor,

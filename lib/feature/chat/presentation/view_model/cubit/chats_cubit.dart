@@ -27,6 +27,9 @@ class ChatCubit extends Cubit<ChatState> {
           emit(MessageLoaded(messages: List.from(messages)));
         }
       });
+      currentPage = 1;
+      hasMore = true;
+      messages.clear();
       fetchMessages(user1Id: user1Id, user2Id: user2Id, isPagination: false);
     } on Exception catch (e) {
       emit(MessageError(errMessage: "Failed to connect to chat: $e"));

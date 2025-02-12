@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:loan_management/core/helper/add_manager.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../../core/constant/app_string.dart';
 import '../../../data/model/debtor_installment_model.dart';
@@ -69,16 +70,22 @@ class DebtorInstallmentCubit extends Cubit<DebtorInstallmentState> {
 
   Future<void> addInstallmentById(String installmentId) async {
     final supabaseClient = Supabase.instance.client;
+    emit(DebtorInstallmentLoading());
     try {
       final response = await supabaseClient
           .from('installments')
           .select('*')
           .eq('Uid', installmentId)
           .single();
-      _addInstallmentToDebtor(response);
+      if (response['Uid'] != installmentId) {
+        emit(DebtorInstallmentFailure(errMessage: "ID does not match."));
+        return;
+      }
+      await _addInstallmentToDebtor(response);
       emit(DebtorInstallmentSuccess());
+      AddManager().showInterstitialAd();
     } catch (e) {
-      throw Exception('Error fetching installment by ID: $e');
+      emit(DebtorInstallmentFailure(errMessage: "Error: ${e.toString()}"));
     }
   }
 
@@ -103,7 +110,6 @@ class DebtorInstallmentCubit extends Cubit<DebtorInstallmentState> {
         id: installment['Uid'],
         creditorId: installment['creditor_id'],
       );
-      print(debtorInstallment);
       await debtorInstallmentsBox.put(
           debtorInstallment.title, debtorInstallment);
     } catch (e) {

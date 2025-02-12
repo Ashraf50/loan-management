@@ -75,7 +75,6 @@ class _AddSharedInstallmentState extends State<AddSharedInstallment> {
                     if (installmentId.isNotEmpty) {
                       BlocProvider.of<DebtorInstallmentCubit>(context)
                           .addInstallmentById(installmentId);
-                      AddManager().showInterstitialAd();
                     }
                   },
                 ),
