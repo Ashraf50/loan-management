@@ -145,12 +145,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 }
 
-extension on PostgrestMap {
-  get error => null;
-
-  get data => null;
-}
-
 extension on AuthResponse {
   get error => null;
 }

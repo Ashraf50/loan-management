@@ -25,7 +25,6 @@ class _MessagesListViewState extends State<MessagesListView> {
     super.initState();
     chatCubit = context.read<ChatCubit>();
     _scrollController = ScrollController();
-
     _scrollController.addListener(_onScroll);
   }
 

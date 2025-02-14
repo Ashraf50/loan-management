@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class ChatService {
   late io.Socket socket;
 
-  void connectSocket(String userId, Function(dynamic) onMessageReceived) {
+  void connectSocket(String chatId, Function(dynamic) onMessageReceived) {
     socket = io.io(
       AppStrings.chatBaseUrl,
       io.OptionBuilder()
@@ -16,7 +16,7 @@ class ChatService {
     socket.connect();
     socket.onConnect((_) {
       print('Connected to Socket.io ✅');
-      socket.emit('join', userId);
+      socket.emit('join', chatId);
     });
 
     socket.onDisconnect((_) {
