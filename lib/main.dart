@@ -1,34 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:hive_flutter/adapters.dart';
-// import 'package:loan_management/core/constant/app_string.dart';
-// import 'package:loan_management/core/constant/app_theme.dart';
-// import 'package:loan_management/core/helper/AuthHelper.dart';
-// import 'package:loan_management/feature/debtor/home/data/model/debtor_installment_model.dart';
-// import 'package:provider/provider.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:supabase_flutter/supabase_flutter.dart';
-// import 'core/constant/shared_pref.dart';
-// import 'feature/creditor/home/data/model/creditor_installment_model.dart';
-// import 'feature/routing/app_router.dart';
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
-// import 'my_app.dart';
-
-//   sharedPreferences = await SharedPreferences.getInstance(); //save language
-//   SharedPreferences pref = await SharedPreferences.getInstance(); //save theme
-//   bool storedValue = pref.getBool('boolValue') ?? false;
-//   bool isLoggedIn = AuthHelper().loginStatus();
-//   bool debtorRole = await AuthHelper().isDebtor();
-//   final appRouter = AppRouter(isLoggedIn: isLoggedIn, isDebtor: debtorRole);
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (context) => ThemeProvider(isDarkTheme: storedValue),
-//       child: MyApp(
-//         appRouter: appRouter,
-//       ),
-//     ),
-//   );
-// }
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -39,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 import 'core/constant/shared_pref.dart';
 import 'feature/creditor/home/data/model/creditor_installment_model.dart';
 import 'feature/debtor/home/data/model/debtor_installment_model.dart';
@@ -48,15 +16,12 @@ import 'my_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await _initializeServices();
-
   runApp(await _buildApp());
 }
 
 Future<void> _initializeServices() async {
   await dotenv.load(fileName: ".env");
-
   await Future.wait([
     _initMobileAds(),
     _initSupabase(),
@@ -100,7 +65,6 @@ Future<Widget> _buildApp() async {
   bool isLoggedIn = AuthHelper().loginStatus();
   bool debtorRole = await AuthHelper().isDebtor();
   final appRouter = AppRouter(isLoggedIn: isLoggedIn, isDebtor: debtorRole);
-
   return ChangeNotifierProvider(
     create: (context) => ThemeProvider(isDarkTheme: storedValue),
     child: MyApp(appRouter: appRouter),
